@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BitmapLedFont
+  m_Shader: {fileID: 4800000, guid: 18f3312781a0f9e42b3316ddd76dd623, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FontAtlas:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas0:
+        m_Texture: {fileID: 2800000, guid: da6b1d6a289c8c245856d5fb0f79f3d5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas1:
+        m_Texture: {fileID: 2800000, guid: aaaf33d5dc56de74ea509efd97cc712d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas2:
+        m_Texture: {fileID: 2800000, guid: b7ea4e9559437f546bede472a8b460be, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas3:
+        m_Texture: {fileID: 2800000, guid: 19595b8f72d845e448b96d274906b2b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas4:
+        m_Texture: {fileID: 2800000, guid: d6fd604da15c5834fa2cfd00ee383a61, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas5:
+        m_Texture: {fileID: 2800000, guid: 5c56f077ce2291d4485a49faf012d33c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas6:
+        m_Texture: {fileID: 2800000, guid: ce8e969f14bdfdd418a07a0efcc2cf2b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas7:
+        m_Texture: {fileID: 2800000, guid: 6889d3a9e4ca4fe4ba319069e933f59a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _High: 0
+    - _Low: 32
+    m_Colors:
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0.43396226, g: 0.1269134, b: 0.42238998, a: 1}
+    - _ShadowOffset: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -1,0 +1,11 @@
+.venv
+.idea
+.vs
+*.yaml
+*.zip
+/anim
+/merged
+/raw
+/*.otf
+/*.ttf
+/*.ttc
