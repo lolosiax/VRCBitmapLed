@@ -8,6 +8,9 @@
 - 显存占用 2.4 MB。  
 - <del>十分卡顿，能从80帧掉到40帧</del>
 
+## 效果展示
+![img](./img/3d14ffe4d66bd87a9f73031ffd1d4e99.png)
+
 ## 如何修改
 字符类型为 UTF-16 BE， 当前支持对256个字节进行寻址，以下为修改方式：  
 
@@ -29,9 +32,6 @@
 # 低八位
 /avatar/parameters/BitmapLed/Data
 ```
-
-## 效果展示
-![img](./img/3d14ffe4d66bd87a9f73031ffd1d4e99.png)
 
 ## 部分原理
 
