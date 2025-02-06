@@ -510,7 +510,7 @@ Shader "Unlit/DisplayShader"
                 if (index == 125) return _Byte251 | _Byte250 << 8;
                 if (index == 126) return _Byte253 | _Byte252 << 8;
                 if (index == 127) return _Byte255 | _Byte254 << 8;
-                return 32;
+                return 0;
             }
 
             fixed4 frag(v2f i) : SV_Target

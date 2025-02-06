@@ -1,0 +1,582 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DisplayShader512
+  m_Shader: {fileID: 4800000, guid: 2fe20583374d7704ba6a8bbb25b8df3f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FontAtlas0:
+        m_Texture: {fileID: 2800000, guid: da6b1d6a289c8c245856d5fb0f79f3d5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas1:
+        m_Texture: {fileID: 2800000, guid: aaaf33d5dc56de74ea509efd97cc712d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas2:
+        m_Texture: {fileID: 2800000, guid: b7ea4e9559437f546bede472a8b460be, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas3:
+        m_Texture: {fileID: 2800000, guid: 19595b8f72d845e448b96d274906b2b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas4:
+        m_Texture: {fileID: 2800000, guid: d6fd604da15c5834fa2cfd00ee383a61, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas5:
+        m_Texture: {fileID: 2800000, guid: 5c56f077ce2291d4485a49faf012d33c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas6:
+        m_Texture: {fileID: 2800000, guid: ce8e969f14bdfdd418a07a0efcc2cf2b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FontAtlas7:
+        m_Texture: {fileID: 2800000, guid: 6889d3a9e4ca4fe4ba319069e933f59a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Byte0: 0
+    - _Byte1: 0
+    - _Byte10: 0
+    - _Byte100: 0
+    - _Byte101: 0
+    - _Byte102: 0
+    - _Byte103: 0
+    - _Byte104: 0
+    - _Byte105: 0
+    - _Byte106: 0
+    - _Byte107: 0
+    - _Byte108: 0
+    - _Byte109: 0
+    - _Byte11: 0
+    - _Byte110: 0
+    - _Byte111: 0
+    - _Byte112: 0
+    - _Byte113: 0
+    - _Byte114: 0
+    - _Byte115: 0
+    - _Byte116: 0
+    - _Byte117: 0
+    - _Byte118: 0
+    - _Byte119: 0
+    - _Byte12: 0
+    - _Byte120: 0
+    - _Byte121: 0
+    - _Byte122: 0
+    - _Byte123: 0
+    - _Byte124: 0
+    - _Byte125: 0
+    - _Byte126: 0
+    - _Byte127: 0
+    - _Byte128: 0
+    - _Byte129: 0
+    - _Byte13: 0
+    - _Byte130: 0
+    - _Byte131: 0
+    - _Byte132: 101
+    - _Byte133: 224
+    - _Byte134: 79
+    - _Byte135: 225
+    - _Byte136: 83
+    - _Byte137: 247
+    - _Byte138: 255
+    - _Byte139: 12
+    - _Byte14: 0
+    - _Byte140: 139
+    - _Byte141: 247
+    - _Byte142: 104
+    - _Byte143: 192
+    - _Byte144: 103
+    - _Byte145: 229
+    - _Byte146: 79
+    - _Byte147: 225
+    - _Byte148: 83
+    - _Byte149: 247
+    - _Byte15: 0
+    - _Byte150: 110
+    - _Byte151: 144
+    - _Byte152: 143
+    - _Byte153: 147
+    - _Byte154: 81
+    - _Byte155: 101
+    - _Byte156: 0
+    - _Byte157: 0
+    - _Byte158: 0
+    - _Byte159: 0
+    - _Byte16: 0
+    - _Byte160: 0
+    - _Byte161: 0
+    - _Byte162: 0
+    - _Byte163: 0
+    - _Byte164: 0
+    - _Byte165: 0
+    - _Byte166: 0
+    - _Byte167: 0
+    - _Byte168: 0
+    - _Byte169: 0
+    - _Byte17: 0
+    - _Byte170: 0
+    - _Byte171: 0
+    - _Byte172: 0
+    - _Byte173: 0
+    - _Byte174: 0
+    - _Byte175: 0
+    - _Byte176: 0
+    - _Byte177: 0
+    - _Byte178: 0
+    - _Byte179: 0
+    - _Byte18: 0
+    - _Byte180: 0
+    - _Byte181: 0
+    - _Byte182: 0
+    - _Byte183: 0
+    - _Byte184: 0
+    - _Byte185: 0
+    - _Byte186: 0
+    - _Byte187: 0
+    - _Byte188: 0
+    - _Byte189: 0
+    - _Byte19: 0
+    - _Byte190: 0
+    - _Byte191: 0
+    - _Byte192: 0
+    - _Byte193: 0
+    - _Byte194: 0
+    - _Byte195: 0
+    - _Byte196: 0
+    - _Byte197: 0
+    - _Byte198: 0
+    - _Byte199: 0
+    - _Byte2: 0
+    - _Byte20: 0
+    - _Byte200: 0
+    - _Byte201: 0
+    - _Byte202: 0
+    - _Byte203: 0
+    - _Byte204: 0
+    - _Byte205: 0
+    - _Byte206: 0
+    - _Byte207: 0
+    - _Byte208: 0
+    - _Byte209: 0
+    - _Byte21: 0
+    - _Byte210: 0
+    - _Byte211: 0
+    - _Byte212: 0
+    - _Byte213: 0
+    - _Byte214: 0
+    - _Byte215: 0
+    - _Byte216: 0
+    - _Byte217: 0
+    - _Byte218: 0
+    - _Byte219: 0
+    - _Byte22: 0
+    - _Byte220: 0
+    - _Byte221: 0
+    - _Byte222: 0
+    - _Byte223: 0
+    - _Byte224: 0
+    - _Byte225: 0
+    - _Byte226: 0
+    - _Byte227: 0
+    - _Byte228: 0
+    - _Byte229: 0
+    - _Byte23: 0
+    - _Byte230: 0
+    - _Byte231: 0
+    - _Byte232: 0
+    - _Byte233: 0
+    - _Byte234: 0
+    - _Byte235: 0
+    - _Byte236: 0
+    - _Byte237: 0
+    - _Byte238: 255
+    - _Byte239: 46
+    - _Byte24: 0
+    - _Byte240: 255
+    - _Byte241: 47
+    - _Byte242: 0
+    - _Byte243: 0
+    - _Byte244: 255
+    - _Byte245: 51
+    - _Byte246: 255
+    - _Byte247: 41
+    - _Byte248: 255
+    - _Byte249: 39
+    - _Byte25: 0
+    - _Byte250: 255
+    - _Byte251: 46
+    - _Byte252: 255
+    - _Byte253: 33
+    - _Byte254: 255
+    - _Byte255: 44
+    - _Byte256: 0
+    - _Byte257: 0
+    - _Byte258: 0
+    - _Byte259: 0
+    - _Byte26: 0
+    - _Byte260: 0
+    - _Byte261: 0
+    - _Byte262: 0
+    - _Byte263: 0
+    - _Byte264: 0
+    - _Byte265: 0
+    - _Byte266: 0
+    - _Byte267: 0
+    - _Byte268: 0
+    - _Byte269: 0
+    - _Byte27: 0
+    - _Byte270: 0
+    - _Byte271: 0
+    - _Byte272: 0
+    - _Byte273: 0
+    - _Byte274: 0
+    - _Byte275: 0
+    - _Byte276: 0
+    - _Byte277: 0
+    - _Byte278: 0
+    - _Byte279: 0
+    - _Byte28: 0
+    - _Byte280: 0
+    - _Byte281: 0
+    - _Byte282: 0
+    - _Byte283: 0
+    - _Byte284: 0
+    - _Byte285: 0
+    - _Byte286: 0
+    - _Byte287: 0
+    - _Byte288: 0
+    - _Byte289: 0
+    - _Byte29: 0
+    - _Byte290: 0
+    - _Byte291: 0
+    - _Byte292: 0
+    - _Byte293: 0
+    - _Byte294: 0
+    - _Byte295: 0
+    - _Byte296: 0
+    - _Byte297: 0
+    - _Byte298: 0
+    - _Byte299: 0
+    - _Byte3: 0
+    - _Byte30: 0
+    - _Byte300: 0
+    - _Byte301: 0
+    - _Byte302: 0
+    - _Byte303: 0
+    - _Byte304: 0
+    - _Byte305: 0
+    - _Byte306: 0
+    - _Byte307: 0
+    - _Byte308: 0
+    - _Byte309: 0
+    - _Byte31: 0
+    - _Byte310: 0
+    - _Byte311: 0
+    - _Byte312: 0
+    - _Byte313: 0
+    - _Byte314: 0
+    - _Byte315: 0
+    - _Byte316: 0
+    - _Byte317: 0
+    - _Byte318: 0
+    - _Byte319: 0
+    - _Byte32: 0
+    - _Byte320: 0
+    - _Byte321: 0
+    - _Byte322: 0
+    - _Byte323: 0
+    - _Byte324: 0
+    - _Byte325: 0
+    - _Byte326: 0
+    - _Byte327: 0
+    - _Byte328: 0
+    - _Byte329: 0
+    - _Byte33: 0
+    - _Byte330: 0
+    - _Byte331: 0
+    - _Byte332: 0
+    - _Byte333: 0
+    - _Byte334: 0
+    - _Byte335: 0
+    - _Byte336: 0
+    - _Byte337: 0
+    - _Byte338: 0
+    - _Byte339: 0
+    - _Byte34: 0
+    - _Byte340: 0
+    - _Byte341: 0
+    - _Byte342: 0
+    - _Byte343: 0
+    - _Byte344: 0
+    - _Byte345: 0
+    - _Byte346: 0
+    - _Byte347: 0
+    - _Byte348: 0
+    - _Byte349: 0
+    - _Byte35: 0
+    - _Byte350: 0
+    - _Byte351: 0
+    - _Byte352: 0
+    - _Byte353: 0
+    - _Byte354: 0
+    - _Byte355: 0
+    - _Byte356: 0
+    - _Byte357: 0
+    - _Byte358: 0
+    - _Byte359: 0
+    - _Byte36: 0
+    - _Byte360: 0
+    - _Byte361: 0
+    - _Byte362: 0
+    - _Byte363: 0
+    - _Byte364: 0
+    - _Byte365: 0
+    - _Byte366: 0
+    - _Byte367: 0
+    - _Byte368: 0
+    - _Byte369: 0
+    - _Byte37: 0
+    - _Byte370: 0
+    - _Byte371: 0
+    - _Byte372: 0
+    - _Byte373: 0
+    - _Byte374: 0
+    - _Byte375: 0
+    - _Byte376: 0
+    - _Byte377: 0
+    - _Byte378: 0
+    - _Byte379: 0
+    - _Byte38: 0
+    - _Byte380: 0
+    - _Byte381: 0
+    - _Byte382: 0
+    - _Byte383: 0
+    - _Byte384: 0
+    - _Byte385: 0
+    - _Byte386: 0
+    - _Byte387: 0
+    - _Byte388: 0
+    - _Byte389: 0
+    - _Byte39: 0
+    - _Byte390: 0
+    - _Byte391: 0
+    - _Byte392: 0
+    - _Byte393: 0
+    - _Byte394: 0
+    - _Byte395: 0
+    - _Byte396: 0
+    - _Byte397: 0
+    - _Byte398: 0
+    - _Byte399: 0
+    - _Byte4: 0
+    - _Byte40: 0
+    - _Byte400: 0
+    - _Byte401: 0
+    - _Byte402: 0
+    - _Byte403: 0
+    - _Byte404: 0
+    - _Byte405: 0
+    - _Byte406: 0
+    - _Byte407: 0
+    - _Byte408: 0
+    - _Byte409: 0
+    - _Byte41: 0
+    - _Byte410: 0
+    - _Byte411: 0
+    - _Byte412: 0
+    - _Byte413: 0
+    - _Byte414: 0
+    - _Byte415: 0
+    - _Byte416: 0
+    - _Byte417: 0
+    - _Byte418: 0
+    - _Byte419: 0
+    - _Byte42: 0
+    - _Byte420: 0
+    - _Byte421: 0
+    - _Byte422: 0
+    - _Byte423: 0
+    - _Byte424: 0
+    - _Byte425: 0
+    - _Byte426: 0
+    - _Byte427: 0
+    - _Byte428: 0
+    - _Byte429: 0
+    - _Byte43: 0
+    - _Byte430: 0
+    - _Byte431: 0
+    - _Byte432: 0
+    - _Byte433: 0
+    - _Byte434: 0
+    - _Byte435: 0
+    - _Byte436: 0
+    - _Byte437: 0
+    - _Byte438: 0
+    - _Byte439: 0
+    - _Byte44: 0
+    - _Byte440: 0
+    - _Byte441: 0
+    - _Byte442: 0
+    - _Byte443: 0
+    - _Byte444: 0
+    - _Byte445: 0
+    - _Byte446: 0
+    - _Byte447: 0
+    - _Byte448: 0
+    - _Byte449: 0
+    - _Byte45: 0
+    - _Byte450: 0
+    - _Byte451: 0
+    - _Byte452: 0
+    - _Byte453: 0
+    - _Byte454: 0
+    - _Byte455: 0
+    - _Byte456: 0
+    - _Byte457: 0
+    - _Byte458: 0
+    - _Byte459: 0
+    - _Byte46: 0
+    - _Byte460: 0
+    - _Byte461: 0
+    - _Byte462: 0
+    - _Byte463: 0
+    - _Byte464: 0
+    - _Byte465: 0
+    - _Byte466: 0
+    - _Byte467: 0
+    - _Byte468: 0
+    - _Byte469: 0
+    - _Byte47: 0
+    - _Byte470: 0
+    - _Byte471: 0
+    - _Byte472: 0
+    - _Byte473: 0
+    - _Byte474: 0
+    - _Byte475: 0
+    - _Byte476: 0
+    - _Byte477: 0
+    - _Byte478: 0
+    - _Byte479: 0
+    - _Byte48: 0
+    - _Byte480: 0
+    - _Byte481: 0
+    - _Byte482: 0
+    - _Byte483: 0
+    - _Byte484: 0
+    - _Byte485: 0
+    - _Byte486: 0
+    - _Byte487: 0
+    - _Byte488: 0
+    - _Byte489: 0
+    - _Byte49: 0
+    - _Byte490: 0
+    - _Byte491: 0
+    - _Byte492: 0
+    - _Byte493: 0
+    - _Byte494: 0
+    - _Byte495: 0
+    - _Byte496: 0
+    - _Byte497: 0
+    - _Byte498: 0
+    - _Byte499: 0
+    - _Byte5: 0
+    - _Byte50: 0
+    - _Byte500: 0
+    - _Byte501: 0
+    - _Byte502: 0
+    - _Byte503: 0
+    - _Byte504: 0
+    - _Byte505: 0
+    - _Byte506: 0
+    - _Byte507: 0
+    - _Byte508: 0
+    - _Byte509: 0
+    - _Byte51: 0
+    - _Byte510: 0
+    - _Byte511: 0
+    - _Byte52: 0
+    - _Byte53: 0
+    - _Byte54: 0
+    - _Byte55: 0
+    - _Byte56: 0
+    - _Byte57: 0
+    - _Byte58: 0
+    - _Byte59: 0
+    - _Byte6: 0
+    - _Byte60: 0
+    - _Byte61: 0
+    - _Byte62: 0
+    - _Byte63: 0
+    - _Byte64: 0
+    - _Byte65: 0
+    - _Byte66: 0
+    - _Byte67: 0
+    - _Byte68: 107
+    - _Byte69: 34
+    - _Byte7: 0
+    - _Byte70: 143
+    - _Byte71: 206
+    - _Byte72: 79
+    - _Byte73: 127
+    - _Byte74: 117
+    - _Byte75: 40
+    - _Byte76: 109
+    - _Byte77: 27
+    - _Byte78: 109
+    - _Byte79: 27
+    - _Byte8: 0
+    - _Byte80: 94
+    - _Byte81: 12
+    - _Byte82: 150
+    - _Byte83: 197
+    - _Byte84: 112
+    - _Byte85: 185
+    - _Byte86: 150
+    - _Byte87: 53
+    - _Byte88: 92
+    - _Byte89: 79
+    - _Byte9: 0
+    - _Byte90: 94
+    - _Byte91: 85
+    - _Byte92: 0
+    - _Byte93: 0
+    - _Byte94: 0
+    - _Byte95: 0
+    - _Byte96: 0
+    - _Byte97: 0
+    - _Byte98: 0
+    - _Byte99: 0
+    - _Col: 64
+    - _High: 0
+    - _Low: 0
+    - _Row: 4
+    m_Colors:
+    - _BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5176471}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowOffset: {r: 1, g: 1, b: 0, a: 0}
+    - _Size: {r: 16, g: 16, b: 0, a: 0}
+  m_BuildTextureStacks: []

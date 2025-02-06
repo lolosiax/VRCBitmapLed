@@ -4,6 +4,7 @@
 *.yaml
 *.zip
 /anim
+/sundry/anim
 /merged
 /raw
 /*.otf

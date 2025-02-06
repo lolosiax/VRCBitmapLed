@@ -21,12 +21,12 @@ client = udp_client.SimpleUDPClient("127.0.0.1", 9000)  # IP和端口
 lines : List[str] = """
 
 
-  欢迎使用洛洛希雅点阵屏幕
+　　欢迎使用洛洛希雅点阵屏幕
 
-  无信号，请检查信号源输入
+　　无信号，请检查信号源输入
 
 
-       ＮＯ ＳＩＧＮＡＬ
+　　　　　　　ＮＯ ＳＩＧＮＡＬ
 """.removeprefix("\n").split("\n")
 for i in range(8):
     line: str = lines[i]
@@ -50,7 +50,7 @@ while True:
         count += 1
         if count > 9:
             count = 0
-    # data = string_to_unicode_bytes(str(count) * 128)
+    data = string_to_unicode_bytes(str(count) * 128)
     # 发送BitmapLed/Pointer
     client.send_message("/avatar/parameters/BitmapLed/Pointer", index)
 

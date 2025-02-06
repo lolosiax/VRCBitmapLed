@@ -77,7 +77,7 @@ def get_guid(line: List[str]) -> str:
     raise Exception("No guid found")
 
 
-for i in range(256):
+for i in range(512):
     print(f"生成动画状态进度：{i}")
     guid: str
     with open(f"anim/Data-{i}.asset.meta", "r") as meta:
@@ -94,10 +94,10 @@ latest:
   items:
 """
 
-for i in range(256):
+for i in range(512):
     print(f"生成动画层进度：{i}")
     textC1 = textC.replace("$index", str(i))
     text += textC1
 
-with open(f"BitmapLedDisplayAnimator.yaml", "w") as f:
+with open(f"BitmapLedDisplayAnimator512.yaml", "w") as f:
     f.write(text)

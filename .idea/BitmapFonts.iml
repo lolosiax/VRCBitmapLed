@@ -6,8 +6,9 @@
       <excludeFolder url="file://$MODULE_DIR$/anim" />
       <excludeFolder url="file://$MODULE_DIR$/merged" />
       <excludeFolder url="file://$MODULE_DIR$/raw" />
+      <excludeFolder url="file://$MODULE_DIR$/sundry/anim" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.12 (BitmapLed)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
