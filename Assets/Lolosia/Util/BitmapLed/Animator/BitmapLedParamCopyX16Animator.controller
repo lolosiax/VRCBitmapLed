@@ -2461,11 +2461,11 @@ AnimatorStateTransition:
     m_ConditionEvent: BitmapLed/Pointer
     m_EventTreshold: 255
   - m_ConditionMode: 6
-    m_ConditionEvent: BitmapLed/Data
-    m_EventTreshold: 4
-  - m_ConditionMode: 6
     m_ConditionEvent: BitmapLed/DataX16
     m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: BitmapLed/Data
+    m_EventTreshold: 4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3689935336818750459}
   m_Solo: 0

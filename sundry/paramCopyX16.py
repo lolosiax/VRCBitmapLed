@@ -111,10 +111,10 @@ for i in range(len(text)):
     try:
         index = index_map[last_id]
         if line.startswith("  parameters:"):
-            text[i] += "\r\n"
+            text[i] += "\n"
             text[i] += element.replace("$index", str(int(index) * 2))
         elif line.startswith("    name:"):
-            text[i] = f"    name: BitmapLed/Data{str(int(index) * 2 + 1)}\r\n"
+            text[i] = f"    name: BitmapLed/Data{str(int(index) * 2 + 1)}\n"
     except KeyError as e:
         print(f"{last_id}错误： {e}")
 

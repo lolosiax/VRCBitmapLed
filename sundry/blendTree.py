@@ -42,7 +42,7 @@ def get_guid(line: List[str]) -> str:
     raise Exception("No guid found")
 
 
-for i in range(256, 512):
+for i in range(640, 768):
     guid1: str
     guid2: str
     with open(f"anim/Data-{i}-A.anim.meta", "r") as meta:

@@ -6,6 +6,7 @@
 *.unitypackage
 /anim
 /sundry/anim
+/sundry/*.png
 /merged
 /raw
 /*.otf

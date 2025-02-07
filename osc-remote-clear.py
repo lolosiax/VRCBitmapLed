@@ -8,5 +8,5 @@ from pythonosc import udp_client
 client = udp_client.SimpleUDPClient("127.0.0.1", 9000)  # IP和端口
 
 client.send_message("/avatar/parameters/BitmapLed/Pointer", 255)
-client.send_message("/avatar/parameters/BitmapLed/Data", 4)
-client.send_message("/avatar/parameters/BitmapLed/DataX16", 0)
+client.send_message("/avatar/parameters/BitmapLed/DataX24", 0)
+client.send_message("/avatar/parameters/BitmapLed/DataX16", 4)

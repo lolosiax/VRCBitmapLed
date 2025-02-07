@@ -1,139 +1,174 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2543082801476588236
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 287566365218000542, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 9100000, guid: aae53e43ecc9e5548b901fdd23c2e826, type: 2}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0151995355
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.26265413
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.713
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2433169407460034457, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5467823613274791171, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 64816fac380a22043b0dd517fdb2326e, type: 2}
-    - target: {fileID: 6412508880781885986, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_Name
-      value: BitmapLedDisplayX16-512byte
-      objectReference: {fileID: 0}
-    - target: {fileID: 6412508880781885986, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7989625198685457991, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 9100000, guid: 103890a8a4d522a478bb3649649931d3, type: 2}
-    m_RemovedComponents:
-    - {fileID: 6021367132038510448, guid: e93574035ba2a81468b2fac4b591b275, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6412508880781885986, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7884333683860192963}
-    - targetCorrespondingSourceObject: {fileID: 6412508880781885986, guid: e93574035ba2a81468b2fac4b591b275,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7669544293358487911}
-  m_SourcePrefab: {fileID: 100100000, guid: e93574035ba2a81468b2fac4b591b275, type: 3}
---- !u!1 &8914618793764851950 stripped
+--- !u!1 &8914618793764851950
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6412508880781885986, guid: e93574035ba2a81468b2fac4b591b275,
-    type: 3}
-  m_PrefabInstance: {fileID: 2543082801476588236}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &7884333683860192963
-Animator:
-  serializedVersion: 5
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 184228648418153813}
+  - component: {fileID: 1483461195636195065}
+  - component: {fileID: 7542197655935799247}
+  - component: {fileID: 2357489545886407762}
+  - component: {fileID: 5596287256894823563}
+  - component: {fileID: 3240345429963831808}
+  - component: {fileID: 2164700130329347454}
+  - component: {fileID: 7669544293358487911}
+  m_Layer: 0
+  m_Name: BitmapLedDisplayX16-512byte
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &184228648418153813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914618793764851950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0151995355, y: 0.26265413, z: 0.713}
+  m_LocalScale: {x: 0.06, y: 1, z: 0.06}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!33 &1483461195636195065
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914618793764851950}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7542197655935799247
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914618793764851950}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 64816fac380a22043b0dd517fdb2326e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2357489545886407762
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8914618793764851950}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 103890a8a4d522a478bb3649649931d3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb122659f724ebf85fe095ac02dc339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9100000, guid: aae53e43ecc9e5548b901fdd23c2e826, type: 2}
+  layerType: 5
+  deleteAttachedAnimator: 0
+  pathMode: 0
+  matchAvatarWriteDefaults: 1
+  relativePathRoot:
+    referencePath: 
+  layerPriority: 0
+--- !u!114 &5596287256894823563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914618793764851950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb122659f724ebf85fe095ac02dc339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9100000, guid: 103890a8a4d522a478bb3649649931d3, type: 2}
+  layerType: 5
+  deleteAttachedAnimator: 0
+  pathMode: 0
+  matchAvatarWriteDefaults: 1
+  relativePathRoot:
+    referencePath: 
+  layerPriority: 0
+--- !u!114 &3240345429963831808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914618793764851950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef83cb0c23d4d7c9d41021e544a1978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuToAppend: {fileID: 0}
+  installTargetMenu: {fileID: 11400000, guid: 8ca2a69782dfc40428ee63861d4a73be, type: 2}
+--- !u!114 &2164700130329347454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914618793764851950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b29d45007c5493d926d2cd45a489529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Control:
+    name: 
+    icon: {fileID: 0}
+    type: 102
+    parameter:
+      name: BitmapLed/Show
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  MenuSource: 0
+  menuSource_otherObjectChildren: {fileID: 0}
+  isSynced: 1
+  isSaved: 1
 --- !u!114 &7669544293358487911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2748,7 +2783,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data256
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2758,7 +2793,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data257
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2768,7 +2803,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data258
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2778,7 +2813,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data259
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2788,7 +2823,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data260
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2798,7 +2833,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data261
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2808,7 +2843,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data262
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2818,7 +2853,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data263
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2828,7 +2863,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data264
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2838,7 +2873,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data265
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2848,7 +2883,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data266
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2858,7 +2893,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data267
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2868,7 +2903,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data268
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2878,7 +2913,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data269
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2888,7 +2923,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data270
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2898,7 +2933,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data271
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2908,7 +2943,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data272
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2918,7 +2953,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data273
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2928,7 +2963,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data274
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2938,7 +2973,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data275
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2948,7 +2983,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data276
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2958,7 +2993,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data277
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2968,7 +3003,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data278
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2978,7 +3013,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data279
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2988,7 +3023,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data280
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -2998,7 +3033,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data281
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3008,7 +3043,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data282
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3018,7 +3053,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data283
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3028,7 +3063,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data284
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3038,7 +3073,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data285
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3048,7 +3083,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data286
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3058,7 +3093,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data287
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3068,7 +3103,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data288
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3078,7 +3113,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data289
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3088,7 +3123,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data290
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3098,7 +3133,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data291
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3108,7 +3143,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data292
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3118,7 +3153,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data293
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3128,7 +3163,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data294
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3138,7 +3173,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data295
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3148,7 +3183,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data296
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3158,7 +3193,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data297
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3168,7 +3203,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data298
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3178,7 +3213,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data299
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3188,7 +3223,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data300
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3198,7 +3233,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data301
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3208,7 +3243,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data302
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3218,7 +3253,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data303
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3228,7 +3263,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data304
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3238,7 +3273,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data305
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3248,7 +3283,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data306
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3258,7 +3293,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data307
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3268,7 +3303,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data308
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3278,7 +3313,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data309
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3288,7 +3323,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data310
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3298,7 +3333,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data311
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3308,7 +3343,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data312
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3318,7 +3353,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data313
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3328,7 +3363,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data314
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3338,7 +3373,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data315
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3348,7 +3383,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data316
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3358,7 +3393,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data317
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3368,7 +3403,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data318
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3378,7 +3413,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data319
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3388,7 +3423,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data320
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3398,7 +3433,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data321
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3408,7 +3443,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data322
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3418,7 +3453,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data323
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3428,7 +3463,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data324
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3438,7 +3473,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data325
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3448,7 +3483,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data326
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3458,7 +3493,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data327
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3468,7 +3503,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data328
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3478,7 +3513,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data329
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3488,7 +3523,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data330
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3498,7 +3533,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data331
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3508,7 +3543,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data332
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3518,7 +3553,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data333
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3528,7 +3563,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data334
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3538,7 +3573,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data335
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3548,7 +3583,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data336
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3558,7 +3593,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data337
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3568,7 +3603,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data338
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3578,7 +3613,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data339
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3588,7 +3623,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data340
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3598,7 +3633,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data341
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3608,7 +3643,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data342
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3618,7 +3653,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data343
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3628,7 +3663,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data344
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3638,7 +3673,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data345
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3648,7 +3683,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data346
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3658,7 +3693,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data347
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3668,7 +3703,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data348
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3678,7 +3713,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data349
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3688,7 +3723,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data350
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3698,7 +3733,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data351
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3708,7 +3743,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data352
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3718,7 +3753,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data353
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3728,7 +3763,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data354
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3738,7 +3773,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data355
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3748,7 +3783,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data356
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3758,7 +3793,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data357
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3768,7 +3803,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data358
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3778,7 +3813,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data359
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3788,7 +3823,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data360
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3798,7 +3833,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data361
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3808,7 +3843,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data362
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3818,7 +3853,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data363
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3828,7 +3863,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data364
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3838,7 +3873,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data365
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3848,7 +3883,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data366
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3858,7 +3893,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data367
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3868,7 +3903,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data368
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3878,7 +3913,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data369
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3888,7 +3923,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data370
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3898,7 +3933,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data371
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3908,7 +3943,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data372
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3918,7 +3953,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data373
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3928,7 +3963,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data374
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3938,7 +3973,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data375
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3948,7 +3983,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data376
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3958,7 +3993,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data377
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3968,7 +4003,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data378
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3978,7 +4013,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data379
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3988,7 +4023,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data380
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -3998,7 +4033,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data381
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4008,7 +4043,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data382
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4018,7 +4053,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data383
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4028,7 +4063,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data384
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4038,7 +4073,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data385
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4048,7 +4083,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data386
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4058,7 +4093,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data387
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4068,7 +4103,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data388
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4078,7 +4113,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data389
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4088,7 +4123,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data390
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4098,7 +4133,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data391
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4108,7 +4143,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data392
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4118,7 +4153,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data393
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4128,7 +4163,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data394
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4138,7 +4173,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data395
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4148,7 +4183,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data396
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4158,7 +4193,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data397
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4168,7 +4203,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data398
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4178,7 +4213,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data399
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4188,7 +4223,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data400
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4198,7 +4233,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data401
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4208,7 +4243,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data402
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4218,7 +4253,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data403
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4228,7 +4263,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data404
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4238,7 +4273,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data405
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4248,7 +4283,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data406
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4258,7 +4293,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data407
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4268,7 +4303,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data408
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4278,7 +4313,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data409
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4288,7 +4323,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data410
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4298,7 +4333,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data411
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4308,7 +4343,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data412
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4318,7 +4353,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data413
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4328,7 +4363,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data414
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4338,7 +4373,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data415
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4348,7 +4383,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data416
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4358,7 +4393,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data417
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4368,7 +4403,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data418
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4378,7 +4413,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data419
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4388,7 +4423,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data420
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4398,7 +4433,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data421
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4408,7 +4443,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data422
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4418,7 +4453,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data423
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4428,7 +4463,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data424
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4438,7 +4473,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data425
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4448,7 +4483,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data426
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4458,7 +4493,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data427
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4468,7 +4503,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data428
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4478,7 +4513,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data429
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4488,7 +4523,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data430
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4498,7 +4533,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data431
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4508,7 +4543,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data432
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4518,7 +4553,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data433
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4528,7 +4563,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data434
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4538,7 +4573,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data435
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4548,7 +4583,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data436
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4558,7 +4593,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data437
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4568,7 +4603,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data438
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4578,7 +4613,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data439
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4588,7 +4623,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data440
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4598,7 +4633,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data441
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4608,7 +4643,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data442
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4618,7 +4653,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data443
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4628,7 +4663,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data444
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4638,7 +4673,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data445
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4648,7 +4683,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data446
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4658,7 +4693,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data447
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4668,7 +4703,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data448
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4678,7 +4713,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data449
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4688,7 +4723,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data450
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4698,7 +4733,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data451
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4708,7 +4743,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data452
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4718,7 +4753,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data453
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4728,7 +4763,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data454
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4738,7 +4773,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data455
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4748,7 +4783,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data456
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4758,7 +4793,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data457
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4768,7 +4803,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data458
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4778,7 +4813,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data459
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4788,7 +4823,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data460
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4798,7 +4833,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data461
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4808,7 +4843,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data462
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4818,7 +4853,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data463
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4828,7 +4863,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data464
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4838,7 +4873,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data465
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4848,7 +4883,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data466
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4858,7 +4893,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data467
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4868,7 +4903,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data468
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4878,7 +4913,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data469
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4888,7 +4923,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data470
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4898,7 +4933,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data471
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4908,7 +4943,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data472
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4918,7 +4953,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data473
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4928,7 +4963,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data474
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4938,7 +4973,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data475
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4948,7 +4983,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data476
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4958,7 +4993,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data477
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4968,7 +5003,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data478
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4978,7 +5013,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data479
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4988,7 +5023,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data480
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -4998,7 +5033,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data481
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5008,7 +5043,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data482
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5018,7 +5053,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data483
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5028,7 +5063,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data484
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5038,7 +5073,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data485
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5048,7 +5083,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data486
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5058,7 +5093,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data487
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5068,7 +5103,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data488
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5078,7 +5113,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data489
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5088,7 +5123,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data490
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5098,7 +5133,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data491
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5108,7 +5143,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data492
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5118,7 +5153,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data493
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5128,7 +5163,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data494
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5138,7 +5173,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data495
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5148,7 +5183,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data496
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5158,7 +5193,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data497
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5168,7 +5203,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data498
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5178,7 +5213,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data499
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5188,7 +5223,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data500
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5198,7 +5233,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data501
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5208,7 +5243,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data502
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5218,7 +5253,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data503
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5228,7 +5263,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data504
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5238,7 +5273,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data505
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5248,7 +5283,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data506
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5258,7 +5293,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data507
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5268,7 +5303,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data508
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5278,7 +5313,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data509
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5288,7 +5323,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data510
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1
@@ -5298,7 +5333,7 @@ MonoBehaviour:
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
   - nameOrPrefix: BitmapLed/Data511
-    remapTo:
+    remapTo: 
     internalParameter: 0
     isPrefix: 0
     syncType: 1

@@ -105,7 +105,7 @@ AnimationClip:
 
 """
 
-for i in range(256, 512):
+for i in range(640, 768):
     with open(f"anim/Data-{i}-A.anim", "w") as f:
         f.write(text.replace("$value", "0").replace("$mark", 'A').replace("$index", str(i)))
     with open(f"anim/Data-{i}-B.anim", "w") as f:

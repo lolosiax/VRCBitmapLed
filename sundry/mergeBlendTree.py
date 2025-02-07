@@ -40,7 +40,7 @@ def get_guid(line: List[str]) -> str:
     raise Exception("No guid found")
 
 
-for i in range(256):
+for i in range(768):
     print(f"生成聚合混合树进度：{i}")
     guid: str
     with open(f"anim/Data-{i}.asset.meta", "r") as meta:
@@ -51,5 +51,5 @@ for i in range(256):
 text += "\n"
 text += after
 
-with open(f"BitmapLedMergedBlendTree.yaml", "w") as f:
+with open(f"BitmapLedMergedBlendTree768.yaml", "w") as f:
     f.write(text)

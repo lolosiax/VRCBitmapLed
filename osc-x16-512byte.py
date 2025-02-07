@@ -58,7 +58,7 @@ while True:
         count += 1
         if count > 9:
             count = 0
-    data = string_to_unicode_bytes(str(count) * 256)
+    # data = string_to_unicode_bytes(str(count) * 256)
     # 发送BitmapLed/Pointer
     client.send_message("/avatar/parameters/BitmapLed/Pointer", index)
 

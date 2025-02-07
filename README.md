@@ -13,6 +13,7 @@
 ## 效果展示
 
 ![img](./img/3d14ffe4d66bd87a9f73031ffd1d4e99.png)
+![img](./img/6e9179165c4505c5320efa05cac26c18.png)
 
 ## 安装与运行
 
@@ -29,18 +30,19 @@
 #### 类型介绍  
 你可以参考这份表格决定选择使用哪个预制件。
 
-|           | 标准版              | 英文版                | X16速率版                   | 256字符版                                   |
-|-----------|------------------|--------------------|--------------------------|------------------------------------------|
-| 参数        | 17bits           | 17bits             | 25bits                   | 25bits                                   |
-| 字数        | 128字             | 256字               | 128字                     | 256字                                     |
-| 速率        | 2.5字/秒           | 5字/秒               | 5字/秒                     | 5字/秒                                     |
-| Pointer长度 | 256              | 256                | 128                      | 256                                      |
-| 完全刷新      | 1分钟              | 1分钟                | 25秒                      | 1分钟                                      |
-| 列与行       | 16*8             | 32*8               | 16*8                     | 16*16                                    |
-| 编码支持      | UTF-16BE         | ISO-8859-1         | UTF-16 BE                | UTF-16 BE                                |
-| 预制件       | BitmapLedDisplay | 无，请自行替换材质          | BitmapLedDisplayX16      | BitmapLedDisplayX16-512byte              |
-| 材质与着色器    | DisplayShader    | DisplayShaderASCII | DisplayShader            | DisplayShader512                         |
-| OSC脚本名称   | [osc.py](osc.py) | 无                  | [osc-x16.py](osc-x16.py) | [osc-x16-512byte.py](osc-x16-512byte.py) |
+|           | 标准版              | 英文版                | X16速率版                   | 256字符版                                   | 256字符彩色版                                 |
+|-----------|------------------|--------------------|--------------------------|------------------------------------------|------------------------------------------|
+| 同步参数      | 17 bits          | 17 bits            | 25 bits                  | 25 bits                                  | 32 bits                                  |
+| 非同步参数     | 256字节            | 256字节              | 256字节                    | 512字节                                    | 768字节                                    |
+| 字数        | 128字             | 256字               | 128字                     | 256字                                     | 256字                                     |
+| 速率        | 2.5字/秒           | 5字/秒               | 5字/秒                     | 5字/秒                                     | 5字/秒                                     |
+| Pointer长度 | 256              | 256                | 128                      | 256                                      | 256                                      |
+| 完全刷新      | 1分钟              | 1分钟                | 25秒                      | 1分钟                                      | 1分钟                                      |
+| 列与行       | 16*8             | 32*8               | 16*8                     | 16*16                                    | 16*16                                    |
+| 编码支持      | UTF-16 BE        | ISO-8859-1         | UTF-16 BE                | UTF-16 BE                                | UTF-16 BE                                |
+| 预制件       | BitmapLedDisplay | 无，请自行替换材质          | BitmapLedDisplayX16      | BitmapLedDisplayX16-512byte              | BitmapLedDisplayX24-768byte              |
+| 材质与着色器    | DisplayShader    | DisplayShaderASCII | DisplayShader            | DisplayShader512                         | DisplayShaderRGB768                      |
+| OSC脚本名称   | [osc.py](osc.py) | 无                  | [osc-x16.py](osc-x16.py) | [osc-x16-512byte.py](osc-x16-512byte.py) | [osc-x24-768byte.py](osc-x24-768byte.py) |
 
 
 ### 发送OSC
@@ -54,14 +56,14 @@
 2. 在安装好 Python 后，进入到你解压的zip的目录。
 3. Win11 鼠标右键单击空白处，然后“在终端中打开”，Win10 请按住Shift键，右键单击空白处，选择“在此处打开Powershell窗口”
 4. 输入以下内容，然后按下回车安装所需依赖库。
-```powershell
-pip install -r requirements.txt
-```
+   ```powershell
+   pip install -r requirements.txt
+   ```
 5. 请按照你所安装的预制件类型，在记事本中修改[osc.py](osc.py)系列脚本，在指定区域内输入你想显示的内容。
 6. 输入以下内容，并按下回车，开始发送OSC信息，以256字符版为例。
-```powershell
-python osc-x16-512byte.py
-```
+   ```powershell
+   python osc-x16-512byte.py
+   ```
 
 ## DIY接入方式
 
@@ -83,11 +85,23 @@ python osc-x16-512byte.py
 25 bits 版本需要设置的参数
 
 ```plaintext
-# 高八位
+# 高8位
 /avatar/parameters/BitmapLed/DataX16
-# 低八位
+# 低8位
 /avatar/parameters/BitmapLed/Data
 ```
+
+32 bits 彩色版本需要设置的参数  
+```plaintext
+# 高16位为UTF-16 BE
+/avatar/parameters/BitmapLed/DataX32
+/avatar/parameters/BitmapLed/DataX16
+# 低8位为色彩
+/avatar/parameters/BitmapLed/Data
+```
+其中色彩部分请参考 ![font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) [font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) 或 [nearest.py](nearest.py)，
+有关于该色彩贴图生成的逻辑，请参考 [textColor.py](sundry/textColor.py)  
+其中，左侧13列为前景色，也就是文字的颜色；右侧3列为背景色，文字渲染为“描边颜色”。
 
 ### 同步速率
 
@@ -100,8 +114,11 @@ python osc-x16-512byte.py
 
 ### 特殊控制符
 
-在`BitmapLed/Pointer`值为`255`时传入`0x0004`可以将屏幕清空。
-> 17 bits 版本需要先修改位于`254`的值为0，再修改位于`255`的值为`4`。
+1. 在`BitmapLed/Pointer`值为`255`时传入`0x0004`可以将屏幕清空。
+   > 17 bits 版本需要先修改位于`254`的值为`0`，再修改位于`255`的值为`4`。
+2. 同理，传入`0x0003`时将会关闭点阵屏幕，传输任意其他字符将会重新打开屏幕。
+   > 彩色版本需要在高16位传入，与低8位传入何种色彩无关。  
+   > 17 bits 版本与控制符①操作方式类似。
 
 ## 部分原理
 
