@@ -113,11 +113,11 @@ for i in range(len(text)):
         index = index_map[last_id]
         if line.startswith("    name:"):
             if element_index == 0:
-                text[i] = f"    name: BitmapLed/Data{str(int(index) * 2)}\n"
-            if element_index == 1:
-                text[i] = f"    name: BitmapLed/Data{str(int(index) * 2 + 1)}\n"
-            if element_index == 2:
                 text[i] = f"    name: BitmapLed/Data{str(512 + int(index))}\n"
+            if element_index == 1:
+                text[i] = f"    name: BitmapLed/Data{str(int(index) * 2)}\n"
+            if element_index == 2:
+                text[i] = f"    name: BitmapLed/Data{str(int(index) * 2 + 1)}\n"
             element_index += 1
     except KeyError as e:
         print(f"{last_id}错误： {e}")

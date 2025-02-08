@@ -86,14 +86,14 @@ while True:
     # 每隔22个字换个颜色
     color_index = index // 22
     # 将 RGB色彩 转换为颜色表中对应的 0~255 索引
-    color = find_nearest_foreground(*colors[color_index])
+    color = find_nearest_background(*colors[color_index])
     # color = find_nearest_foreground(index, index, index)
     # color = find_nearest_background(255, 255, 255)
 
     # 发送BitmapLed/Data
-    client.send_message("/avatar/parameters/BitmapLed/DataX24", data[high_index])
-    client.send_message("/avatar/parameters/BitmapLed/DataX16", data[low_index])
-    client.send_message("/avatar/parameters/BitmapLed/Data", color)
+    client.send_message("/avatar/parameters/BitmapLed/DataX24", color)
+    client.send_message("/avatar/parameters/BitmapLed/DataX16", data[high_index])
+    client.send_message("/avatar/parameters/BitmapLed/Data", data[low_index])
 
     char = text[index] if len(text) > index else ""
     # print(f"\r{index}: {data[index]}, {char}", end="")

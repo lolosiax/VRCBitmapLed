@@ -2,15 +2,23 @@
 该脚本用于将 256张黑白字体合并到8张RGBA图像中
 文件遵循 GNU GPLv3 协议，©2025 洛洛希雅 版权所有
 """
+import os.path
+
 import numpy as np
 from PIL import Image
+
+if not os.path.exists("merged"):
+    os.mkdir("merged")
 
 # 加载所有输入图片并转换为二进制数组
 input_arrays = np.zeros((256, 256, 256), dtype=np.uint8)
 
 for i in range(256):
     # 根据实际路径修改文件名
-    img = Image.open(f"raw/unifont-{i}.png")
+    hex_index = hex(i)[2:].upper()
+    if len(hex_index) == 1:
+        hex_index = '0' + hex_index
+    img = Image.open(f"raw/{hex_index}.png")
     arr = np.array(img)
     # 提取R通道，转换为0或1
     if arr.ndim == 3:  # RGB或RGBA图像
@@ -50,4 +58,4 @@ for k in range(num_output_images):
 
     # 保存图像
     output_image = Image.fromarray(rgba_array, mode='RGBA')
-    output_image.save(f"merged/unifont-{k}.png")
+    output_image.save(f"merged/{k}.png")

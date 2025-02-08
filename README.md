@@ -93,10 +93,10 @@
 
 32 bits 彩色版本需要设置的参数  
 ```plaintext
-# 高16位为UTF-16 BE
-/avatar/parameters/BitmapLed/DataX32
+# 高8位为色彩
+/avatar/parameters/BitmapLed/DataX24
+# 低16位为UTF-16 BE
 /avatar/parameters/BitmapLed/DataX16
-# 低8位为色彩
 /avatar/parameters/BitmapLed/Data
 ```
 其中色彩部分请参考 ![font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) [font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) 或 [nearest.py](nearest.py)，
@@ -117,7 +117,7 @@
 1. 在`BitmapLed/Pointer`值为`255`时传入`0x0004`可以将屏幕清空。
    > 17 bits 版本需要先修改位于`254`的值为`0`，再修改位于`255`的值为`4`。
 2. 同理，传入`0x0003`时将会关闭点阵屏幕，传输任意其他字符将会重新打开屏幕。
-   > 彩色版本需要在高16位传入，与低8位传入何种色彩无关。  
+   > 彩色版本需要在低16位传入，与高8位传入何种色彩无关。  
    > 17 bits 版本与控制符①操作方式类似。
 
 ## 部分原理

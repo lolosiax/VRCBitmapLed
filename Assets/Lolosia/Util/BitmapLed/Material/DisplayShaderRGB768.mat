@@ -834,7 +834,7 @@ Material:
     - _Low: 0
     - _Row: 4
     m_Colors:
-    - _BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5176471}
+    - _BackgroundColor: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowOffset: {r: 1, g: 1, b: 0, a: 0}
