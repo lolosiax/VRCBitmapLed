@@ -133,4 +133,4 @@ RGBA32图像中每个色彩通道里面每个颜色是8bit，这样我们可以�
 然后由于RGBA有四个通道，且每个通道能塞8张，结果就是我们可以把32张黑白图像合并到1张贴图内。
 
 示例：  
-![unifont-2.png](Assets/Lolosia/Util/BitmapLed/Texture/unifont-2.png)
+![unifont-2.png](Assets/Lolosia/Util/BitmapLed/Texture/2.png)
