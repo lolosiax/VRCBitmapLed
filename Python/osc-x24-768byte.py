@@ -1,6 +1,6 @@
 """
 这是一次出一个字的OSC版本，32 bits参数版本，具有发送彩色字符的功能。
-文件遵循 GNU GPLv3 协议，©2025 洛洛希雅 版权所有
+文件遵循 MIT 协议，©2025 洛洛希雅 版权所有
 """
 from time import sleep
 from typing import List

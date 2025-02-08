@@ -1,6 +1,6 @@
 """
 该脚本用于一键清除屏幕上的字符，非同步。
-文件遵循 GNU GPLv3 协议，©2025 洛洛希雅 版权所有
+文件遵循 MIT 协议，©2025 洛洛希雅 版权所有
 """
 from pythonosc import udp_client
 

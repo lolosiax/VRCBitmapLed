@@ -1,6 +1,6 @@
 """
 这是一次出一个字的OSC版本，25 bits参数版本。
-文件遵循 GNU GPLv3 协议，©2025 洛洛希雅 版权所有
+文件遵循 MIT 协议，©2025 洛洛希雅 版权所有
 """
 
 from time import sleep

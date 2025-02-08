@@ -1,6 +1,6 @@
 """
 该文件用于生成数字的自定义字体
-文件遵循 GNU GPLv3 协议，©2025 洛洛希雅 版权所有
+文件遵循 MIT 协议，©2025 洛洛希雅 版权所有
 """
 from generator import PixelFontTextureGenerator
 
