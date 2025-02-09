@@ -82,6 +82,7 @@ dependencies{
 
     implementation("org.apache.commons:commons-collections4:4.4")
     implementation("org.jmdns:jmdns:3.5.12")
+    implementation("com.illposed.osc:javaosc-core:0.9")
 
     // Kotlin Compose
     // implementation(compose.desktop.currentOs)

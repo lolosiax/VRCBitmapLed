@@ -37,6 +37,7 @@ object SConfig : NodeChainConfigRoot() {
     val host by lazy { HostConfig(this, node) }
     val resources by lazy { ResourcesConfig(getBundleOrCreate("resources")) }
     val server by lazy { ServerConfig(this, getMappingNodeOrCreate("server")) }
+    val osc by lazy { OscConfig(this, getMappingNodeOrCreate("osc")) }
 
     private fun init(): MappingNode {
         if (!Path(CONFIG_FILE).exists()) {
