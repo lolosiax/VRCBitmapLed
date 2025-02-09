@@ -1,0 +1,15 @@
+.venv
+.idea
+.vs
+*.yaml
+*.zip
+*.unitypackage
+/anim
+/sundry/anim
+/sundry/*.png
+/merged
+/raw
+/*.otf
+/*.ttf
+/*.ttc
+__pycache__

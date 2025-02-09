@@ -42,7 +42,7 @@
 | 编码支持      | UTF-16 BE        | ISO-8859-1         | UTF-16 BE                | UTF-16 BE                                | UTF-16 BE                                |
 | 预制件       | BitmapLedDisplay | 无，请自行替换材质          | BitmapLedDisplayX16      | BitmapLedDisplayX16-512byte              | BitmapLedDisplayX24-768byte              |
 | 材质与着色器    | DisplayShader    | DisplayShaderASCII | DisplayShader            | DisplayShader512                         | DisplayShaderRGB768                      |
-| OSC脚本名称   | [osc.py](osc.py) | 无                  | [osc-x16.py](osc-x16.py) | [osc-x16-512byte.py](osc-x16-512byte.py) | [osc-x24-768byte.py](osc-x24-768byte.py) |
+| OSC脚本名称   | [osc.py](BitmapLedPython/osc.py) | 无                  | [osc-x16.py](BitmapLedPython/osc-x16.py) | [osc-x16-512byte.py](BitmapLedPython/osc-x16-512byte.py) | [osc-x24-768byte.py](BitmapLedPython/osc-x24-768byte.py) |
 
 
 ### 发送OSC
@@ -59,7 +59,7 @@
    ```powershell
    pip install -r requirements.txt
    ```
-5. 请按照你所安装的预制件类型，在记事本中修改[osc.py](osc.py)系列脚本，在指定区域内输入你想显示的内容。
+5. 请按照你所安装的预制件类型，在记事本中修改[osc.py](BitmapLedPython/osc.py)系列脚本，在指定区域内输入你想显示的内容。
 6. 输入以下内容，并按下回车，开始发送OSC信息，以256字符版为例。
    ```powershell
    python osc-x16-512byte.py
@@ -99,8 +99,8 @@
 /avatar/parameters/BitmapLed/DataX16
 /avatar/parameters/BitmapLed/Data
 ```
-其中色彩部分请参考 ![font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) [font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) 或 [nearest.py](nearest.py)，
-有关于该色彩贴图生成的逻辑，请参考 [textColor.py](sundry/textColor.py)  
+其中色彩部分请参考 ![font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) [font_color.png](Assets/Lolosia/Util/BitmapLed/Texture/font_color.png) 或 [nearest.py](BitmapLedPython/nearest.py)，
+有关于该色彩贴图生成的逻辑，请参考 [textColor.py](BitmapLedPython/sundry/textColor.py)  
 其中，左侧13列为前景色，也就是文字的颜色；右侧3列为背景色，文字渲染为“描边颜色”。
 
 ### 同步速率
