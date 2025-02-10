@@ -18,6 +18,7 @@
 
 package top.lolosia.vrc.led
 
+import org.slf4j.LoggerFactory
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.ApplicationContext
@@ -34,21 +35,27 @@ import top.lolosia.vrc.led.plugin.BitmapLedPlugin
 object BitmapLed {
     @SpringBootApplication
     class Application
+    private val logger = LoggerFactory.getLogger(BitmapLed::class.java)
 
     @JvmStatic
     fun main(args: Array<String>) {
         val classLoader = BitmapLed::class.java.classLoader as? LedClassLoader
-            ?: throw IllegalStateException("核心服务必须使用 LedClassLoader 启动！")
+
         val app = SpringApplication(Application::class.java)
-        app.addInitializers({
-            it.setClassLoader(classLoader)
-        })
+        classLoader?.let {
+            app.addInitializers({
+                it.setClassLoader(classLoader)
+            })
+        }
         applicationContext = app.run(*args)
     }
 
     /** SpringBoot 应用程序上下文 */
     lateinit var applicationContext: ApplicationContext
         private set
+
+    /** 判断当前环境是否支持 Mixin */
+    val mixinSupported get() = BitmapLed::class.java.classLoader is LedClassLoader
 
     /**
      * 获取一个插件

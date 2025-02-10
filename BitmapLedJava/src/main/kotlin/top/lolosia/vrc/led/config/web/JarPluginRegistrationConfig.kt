@@ -24,6 +24,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
 import org.springframework.beans.factory.support.GenericBeanDefinition
 import org.springframework.context.annotation.Configuration
+import top.lolosia.vrc.led.BitmapLed
 import top.lolosia.vrc.led.boot.LedClassLoader
 import top.lolosia.vrc.led.util.packageLogger
 
@@ -38,6 +39,11 @@ class JarPluginRegistrationConfig : BeanDefinitionRegistryPostProcessor {
     val logger = packageLogger<JarPluginRegistrationConfig>()
 
     override fun postProcessBeanDefinitionRegistry(registry: BeanDefinitionRegistry) {
+
+        if (!BitmapLed.mixinSupported) {
+            logger.warn("The current environment does not support mixins and external plugins will not be loaded.")
+            return
+        }
 
         // 开始加载插件
         val loader = JarPluginRegistrationConfig::class.java.classLoader as LedClassLoader
