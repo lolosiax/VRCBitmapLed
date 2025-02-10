@@ -5,6 +5,9 @@
 //动画文件
 @use 'transition.scss';
 
+html{
+  user-select: none;
+}
 //reset style
 body {
   height: 100%;

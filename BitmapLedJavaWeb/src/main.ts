@@ -4,6 +4,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
+import "./utils/app-preset"
 
 //import theme
 import './theme/index.scss'
