@@ -23,7 +23,7 @@ window.addEventListener(
   'keydown',
   (e: KeyboardEvent) => {
     if (!e.ctrlKey && !e.metaKey) return
-    if (e.key == '=' || e.key == '+' || e.key == '-') {
+    if ('=+-ps'.includes(e.key)) {
       e.preventDefault()
     }
   },

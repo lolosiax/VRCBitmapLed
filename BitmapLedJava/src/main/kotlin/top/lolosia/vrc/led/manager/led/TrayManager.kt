@@ -1,10 +1,15 @@
 package top.lolosia.vrc.led.manager.led
 
-import com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener
 import jakarta.annotation.PostConstruct
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.getBean
+import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Service
-import top.lolosia.vrc.led.config.SConfig
 import java.awt.*
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
@@ -13,7 +18,6 @@ import java.awt.event.MouseEvent.BUTTON3
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import java.awt.image.BufferedImage
-import java.net.URI
 import javax.swing.BoxLayout
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -30,6 +34,13 @@ class TrayManager {
 
     private val logger = LoggerFactory.getLogger(TrayManager::class.java)
 
+    @Autowired
+    lateinit var applicationContext: ApplicationContext
+
+    private val windowManager by lazy {
+        applicationContext.getBean<WindowManager>()
+    }
+
     @PostConstruct
     fun init() {
         try {
@@ -45,7 +56,7 @@ class TrayManager {
             override fun mouseClicked(e: MouseEvent) {
                 when (e.button) {
                     BUTTON1 -> {
-                        showMainWindow()
+                        windowManager.showMainWindow()
                     }
 
                     BUTTON3 -> showMenuWindow(e)
@@ -82,6 +93,16 @@ class TrayManager {
     private fun showMenuWindow(e: MouseEvent) {
         menuWindow?.dispose()
 
+        // 获取屏幕缩放因子
+        val config = GraphicsEnvironment.getLocalGraphicsEnvironment()
+            .defaultScreenDevice.defaultConfiguration
+        val scale = config.defaultTransform.scaleX
+
+        // 获取主显示器尺寸（考虑多显示器）
+        val screenBounds = config.bounds
+        val screenWidth = screenBounds.width
+        val screenHeight = screenBounds.height - 60
+
         // 创建菜单窗口
         val jWindow = JWindow()
         menuWindow = jWindow
@@ -92,6 +113,7 @@ class TrayManager {
         val menuPanel = JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
             background = Color.WHITE
+            // background = Color(0, 0, 0, 0)
             border = EmptyBorder(5, 10, 5, 10)
             addMouseListener(object : MouseAdapter() {
                 override fun mouseExited(e: MouseEvent) {
@@ -104,7 +126,7 @@ class TrayManager {
 
         // 添加菜单项
         arrayOf(
-            "主界面" to { showMainWindow() },
+            "主界面" to { windowManager.showMainWindow() },
             "设置" to { openSettings() },
             "退出" to { exitApp() }
         ).forEach { (text, action) ->
@@ -114,11 +136,40 @@ class TrayManager {
 
         jWindow.add(menuPanel, BorderLayout.CENTER)
         jWindow.pack()
+        jWindow.minimumSize = Dimension(100, 0)
+
+        // 计算自适应位置
+        val prefSize = jWindow.preferredSize
+        val maxX = (e.xOnScreen / scale).toInt() + prefSize.width
+        val maxY = (e.yOnScreen / scale).toInt() + prefSize.height
+
+        // 智能定位算法
+        val finalX = when {
+            maxX > screenWidth -> (e.xOnScreen / scale - prefSize.width).toInt()
+            else -> (e.xOnScreen / scale).toInt()
+        }
+
+        val finalY = when {
+            maxY > screenHeight -> (e.yOnScreen / scale - prefSize.height).toInt()
+            else -> (e.yOnScreen / scale).toInt()
+        }
+
+        // 最终边界检查
         jWindow.setLocation(
-            e.xOnScreen - 20,
-            e.yOnScreen - jWindow.height - 5
+            finalX.coerceAtLeast(0),
+            finalY.coerceAtLeast(0)
         )
+
+        // 保证窗口完全可见
+        val adjustedX = finalX.coerceIn(0, screenWidth - prefSize.width)
+        val adjustedY = finalY.coerceIn(0, screenHeight - prefSize.height)
+
+        jWindow.setLocation(adjustedX, adjustedY)
         jWindow.isVisible = true
+        CoroutineScope(Dispatchers.Default).launch {
+            delay(200)
+            jWindow.requestFocus()
+        }
 
         // 添加窗口焦点监听
         jWindow.addWindowFocusListener(object : WindowAdapter() {
@@ -157,11 +208,7 @@ class TrayManager {
         menuWindow = null
     }
 
-    private fun showMainWindow() {
-        val url = "http://127.0.0.1:${SConfig.server.port}/"
-        // Desktop.getDesktop().browse(URI.create())
-        Runtime.getRuntime().exec(arrayOf("C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe", "--app=\"${url}\""))
-    }
+
 
     private fun openSettings() {
         // 打开设置逻辑
