@@ -29,6 +29,8 @@ import top.lolosia.vrc.led.service.HomeService
 import top.lolosia.vrc.led.util.session.Context
 import top.lolosia.vrc.led.util.session.IWebExchangeContext
 import java.net.URI
+import kotlin.io.path.Path
+import kotlin.io.path.exists
 
 @RestController
 class HomeController {
@@ -39,7 +41,12 @@ class HomeController {
     @GetMapping("/")
     fun home(resp: ServerHttpResponse): Mono<Void> {
         resp.statusCode = HttpStatus.FOUND
-        resp.headers.location = URI.create("/bitmapLed/")
+        // dev-jump
+        if (Path("static/build.gradle.kts").exists()) {
+            resp.headers.location = URI.create("http://localhost:5005/bitmapLed/")
+        } else {
+            resp.headers.location = URI.create("/bitmapLed/")
+        }
         return resp.writeWith(Mono.empty())
     }
 

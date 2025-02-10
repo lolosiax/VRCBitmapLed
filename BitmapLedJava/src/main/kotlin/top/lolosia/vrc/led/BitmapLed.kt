@@ -21,6 +21,7 @@ package top.lolosia.vrc.led
 import org.slf4j.LoggerFactory
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.context.ApplicationContext
 import top.lolosia.vrc.led.boot.LedClassLoader
 import top.lolosia.vrc.led.manager.PluginManager
@@ -35,18 +36,21 @@ import top.lolosia.vrc.led.plugin.BitmapLedPlugin
 object BitmapLed {
     @SpringBootApplication
     class Application
+
     private val logger = LoggerFactory.getLogger(BitmapLed::class.java)
 
     @JvmStatic
     fun main(args: Array<String>) {
         val classLoader = BitmapLed::class.java.classLoader as? LedClassLoader
 
-        val app = SpringApplication(Application::class.java)
-        classLoader?.let {
-            app.addInitializers({
+        val builder = SpringApplicationBuilder(Application::class.java)
+        builder.headless(false)
+        val app = builder.application()
+        app.addInitializers({
+            classLoader?.let { _ ->
                 it.setClassLoader(classLoader)
-            })
-        }
+            }
+        })
         applicationContext = app.run(*args)
     }
 
