@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
-    kotlin("plugin.spring") version "2.0.0"
-    id("org.jetbrains.kotlin.kapt") version "2.0.0"
+    kotlin("plugin.spring") version "2.1.10"
+    id("org.jetbrains.kotlin.kapt") version "2.1.10"
     // id("org.jetbrains.compose")
     // id("org.jetbrains.kotlin.plugin.compose")
     id("io.ebean") version "15.1.0"

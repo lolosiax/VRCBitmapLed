@@ -20,6 +20,7 @@ rootProject.name = "BitmapLedJava"
 
 include(":orm")
 include(":static")
+include(":installer")
 
 pluginManagement {
     repositories {
@@ -34,7 +35,8 @@ pluginManagement {
         kotlin("jvm").version(extra["kotlin.version"] as String)
         kotlin("kapt").version(extra["kotlin.version"] as String)
         kotlin("plugin.spring").version(extra["kotlin.version"] as String)
-        // kotlin("multiplatform").version(extra["kotlin.version"] as String)
+        kotlin("multiplatform").version(extra["kotlin.version"] as String)
+        kotlin("plugin.serialization").version(extra["kotlin.version"] as String)
         // id("org.jetbrains.compose").version(extra["compose.version"] as String)
         // id("org.jetbrains.kotlin.plugin.compose").version(extra["kotlin.version"] as String)
     }
