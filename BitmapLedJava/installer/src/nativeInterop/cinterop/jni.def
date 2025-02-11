@@ -1,0 +1,3 @@
+# headers = jni/classfile_constants.h jni/jawt.h jni/jdwpTransport.h jni/jni.h jni/jvmti.h jni/jvmticmlr.h jni/win32/jawt_md.h jni/win32/jni_md.h jni/win32/bridge/AccessBridgeCallbacks.h jni/win32/bridge/AccessBridgeCalls.h
+headers = classfile_constants.h jawt.h jdwpTransport.h jni.h jvmti.h jvmticmlr.h jawt_md.h jni_md.h AccessBridgeCallbacks.h AccessBridgeCalls.h
+package = top.lolosia.jni
