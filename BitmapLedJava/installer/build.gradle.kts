@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.library.resolveSingleFileKlib
+
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
@@ -19,6 +21,9 @@ kotlin {
         binaries {
             executable {
                 entryPoint = "top.lolosia.installer.main"
+
+                runTask?.args("")
+                linkerOpts("-Wl,--subsystem,windows")
             }
         }
         compilations.getByName("main") {
