@@ -3,8 +3,13 @@
 package top.lolosia.installer
 
 import kotlinx.cinterop.*
-import top.lolosia.jni.*
-import platform.windows.*
+import platform.windows.GetLastError
+import platform.windows.GetProcAddress
+import platform.windows.LoadLibraryW
+import top.lolosia.installer.form.MainWindow
+import top.lolosia.jni.JNIEnvVar
+import top.lolosia.jni.JavaVMVar
+import top.lolosia.jni.`null`
 import kotlin.system.exitProcess
 
 typealias JNI_CreateJavaVM_t = CFunction<(
@@ -15,7 +20,8 @@ typealias JNI_CreateJavaVM_t = CFunction<(
 
 @OptIn(ExperimentalForeignApi::class)
 fun main() {
-    winForm()
+    val mainWindow = MainWindow()
+    mainWindow.create()
     if (1 == 1) return
 
     val dllPath = "jre\\bin\\server\\jvm.dll"
