@@ -1,5 +1,9 @@
 package top.lolosia.installer.form
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import libui.ktx.*
 
 fun libuiKtxMain() = appWindow(
@@ -20,6 +24,16 @@ fun libuiKtxMain() = appWindow(
                     |""".trimMargin()
                 )
             }
+
+            CoroutineScope(Dispatchers.Default).launch {
+                for (i in 0 until 10){
+                    delay(2000)
+                    scroll.append("这是调度器。")
+                }
+            }
+        }
+        progressbar {
+            value = 50
         }
         scroll = textarea {
             readonly = true
