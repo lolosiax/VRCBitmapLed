@@ -1,0 +1,53 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.github.msink",
+    "module": "libui",
+    "version": "0.1.9",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "libui-metadata-0.1.9.jar",
+          "url": "libui-0.1.9.jar",
+          "size": 668,
+          "sha512": "0a77ee005ca9bd843b3d0c460e70ebc0d199ff7b00b7524e9b13b5f98025404c7cc1887e9beda7d3c20f65ceb5e491a13979b6b135461e5c7321c2a9a7811125",
+          "sha256": "659af08c4ca0a3832fa1fba5e9c7212b0efd72aa3f5ed330f60a6242143df1f9",
+          "sha1": "d09ed4e0c17042cbd65794dfd6628b55e65ed60c",
+          "md5": "63463d421190e13d0ead4453dfe83120"
+        }
+      ]
+    },
+    {
+      "name": "windows64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../libui-windows64/0.1.9/libui-windows64-0.1.9.module",
+        "group": "com.github.msink",
+        "module": "libui-windows64",
+        "version": "0.1.9"
+      }
+    }
+  ]
+}
