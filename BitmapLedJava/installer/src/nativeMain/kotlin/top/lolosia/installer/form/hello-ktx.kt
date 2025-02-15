@@ -5,6 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import libui.ktx.*
+import top.lolosia.installer.runOnUiThread
+import top.lolosia.installer.showJar
 
 fun libuiKtxMain() = appWindow(
     title = "Hello",
@@ -24,20 +26,26 @@ fun libuiKtxMain() = appWindow(
                     |""".trimMargin()
                 )
             }
-
             CoroutineScope(Dispatchers.Default).launch {
-                for (i in 0 until 10){
+                for (i in 0 until 10) {
                     delay(2000)
-                    scroll.append("这是调度器。")
+                    runOnUiThread {
+                        scroll.append("这是调度器。")
+                    }
                 }
             }
         }
-        progressbar {
+        val progress = progressbar {
             value = 50
         }
         scroll = textarea {
             readonly = true
             stretchy = true
+        }
+
+        CoroutineScope(Dispatchers.Default).launch {
+            // download(progress)
+            showJar()
         }
     }
 }

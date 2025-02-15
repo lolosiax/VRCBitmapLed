@@ -16,6 +16,8 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
@@ -33,7 +35,7 @@ plugins {
 group = "top.lolosia"
 version = "0.0.1-SNAPSHOT"
 
-dependencies{
+dependencies {
 
     /* Kotlin */
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
@@ -97,7 +99,7 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-sourceSets{
+sourceSets {
     main {
         java {
             srcDir(projectDir.resolve("src/main/kotlin"))
@@ -105,7 +107,7 @@ sourceSets{
     }
 }
 
-tasks.test{
+tasks.test {
     useJUnitPlatform()
     jvmArgs = listOf("--add-opens", "java.base/java.lang.invoke=ALL-UNNAMED")
 }
@@ -114,11 +116,12 @@ ebean {
     debugLevel = 1
 }
 
-springBoot{
+springBoot {
     mainClass = "top.lolosia.vrc.led.Launcher"
 }
 
 tasks.jar {
+    dependsOn(":generateDependencyUrls")
     archiveFileName = "${rootProject.name}-${rootProject.version}.jar"
     manifest {
         val at = attributes
@@ -137,5 +140,74 @@ tasks.bootJar {
     from(zipTree(staticJar)) {
         exclude("META-INF/MANIFEST.MF")
         into("BOOT-INF/classes")
+    }
+}
+
+tasks.register<Jar>("installerJar"){
+    group = "build"
+    dependsOn(tasks.jar)
+    dependsOn(":static:jar")
+    archiveClassifier = "installer"
+    fun mergeJar(task: Jar, conf: CopySpec.() -> Unit = {}){
+        val staticJar = task.outputs.files.singleFile
+        from(zipTree(staticJar)) {
+            exclude("META-INF/MANIFEST.MF")
+            into("")
+            conf()
+        }
+    }
+    mergeJar(project(":static").tasks.jar.get())
+    mergeJar(project(":orm").tasks.jar.get())
+    mergeJar(tasks.jar.get())
+}
+
+tasks.register("generateDependencyUrls") {
+    doLast {
+        val outputFile = file("$projectDir/build/resources/main/dependencies-urls.json")
+        outputFile.delete()
+
+        // 怎么获得 settings.dependencyResolutionManagement.repositories?
+        val repos = repositories.filterIsInstance<UrlArtifactRepository>().map { it.url.toString() }.toMutableList()
+        var lines = File("${projectDir}/settings.gradle.kts").readLines()
+        lines = lines.dropWhile { !it.contains("dependencyResolutionManagement") }
+        lines.forEach {
+            if (it.contains("https://")) {
+                val url = "https://" + it.replace(".+https://".toRegex(), "")
+                    .replace("\".+$".toRegex(), "")
+                repos.add(url)
+            } else if (it.contains("mavenCentral()")) {
+                repos.add("https://repo.maven.apache.org/maven2")
+            } else if (it.contains("google()")) {
+                repos.add("https://dl.google.com/dl/android/maven2")
+            }
+        }
+
+        val deps = configurations.productionRuntimeClasspath.get()
+            .resolvedConfiguration.resolvedArtifacts.map { artifact ->
+            val group = artifact.moduleVersion.id.group
+            val name = artifact.moduleVersion.id.name
+            val version = artifact.moduleVersion.id.version
+            val extension = artifact.extension
+            val classifier = artifact.classifier ?: ""
+
+            val fileName = artifact.file.name
+
+            val groupUrl = group.replace(".", "/")
+
+            mapOf(
+                "group" to group,
+                "name" to name,
+                "version" to version,
+                "extension" to extension,
+                "classifier" to classifier,
+                "url" to "/${groupUrl}/$name/$version/$fileName",
+            )
+        }
+
+        val rs = mapOf("repositories" to repos, "dependencies" to deps)
+        val jsonMapper = ObjectMapper()
+        jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        val rsJson = jsonMapper.writeValueAsString(rs)
+        outputFile.writeText(rsJson)
     }
 }
