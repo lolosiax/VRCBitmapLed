@@ -48,6 +48,7 @@ kotlin {
 
     sourceSets {
         nativeMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
             implementation("com.github.msink:libui:0.1.9")
         }
