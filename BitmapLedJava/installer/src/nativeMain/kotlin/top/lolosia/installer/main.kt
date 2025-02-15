@@ -6,7 +6,7 @@ import kotlinx.cinterop.*
 import platform.windows.GetLastError
 import platform.windows.GetProcAddress
 import platform.windows.LoadLibraryW
-import top.lolosia.installer.form.MainWindow
+import top.lolosia.installer.form.libuiKtxMain
 import top.lolosia.jni.JNIEnvVar
 import top.lolosia.jni.JavaVMVar
 import top.lolosia.jni.`null`
@@ -20,8 +20,7 @@ typealias JNI_CreateJavaVM_t = CFunction<(
 
 @OptIn(ExperimentalForeignApi::class)
 fun main() {
-    val mainWindow = MainWindow()
-    mainWindow.create()
+    libuiKtxMain()
     if (1 == 1) return
 
     val dllPath = "jre\\bin\\server\\jvm.dll"
