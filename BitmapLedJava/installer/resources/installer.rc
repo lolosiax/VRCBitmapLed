@@ -3,4 +3,34 @@
 
 // this is the Common Controls 6 manifest
 // 1 is the value of CREATEPROCESS_MANIFEST_RESOURCE_ID and 24 is the value of RT_MANIFEST
-1 24 "installer.manifest"
+1           24      "installer.manifest"
+IDI_ICON1	ICON    DISCARDABLE	 "logo.ico"  //设置程序图标
+IDR_JAR1    JARFILE "installer.jar"
+
+// https://blog.csdn.net/xiaotoly/article/details/53841013
+#define VFT_APP 1
+#define VFT2_UNKNOWN 0
+
+VS_VERSION_INFO VERSIONINFO
+    FILEVERSION     1,0,0,0
+    PRODUCTVERSION  1,0,0,0
+    FILEFLAGSMASK   0x3fL
+    FILEFLAGS       0
+    FILEOS          0x40004L
+    FILETYPE        VFT_APP
+    FILESUBTYPE     VFT2_UNKNOWN
+    BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN
+            BLOCK "040904b0"  // 表示语言和编码（英语-美国，Unicode）
+            BEGIN
+                VALUE "ProductName", "VRC点阵屏幕"
+                VALUE "ProductVersion", "1.0.0.0"
+                VALUE "FileDescription", "适用于虚拟社交游戏VRChat中支持点阵屏功能的虚拟形象(Avatar)的OSC驱动程序"
+                VALUE "FileVersion", "1.0.0.0"
+                VALUE "CompanyName", "Lolosia Game Studio(Fake)"
+                VALUE "OriginalFilename", "VRCBitmapLed.exe"
+                VALUE "LegalCopyright", "Copyright ©2025 Lolosia. All rights reserved."
+            END
+        END
+    END

@@ -3,10 +3,10 @@
   <assemblyIdentity
     version="1.0.0.0"
     processorArchitecture="*"
-    name="CompanyName.ProductName.YourApplication"
+    name="Lolosia.BitmapLedJava.Launcher"
     type="win32"
   />
-  <description>Your application description here.</description>
+  <description>对VRChat中支持点阵屏功能的Avatar提供OSC驱动</description>
   <dependency>
     <dependentAssembly>
         <assemblyIdentity
