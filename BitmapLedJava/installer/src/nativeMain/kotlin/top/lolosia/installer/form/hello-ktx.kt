@@ -5,8 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import libui.ktx.*
+import top.lolosia.installer.getDeps
 import top.lolosia.installer.runOnUiThread
-import top.lolosia.installer.showJar
 
 fun libuiKtxMain() = appWindow(
     title = "Hello",
@@ -45,7 +45,9 @@ fun libuiKtxMain() = appWindow(
 
         CoroutineScope(Dispatchers.Default).launch {
             // download(progress)
-            showJar()
+            // showJar()
+            val deps = getDeps()
+            println(deps)
         }
     }
 }

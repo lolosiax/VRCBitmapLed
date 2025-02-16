@@ -18,7 +18,13 @@
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.kotlin.daemon.common.toHexString
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.security.MessageDigest
 
 
 plugins {
@@ -143,12 +149,12 @@ tasks.bootJar {
     }
 }
 
-tasks.register<Jar>("installerJar"){
+tasks.register<Jar>("installerJar") {
     group = "build"
     dependsOn(tasks.jar)
     dependsOn(":static:jar")
     archiveClassifier = "installer"
-    fun mergeJar(task: Jar, conf: CopySpec.() -> Unit = {}){
+    fun mergeJar(task: Jar, conf: CopySpec.() -> Unit = {}) {
         val staticJar = task.outputs.files.singleFile
         from(zipTree(staticJar)) {
             exclude("META-INF/MANIFEST.MF")
@@ -181,27 +187,30 @@ tasks.register("generateDependencyUrls") {
                 repos.add("https://dl.google.com/dl/android/maven2")
             }
         }
+        val deps = runBlocking {
+            configurations.productionRuntimeClasspath.get()
+                .resolvedConfiguration.resolvedArtifacts.map { artifact ->
+                    val group = artifact.moduleVersion.id.group
+                    val name = artifact.moduleVersion.id.name
+                    val version = artifact.moduleVersion.id.version
+                    val extension = artifact.extension
+                    val classifier = artifact.classifier ?: ""
 
-        val deps = configurations.productionRuntimeClasspath.get()
-            .resolvedConfiguration.resolvedArtifacts.map { artifact ->
-            val group = artifact.moduleVersion.id.group
-            val name = artifact.moduleVersion.id.name
-            val version = artifact.moduleVersion.id.version
-            val extension = artifact.extension
-            val classifier = artifact.classifier ?: ""
+                    val fileName = artifact.file.name
 
-            val fileName = artifact.file.name
-
-            val groupUrl = group.replace(".", "/")
-
-            mapOf(
-                "group" to group,
-                "name" to name,
-                "version" to version,
-                "extension" to extension,
-                "classifier" to classifier,
-                "url" to "/${groupUrl}/$name/$version/$fileName",
-            )
+                    val groupUrl = group.replace(".", "/")
+                    async(Dispatchers.IO) {
+                        mapOf(
+                            "group" to group,
+                            "name" to name,
+                            "version" to version,
+                            "extension" to extension,
+                            "classifier" to classifier,
+                            "sha256" to artifact.file.sha256,
+                            "url" to "/${groupUrl}/$name/$version/$fileName",
+                        )
+                    }
+                }.awaitAll()
         }
 
         val rs = mapOf("repositories" to repos, "dependencies" to deps)
@@ -211,3 +220,17 @@ tasks.register("generateDependencyUrls") {
         outputFile.writeText(rsJson)
     }
 }
+
+
+val File.sha256: String
+    get() {
+        val digest = MessageDigest.getInstance("SHA-256")
+
+        inputStream().use { fis ->
+            val bytes = ByteArray(8192) // 8 KB buffer
+            while (fis.read(bytes) != -1) {
+                digest.update(bytes)
+            }
+            return digest.digest().toHexString()
+        }
+    }
