@@ -43,7 +43,18 @@ kotlin {
                         "src/nativeInterop/cinterop/jni/win32/bridge"
                     )
                 }
+                create("minizip"){
+                    defFile("src/nativeInterop/cinterop/minizip.def")
+                    includeDirs("src/nativeInterop/cinterop/minizip")
+                }
             }
+            kotlinOptions.freeCompilerArgs = listOf(
+                "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libminizip.a",
+                "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libbzip2.a",
+                "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/liblzma.a",
+                "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libzstd.a",
+                "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libz-ng.a",
+            )
         }
     }
 
