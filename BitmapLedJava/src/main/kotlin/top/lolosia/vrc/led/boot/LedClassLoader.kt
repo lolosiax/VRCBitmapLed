@@ -18,13 +18,13 @@
 
 package top.lolosia.vrc.led.boot
 
-import top.lolosia.vrc.led.annotation.Plugin
-import top.lolosia.vrc.led.boot.wrapper.LaunchClassLoader
 import org.jboss.errai.reflections.Reflections
 import org.jboss.errai.reflections.scanners.SubTypesScanner
 import org.jboss.errai.reflections.scanners.TypeAnnotationsScanner
 import org.jboss.errai.reflections.util.ConfigurationBuilder
 import org.slf4j.LoggerFactory
+import top.lolosia.vrc.led.annotation.Plugin
+import top.lolosia.vrc.led.boot.wrapper.LaunchClassLoader
 import java.io.InputStream
 import java.net.URL
 import kotlin.io.path.*
@@ -49,6 +49,7 @@ class LedClassLoader(parent: ClassLoader?) : LaunchClassLoader(emptyArray(), par
         "top.lolosia.vrc.led.plugin.NativePluginInterface",
         "top.lolosia.vrc.led.logging.ConsoleListenerAppender",
         "top.lolosia.vrc.led.logging.CoreLogging",
+        "top.lolosia.vrc.led.util.ebean.AbstractModel",
     )
 
     override fun loadClass(name: String, resolve: Boolean): Class<*> {

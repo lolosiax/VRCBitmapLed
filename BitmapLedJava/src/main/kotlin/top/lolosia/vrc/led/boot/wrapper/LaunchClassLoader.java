@@ -77,8 +77,10 @@ public class LaunchClassLoader extends URLClassLoader {
         addClassLoaderExclusion("org.slf4j.");
         addClassLoaderExclusion("org.lwjgl.");
         addClassLoaderExclusion("org.apache.logging.");
+        addClassLoaderExclusion("io.ebean.");
         addClassLoaderExclusion("top.lolosia.vrc.led.boot.");
         addClassLoaderExclusion("top.lolosia.vrc.led.logging.");
+        addClassLoaderExclusion("top.lolosia.vrc.led.model.");
 
         // transformer exclusions
         addTransformerExclusion("javax.");
