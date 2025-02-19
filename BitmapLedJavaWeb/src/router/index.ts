@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { RouterTypes } from '~/basic'
 import settings from '@/settings'
 import { userRoute } from '@/router/modules/user'
+import { mobileRoute } from '@/router/modules/mobile'
+
 const Layout = () => import('@/layout/default/index.vue')
 
 export function constantRoutes(): RouterTypes {
@@ -39,13 +41,13 @@ export function constantRoutes(): RouterTypes {
           meta: { title: 'Dashboard', icon: 'house-door', affix: true }
         }
       ]
-    },
+    }
   ]
 }
 
 //角色和code数组动态路由
 export function roleRoutes(): RouterTypes {
-  return [userRoute]
+  return [mobileRoute, userRoute]
 }
 
 /**

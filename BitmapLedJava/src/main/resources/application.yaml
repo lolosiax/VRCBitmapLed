@@ -6,7 +6,7 @@ datasource:
     url: "jdbc:sqlite:work/database/db.sqlite"
 
 server:
-  port: 7031
+  port: 47700
   compression:
     enabled: true
     mime-types: application/json,application/xml,text/html,image/png,image/jpeg

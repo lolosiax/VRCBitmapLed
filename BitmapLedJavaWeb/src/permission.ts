@@ -1,5 +1,11 @@
 import router, { roleRoutes } from '@/router'
-import { filterRouters, filterTagRouters, progressClose, progressStart, setRouterFromDatabase } from '@/hooks/use-permission'
+import {
+  filterRouters,
+  filterTagRouters,
+  progressClose,
+  progressStart,
+  setRouterFromDatabase
+} from '@/hooks/use-permission'
 import { useBasicStore } from '@/store/basic'
 import { getMyInfo, getMyRole } from '@/api/user'
 import { getMenuConfig } from '@/api/menu'
@@ -20,6 +26,10 @@ router.beforeEach(async (to) => {
   }
   if (to.path === '/login') {
     return true
+  }
+
+  if (to.query.token && !basicStore.token) {
+    basicStore.token = to.query.token as string
   }
 
   //1.判断token
@@ -58,7 +68,7 @@ router.beforeEach(async (to) => {
       return { ...to, replace: true }
     }
 
-    if (window) return true
+    // if (window) return true
 
     if (!whiteList.includes(to.path)) {
       return `/login?redirect=${to.path}`

@@ -46,7 +46,7 @@ dependencies{
     implementation("org.springframework.boot:spring-boot-starter-integration:3.3.5")
     implementation("org.springframework.boot:spring-boot-starter-webflux:3.3.5")
     developmentOnly("org.springframework.boot:spring-boot-starter-actuator:3.3.5")
-    developmentOnly("org.springframework.boot:spring-boot-devtools:3.2.5")
+    // developmentOnly("org.springframework.boot:spring-boot-devtools:3.2.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.5")
     implementation("org.springframework.security:spring-security-crypto:6.2.4")
 

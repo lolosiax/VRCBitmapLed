@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@types/qrcode": "^1.5.5",
     "axios": "^1.7.7",
     "bootstrap-icons": "^1.11.3",
     "d3": "7.9.0",
@@ -40,6 +41,7 @@
     "path-to-regexp": "^6.3.0",
     "pinia": "^2.2.6",
     "pinia-plugin-persistedstate": "3.2.1",
+    "qrcode": "^1.5.4",
     "screenfull": "^6.0.2",
     "sortablejs": "1.15.2",
     "splitpanes": "^3.1.5",
