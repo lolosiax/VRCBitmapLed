@@ -102,6 +102,7 @@ declare global {
   const useId: typeof import('vue')['useId']
   const useKeyboard: typeof import('../src/hooks/use-keyboard')['useKeyboard']
   const useLink: typeof import('vue-router')['useLink']
+  const useMobileStore: typeof import('../src/store/mobile')['useMobileStore']
   const useModel: typeof import('vue')['useModel']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']

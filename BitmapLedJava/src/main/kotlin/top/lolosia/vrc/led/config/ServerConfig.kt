@@ -18,9 +18,9 @@
 
 package top.lolosia.vrc.led.config
 
-import top.lolosia.vrc.led.util.config.NodeChainConfig
 import org.yaml.snakeyaml.nodes.MappingNode
+import top.lolosia.vrc.led.util.config.NodeChainConfig
 
 class ServerConfig(parent: NodeChainConfig, node: MappingNode) : NodeChainConfig(parent, node){
-    var port by notnull(7031)
+    var port by notnull(47700)
 }

@@ -125,6 +125,7 @@
     "useId": true,
     "useKeyboard": true,
     "useModel": true,
-    "useTemplateRef": true
+    "useTemplateRef": true,
+    "useMobileStore": true
   }
 }
