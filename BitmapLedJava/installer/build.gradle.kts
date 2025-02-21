@@ -35,7 +35,7 @@ kotlin {
         }
         compilations.getByName("main") {
             cinterops {
-                create("jni"){
+                create("jni") {
                     defFile("src/nativeInterop/cinterop/jni.def")
                     includeDirs(
                         "src/nativeInterop/cinterop/jni",
@@ -43,7 +43,7 @@ kotlin {
                         "src/nativeInterop/cinterop/jni/win32/bridge"
                     )
                 }
-                create("minizip"){
+                create("minizip") {
                     defFile("src/nativeInterop/cinterop/minizip.def")
                     includeDirs("src/nativeInterop/cinterop/minizip")
                 }
@@ -56,6 +56,10 @@ kotlin {
                 "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libz-ng.a",
             )
         }
+    }
+
+    val jvmTarget = jvm("java") {
+        withJava()
     }
 
     sourceSets {
@@ -95,9 +99,10 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Executable.windowsResources(rcFileNam
     linkerOpts(outFile.toString())
 }
 
-tasks.register<Copy>("copyInstallerJar"){
+tasks.register<Copy>("copyInstallerJar") {
     val jar = project(":").tasks["installerJar"] as Jar
     dependsOn(jar)
+    dependsOn(tasks["javaJar"])
     val file = jar.outputs.files.singleFile
     from(file)
     into("$projectDir/resources")

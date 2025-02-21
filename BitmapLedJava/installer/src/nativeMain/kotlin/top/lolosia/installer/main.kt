@@ -7,9 +7,7 @@ import platform.windows.GetLastError
 import platform.windows.GetProcAddress
 import platform.windows.LoadLibraryW
 import top.lolosia.installer.form.libuiKtxMain
-import top.lolosia.jni.JNIEnvVar
-import top.lolosia.jni.JavaVMVar
-import top.lolosia.jni.`null`
+import top.lolosia.jni.*
 import kotlin.system.exitProcess
 
 typealias JNI_CreateJavaVM_t = CFunction<(
@@ -39,16 +37,20 @@ fun main() {
     val createJavaVM = proc.reinterpret<JNI_CreateJavaVM_t>()
 
     memScoped {
-        val p_vm = alloc<CPointerVar<JavaVMVar>>()
-        val p_env = alloc<CPointerVar<JNIEnvVar>>()
+        val jvm = alloc<CPointerVar<JavaVMVar>>()
+        val jEnv = alloc<CPointerVar<JNIEnvVar>>()
         val args: COpaquePointer? = `null`
 
-        val result = createJavaVM(p_vm.ptr, p_env.reinterpret<COpaquePointerVar>().ptr, args)
+        val result = createJavaVM(jvm.ptr, jEnv.reinterpret<COpaquePointerVar>().ptr, args)
         if (result != 0) {
             println("Failed to create JVM. Error code: $result")
         } else {
             println("JVM created successfully")
         }
+
+        val inte = alloc<JNINativeInterface_>()
+        val bytes = byteArrayOf().refTo(0).getPointer(this)
+        inte.DefineClass!!.invoke(jEnv.value, "Name".cstr.ptr, null, bytes, 0)
     }
 
     return
