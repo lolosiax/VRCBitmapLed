@@ -211,7 +211,7 @@ tasks.register("generateDependencyUrls") {
                         )
                     }
                 }.awaitAll()
-        }
+        }.filter { it["url"]?.contains("ebean-querybean") != true }
 
         val rs = mapOf("repositories" to repos, "dependencies" to deps)
         val jsonMapper = ObjectMapper()

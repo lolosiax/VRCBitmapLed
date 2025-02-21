@@ -19,6 +19,8 @@
 package top.lolosia.installer
 
 import kotlinx.cinterop.*
+import kotlinx.io.files.Path
+import kotlinx.io.files.SystemFileSystem
 import platform.windows.GetLastError
 import platform.windows.GetProcAddress
 import platform.windows.LoadLibraryW
@@ -88,8 +90,8 @@ fun runJvm() {
         getClassloaderJarCollection().use { iter ->
             iter.forEach { (name, data) ->
                 if (!name.endsWith(".class")) return@forEach
-                var name1 = name.removeSuffix(".class")
-                println(name1)
+                val name1 = name.removeSuffix(".class")
+                // println(name1)
                 val clazz = data.usePinned { pinned ->
                     env.DefineClass!!(jEnv.value, name1.cstr.ptr, null, pinned.addressOf(0), data.size)
                 }
@@ -116,7 +118,12 @@ fun runJvm() {
         methods[1].name = "getResourcesNames".cstr.ptr
         methods[1].signature = "()[Ljava/lang/String;".cstr.ptr
 
-        val status = env.RegisterNatives!!(jEnv.value, classLoaderClazz, methods, 2)
+        // 方法 3: getLibraries
+        methods[2].fnPtr = staticCFunction(::getLibraries)
+        methods[2].name = "getLibraries".cstr.ptr
+        methods[2].signature = "()[Ljava/lang/String;".cstr.ptr
+
+        val status = env.RegisterNatives!!(jEnv.value, classLoaderClazz, methods, 3)
         if (status != JNI_OK) {
             jEnv.checkException()
             throw IllegalStateException("RegisterNatives failed")
@@ -164,6 +171,31 @@ private fun getResourcesNames(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectA
     memScoped {
         // 返回资源名称
         val files = getInstallerJarCollection().use { iter -> iter.map { it.fileName } }
+        val util = env.getUtil()
+        val clazz0 = util.FindClass!!(env, "java/lang/String".cstr.ptr);
+        val objArray = util.NewObjectArray!!(env, files.size, clazz0, null)
+        files.forEachIndexed { i, it ->
+            val jStr = util.NewStringUTF!!(env, it.cstr.ptr)
+            util.SetObjectArrayElement!!(env, objArray, i, jStr)
+        }
+        return objArray
+    }
+}
+
+
+@OptIn(ExperimentalForeignApi::class)
+private fun getLibraries(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectArray? {
+    var baseDir = Path("library")
+    if (!SystemFileSystem.exists(baseDir)) SystemFileSystem.createDirectories(baseDir)
+    baseDir = SystemFileSystem.resolve(baseDir)
+
+    memScoped {
+        // 返回资源名称
+        val dependencies = getDependencies()
+        val files = dependencies.dependencies.map {
+            val fileName = it.url.split('/').last()
+            Path(baseDir, it.group, it.name, it.version, fileName).toString().replace("\\", "/")
+        }
         val util = env.getUtil()
         val clazz0 = util.FindClass!!(env, "java/lang/String".cstr.ptr);
         val objArray = util.NewObjectArray!!(env, files.size, clazz0, null)

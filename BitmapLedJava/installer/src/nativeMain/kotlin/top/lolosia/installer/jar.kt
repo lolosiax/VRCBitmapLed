@@ -126,7 +126,7 @@ private fun getJarCollection0(name: String): JarCollection {
                 val meta = item!!.pointed!!
 
                 val fileName = meta.filename?.toKString() ?: throw NullPointerException("Can not get entry file name.")
-                println(fileName)
+                // println(fileName)
 
                 return JarItem(fileName) {
                     if (closed) {

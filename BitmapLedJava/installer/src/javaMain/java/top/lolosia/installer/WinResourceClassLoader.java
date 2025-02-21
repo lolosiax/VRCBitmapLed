@@ -2,45 +2,73 @@ package top.lolosia.installer;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
 import java.util.*;
 
-class WinResourceClassLoader extends ClassLoader {
+class WinResourceClassLoader extends URLClassLoader {
     public WinResourceClassLoader() {
         this(null);
     }
 
-    // 必须传入父加载器保证双亲委派机制
     public WinResourceClassLoader(ClassLoader parent) {
-        super(parent);
+        super(new URL[0], parent);
         synchronized (WinResourceClassLoader.class) {
             if (resources == null) init();
         }
+        for (URL library : libraries) addURL(library);
     }
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         byte[] classBytes = loadFromResource(name.replace('.', '/') + ".class");
-        if (classBytes == null) throw new ClassNotFoundException(name);
+        if (classBytes == null) return super.findClass(name);
+
         return defineClass(name, classBytes, 0, classBytes.length);
     }
 
-    // 可选：资源加载支持
+
     @Override
     public InputStream getResourceAsStream(String name) {
         byte[] data = loadFromResource(name);
-        return data != null ? new ByteArrayInputStream(data) : super.getResourceAsStream(name);
+        if (data == null) return super.getResourceAsStream(name);
+
+        return new ByteArrayInputStream(data);
     }
 
     @Override
-    protected Enumeration<URL> findResources(String name) {
-        return Collections.enumeration(resources.values());
+    public Enumeration<URL> findResources(String name) throws IOException {
+        var s = super.findResources(name);
+        var l = Collections.enumeration(resources.values());
+        final boolean[] isLocal = {true};
+        return new Enumeration<>() {
+            @Override
+            public boolean hasMoreElements() {
+                if (isLocal[0]) {
+                    if (l.hasMoreElements()) return true;
+                    isLocal[0] = false;
+                }
+                return s.hasMoreElements();
+            }
+
+            @Override
+            public URL nextElement() {
+                if (isLocal[0]) return l.nextElement();
+                return s.nextElement();
+            }
+        };
     }
 
     @Override
-    protected URL findResource(String name) {
-        return resources.get(name);
+    public URL findResource(String name) {
+        if (resources.containsKey(name)) return resources.get(name);
+        return super.findResource(name);
+    }
+
+    @Override
+    public void addURL(URL url) {
+        super.addURL(url);
     }
 
     // Native 方法声明
@@ -48,7 +76,10 @@ class WinResourceClassLoader extends ClassLoader {
 
     private static native String[] getResourcesNames();
 
+    private static native String[] getLibraries();
+
     private static Map<String, URL> resources;
+    private static URL[] libraries;
 
     private static void init() {
         URL.setURLStreamHandlerFactory(protocol -> {
@@ -102,6 +133,22 @@ class WinResourceClassLoader extends ClassLoader {
         }
 
         resources = Collections.unmodifiableMap(map);
+
+        var libs = getLibraries();
+        var urls = new URL[libs.length];
+        for (int i = 0; i < libs.length; i++) {
+            try {
+                var lib = libs[i];
+                System.out.println(lib);
+                var url = new URI("file:/" + lib).toURL();
+                urls[i] = url;
+            } catch (MalformedURLException | URISyntaxException e) {
+                System.err.println(e);
+            }
+        }
+
+        libraries = urls;
+        // libraries = new URL[0];
         System.out.println("WinResourceClassLoader initialized!");
     }
 }

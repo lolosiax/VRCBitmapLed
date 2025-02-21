@@ -16,42 +16,52 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-@file:OptIn(ExperimentalForeignApi::class)
+package top.lolosia.installer.util
 
-package top.lolosia.installer
-
-import kotlinx.atomicfu.locks.SynchronizedObject
-import kotlinx.atomicfu.locks.synchronized
-import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.StableRef
-import kotlinx.cinterop.asStableRef
-import kotlinx.cinterop.staticCFunction
-import libui.uiQueueMain
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 
 /**
- * util
+ * ConcurrentTaskQueue
  * @author 洛洛希雅Lolosia
- * @since 2025-02-15 17:43
+ * @since 2025-02-22 00:35
  */
+class ConcurrentTaskQueue(val maxConcurrency: Int) : AutoCloseable {
+    private lateinit var channel: Channel<suspend (Int) -> Unit>
 
-private val actions: MutableList<StableRef<Any>> = mutableListOf()
-private val actionsSync = SynchronizedObject()
+    private var running = false
+    private var jobs = emptyList<Job>()
 
-@OptIn(ExperimentalForeignApi::class)
-fun runOnUiThread(block: () -> Unit) {
-    val ref = StableRef.create(block)
-    synchronized(actionsSync) {
-        actions.add(ref)
-    }
-    uiQueueMain(staticCFunction { it ->
-        val ref0 = it!!.asStableRef<() -> Unit>()
-        try {
-            ref0.get().invoke()
-        } finally {
-            synchronized(actionsSync) {
-                actions.remove(ref0)
+    fun start() {
+        if (running) return
+        running = true
+        channel = Channel(Channel.UNLIMITED)
+        jobs = List(maxConcurrency) { index ->
+            CoroutineScope(Dispatchers.Default).launch {
+                for (task in channel) {
+                    try {
+                        task(index)
+                    } catch (e: Throwable) {
+                        e.printStackTrace()
+                    }
+                }
             }
-            ref0.dispose()
         }
-    }, ref.asCPointer())
+    }
+
+    suspend fun send(task: suspend (no: Int) -> Unit) {
+        channel.send(task)
+    }
+
+    suspend fun awaitFinish(){
+        channel.close()
+        jobs.joinAll()
+        running = false
+    }
+
+    override fun close() {
+        running = false
+        channel.close()
+        jobs.forEach { it.cancel() }
+    }
 }
