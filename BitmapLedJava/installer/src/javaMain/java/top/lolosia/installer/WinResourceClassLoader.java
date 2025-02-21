@@ -46,9 +46,7 @@ class WinResourceClassLoader extends ClassLoader {
     // Native 方法声明
     private static native byte[] loadFromResource(String resourcePath);
 
-    private static native String getResourcesName(int index);
-
-    private static native int getResourcesCount();
+    private static native String[] getResourcesNames();
 
     private static Map<String, URL> resources;
 
@@ -93,9 +91,8 @@ class WinResourceClassLoader extends ClassLoader {
 
         // 初始化Jar资源列表
         var map = new LinkedHashMap<String, URL>();
-        var count = getResourcesCount();
-        for (int i = 0; i < count; i++) {
-            var name = getResourcesName(i);
+        var names = getResourcesNames();
+        for (String name : names) {
             try {
                 var url = new URI("winres://" + name).toURL();
                 map.put(name, url);
@@ -105,5 +102,6 @@ class WinResourceClassLoader extends ClassLoader {
         }
 
         resources = Collections.unmodifiableMap(map);
+        System.out.println("WinResourceClassLoader initialized!");
     }
 }

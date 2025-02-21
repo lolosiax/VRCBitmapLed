@@ -20,9 +20,7 @@ repositories {
 }
 
 kotlin {
-    val nativeTarget = mingwX64("native")
-
-    nativeTarget.apply {
+    mingwX64("native") {
         binaries {
             executable {
                 entryPoint = "top.lolosia.installer.main"
@@ -48,6 +46,7 @@ kotlin {
                     includeDirs("src/nativeInterop/cinterop/minizip")
                 }
             }
+
             kotlinOptions.freeCompilerArgs = listOf(
                 "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libminizip.a",
                 "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libbzip2.a",
@@ -58,7 +57,7 @@ kotlin {
         }
     }
 
-    val jvmTarget = jvm("java") {
+    jvm("java") {
         withJava()
     }
 
@@ -91,20 +90,31 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Executable.windowsResources(rcFileNam
         commandLine("$toolchainBinDir/windres", inFile, "-D_${buildType.name}", "-O", "coff", "-o", outFile)
         environment("PATH", "$toolchainBinDir;${System.getenv("PATH")}")
 
-        dependsOn(compilation.compileKotlinTask)
-        dependsOn(":installer:copyInstallerJar")
+        dependsOn(
+            compilation.compileTaskProvider.get(),
+            ":installer:copyInstallerJar",
+            ":installer:copyClassloaderJar"
+        )
     }
 
-    linkTask.dependsOn(windresTask)
+    linkTaskProvider.get().dependsOn(windresTask)
     linkerOpts(outFile.toString())
 }
 
 tasks.register<Copy>("copyInstallerJar") {
     val jar = project(":").tasks["installerJar"] as Jar
     dependsOn(jar)
-    dependsOn(tasks["javaJar"])
     val file = jar.outputs.files.singleFile
     from(file)
     into("$projectDir/resources")
     rename("(.*).jar", "installer.jar")
+}
+
+tasks.register<Copy>("copyClassloaderJar") {
+    val jar = tasks["javaJar"] as Jar
+    dependsOn(jar)
+    val file = jar.outputs.files.singleFile
+    from(file)
+    into("$projectDir/resources")
+    rename("(.*).jar", "classloader.jar")
 }

@@ -1,3 +1,5 @@
 work
 libs
 resources/installer.jar
+resources/classloader.jar
+*.log
