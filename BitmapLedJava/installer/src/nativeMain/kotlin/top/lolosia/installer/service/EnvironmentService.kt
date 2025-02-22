@@ -26,6 +26,7 @@ import io.ktor.http.*
 import io.ktor.utils.io.*
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
+import kotlinx.cinterop.pointed
 import kotlinx.datetime.Clock
 import kotlinx.io.buffered
 import kotlinx.io.files.FileNotFoundException
@@ -37,6 +38,9 @@ import top.lolosia.installer.*
 import top.lolosia.installer.ui.component.dispatch
 import top.lolosia.installer.ui.view.EnvironmentPage
 import top.lolosia.installer.util.ConcurrentTaskQueue
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
@@ -55,24 +59,21 @@ class EnvironmentService : IService {
         while (true) {
             val failure = downloadDependencies()
             if (failure.isEmpty()) break
-            // val rs = suspendCoroutine { cor ->
-            //     view.dispatch {
-            //         val hwnd = Installer.mainWindow.window.ptr.pointed.hwnd
-            var msg = "以下依赖下载失败，要重试吗？\n"
-            msg += failure.joinToString("\n") { "${it.group}:${it.name}:${it.version}" }
-            val type = MB_ABORTRETRYIGNORE or MB_ICONWARNING or MB_DEFBUTTON2
-
-            CoInitializeEx(null, COINIT_APARTMENTTHREADED)
-            val rs = MessageBoxW(null, msg, "下载失败", type.toUInt())
-            CoUninitialize()
-
-            if (rs == 0) {
-                throw RuntimeException("Win32 Error: ${GetLastError()}")
-                // cor.resumeWithException(RuntimeException("Win32 Error: ${GetLastError()}"))
+            val rs = suspendCoroutine { cor ->
+                thread {
+                    CoInitializeEx(null, COINIT_APARTMENTTHREADED)
+                    val hwnd = Installer.mainWindow.window.ptr.pointed.hwnd
+                    var msg = "以下依赖下载失败，要重试吗？\n"
+                    msg += failure.joinToString("\n") { "${it.group}:${it.name}:${it.version}" }
+                    val type = MB_ABORTRETRYIGNORE or MB_ICONWARNING or MB_DEFBUTTON2
+                    val rs = MessageBoxW(hwnd, msg, "下载失败", type.toUInt())
+                    if (rs == 0) {
+                        cor.resumeWithException(RuntimeException("Win32 Error: ${GetLastError()}"))
+                    }
+                    cor.resume(rs)
+                    CoUninitialize()
+                }
             }
-            //         cor.resume(rs)
-            //     }
-            // }
             if (rs == IDABORT) exitProcess(-1)
             else if (rs == IDTRYAGAIN) continue
             else if (rs == IDIGNORE) return
@@ -245,7 +246,8 @@ class EnvironmentService : IService {
         }
         ZipCollection.open(data).use {
             it.forEach { (name, data) ->
-                val itemFile = Path(javaZipDir, name)
+                val name1 = name.split("/", limit = 2)[1]
+                val itemFile = Path(jreDir, name1)
                 val parent = itemFile.parent!!
                 if (!SystemFileSystem.exists(parent)) {
                     SystemFileSystem.createDirectories(parent)
