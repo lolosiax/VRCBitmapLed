@@ -1,13 +1,9 @@
 package top.lolosia.installer
 
 import kotlinx.coroutines.runBlocking
-import top.lolosia.installer.ui.window.MainWindow
 
-
-fun main() {
-    val mainWindow = runBlocking {
-        MainWindow.create()
-    }
-
-    return
+fun main() = runBlocking {
+    val name = getCurrentProcessFileName()
+    println(name)
+    Installer.main()
 }

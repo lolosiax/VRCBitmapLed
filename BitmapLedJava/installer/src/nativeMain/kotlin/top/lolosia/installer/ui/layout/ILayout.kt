@@ -18,6 +18,8 @@
 
 package top.lolosia.installer.ui.layout
 
+import libui.ktx.Control
+import top.lolosia.installer.ui.component.IComponent
 import top.lolosia.installer.ui.view.IRouterView
 
 /**
@@ -25,6 +27,6 @@ import top.lolosia.installer.ui.view.IRouterView
  * @author 洛洛希雅Lolosia
  * @since 2025-02-22 20:22
  */
-interface ILayout {
-    var view: IRouterView?
+interface ILayout<T : Control<*>> : IComponent<T> {
+    var view: IRouterView<*>?
 }

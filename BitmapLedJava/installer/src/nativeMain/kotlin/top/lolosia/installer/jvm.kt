@@ -40,11 +40,14 @@ typealias JNI_CreateJavaVM_t = CFunction<(
 ) -> Int> // jint
 
 typealias NewObject_t = CFunction<(CPointer<JNIEnvVar>?, jclass?, jmethodID?) -> jobject?>
+typealias CallObjectMethod_t = CFunction<(CPointer<JNIEnvVar>?, jobject?, jmethodID?, jstring?) -> jclass?>
+typealias CallStaticVoidMethod_t = CFunction<(CPointer<JNIEnvVar>?, jclass?, jmethodID?, jstring?) -> Unit>
+typealias CallStaticVoidMethod_t0 = CFunction<(CPointer<JNIEnvVar>?, jclass?, jmethodID?) -> Unit>
 
 fun runJvm() {
 
-    val dllPath = "D:\\Java\\jdk-21.0.4.7-hotspot\\bin\\server\\jvm.dll"
-    // val dllPath = "jre\\bin\\server\\jvm.dll"
+    // val dllPath = "D:\\Java\\jdk-21.0.4.7-hotspot\\bin\\server\\jvm.dll"
+    val dllPath = "jre\\bin\\server\\jvm.dll"
 
     val hModule = LoadLibraryW(dllPath)
     if (hModule == null) {
@@ -60,6 +63,8 @@ fun runJvm() {
     val createJavaVM = proc.reinterpret<JNI_CreateJavaVM_t>()
 
     memScoped {
+        //
+        // 创建JVM
         val jvm = alloc<CPointerVar<JavaVMVar>>()
         val jEnv = alloc<CPointerVar<JNIEnvVar>>()
         val vmArgs = alloc<JavaVMInitArgs>()
@@ -80,9 +85,10 @@ fun runJvm() {
         }
         println("JVM created successfully")
 
-        val env = jEnv.pointed!!.value!!.pointed
+        val util = jEnv.getUtil()
 
-        // val inte = alloc<JNINativeInterface_>()
+        //
+        // 创建ClassLoader
         var classLoaderClazz: jclass? = null
         getClassloaderJarCollection().use { iter ->
             iter.forEach { (name, data) ->
@@ -90,7 +96,7 @@ fun runJvm() {
                 val name1 = name.removeSuffix(".class")
                 // println(name1)
                 val clazz = data.usePinned { pinned ->
-                    env.DefineClass!!(jEnv.value, name1.cstr.ptr, null, pinned.addressOf(0), data.size)
+                    util.DefineClass!!(jEnv.value, name1.cstr.ptr, null, pinned.addressOf(0), data.size)
                 }
 
                 if (clazz == null) jEnv.checkException()
@@ -120,21 +126,56 @@ fun runJvm() {
         methods[2].name = "getLibraries".cstr.ptr
         methods[2].signature = "()[Ljava/lang/String;".cstr.ptr
 
-        val status = env.RegisterNatives!!(jEnv.value, classLoaderClazz, methods, 3)
+        val status = util.RegisterNatives!!(jEnv.value, classLoaderClazz, methods, 3)
         if (status != JNI_OK) {
             jEnv.checkException()
             throw IllegalStateException("RegisterNatives failed")
         }
 
-        val constructorMethodId = env.GetMethodID!!(jEnv.value, classLoaderClazz, "<init>".cstr.ptr, "()V".cstr.ptr)
+        val constructorMethodId = util.GetMethodID!!(jEnv.value, classLoaderClazz, "<init>".cstr.ptr, "()V".cstr.ptr)
         constructorMethodId ?: jEnv.checkException()
-        val NewObject = env.NewObject!!.reinterpret<NewObject_t>()
+        val NewObject = util.NewObject!!.reinterpret<NewObject_t>()
         val classLoader = NewObject(jEnv.value, classLoaderClazz, constructorMethodId)
         classLoader ?: jEnv.checkException()
 
         println("Create ClassLoader successfully!")
-    }
 
+        //
+        // 启动应用程序
+        val methodId = util.GetMethodID!!(
+            jEnv.value, classLoaderClazz,
+            "loadClass".cstr.ptr,
+            "(Ljava/lang/String;)Ljava/lang/Class;".cstr.ptr
+        )
+        val jStr = util.NewStringUTF!!(jEnv.value, "top.lolosia.vrc.led.Launcher".cstr.ptr)
+        if (methodId == null) jEnv.checkException()
+        val LoadClass = util.CallObjectMethod!!.reinterpret<CallObjectMethod_t>()
+
+        val mainClass = LoadClass(jEnv.value, classLoader, methodId, jStr)
+        if (mainClass == null) jEnv.checkException()
+
+        var zeroArg = false
+        var mainMethodId = util.GetStaticMethodID!!(
+            jEnv.value, mainClass, "main".cstr.ptr, "([Ljava/lang/String;)V".cstr.ptr
+        )
+        if (mainMethodId == null) {
+            zeroArg = true
+            mainMethodId = util.GetStaticMethodID!!(
+                jEnv.value, mainClass, "main".cstr.ptr, "()V".cstr.ptr
+            )
+        }
+        mainMethodId ?: jEnv.checkException()
+        if (!zeroArg) {
+            val CallStaticVoidMethod = util.CallStaticVoidMethod!!.reinterpret<CallStaticVoidMethod_t>()
+            val clazz0 = util.FindClass!!(jEnv.value, "java/lang/String".cstr.ptr)
+            val objArray = util.NewObjectArray!!(jEnv.value, 0, clazz0, null)
+            CallStaticVoidMethod(jEnv.value, mainClass, mainMethodId, objArray)
+            return
+        }
+
+        val CallStaticVoidMethod = util.CallStaticVoidMethod!!.reinterpret<CallStaticVoidMethod_t0>()
+        CallStaticVoidMethod(jEnv.value, mainClass, mainMethodId)
+    }
 }
 
 private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePath: jstring): jbyteArray? {

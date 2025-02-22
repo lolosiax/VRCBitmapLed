@@ -18,18 +18,16 @@
 
 package top.lolosia.installer.ui.component
 
-import libui.ktx.Control
 import top.lolosia.installer.runOnUiThread
 
 /**
- * IComponent
+ * `package`
  * @author 洛洛希雅Lolosia
- * @since 2025-02-22 19:23
+ * @since 2025-02-23 00:31
  */
-interface IComponent<T : Control<*>> {
-    val name: String get() = this::class.simpleName ?: ""
-    val container: T
-    var parent: IComponent<*>?
-        get() = null
-        set(_) {}
+
+fun <T : IComponent<*>> T.dispatch(block: T.() -> Unit) {
+    runOnUiThread {
+        block(this)
+    }
 }

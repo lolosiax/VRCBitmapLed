@@ -18,7 +18,9 @@
 
 package top.lolosia.installer.ui.layout
 
+import libui.ktx.VBox
 import top.lolosia.installer.ui.component.BaseContainer
+import top.lolosia.installer.ui.component.IComponent
 import top.lolosia.installer.ui.view.IRouterView
 
 /**
@@ -26,10 +28,16 @@ import top.lolosia.installer.ui.view.IRouterView
  * @author 洛洛希雅Lolosia
  * @since 2025-02-22 19:23
  */
-class BaseLayout : BaseContainer(), ILayout{
-    override var view: IRouterView? = null
+class BaseLayout private constructor(
+    private val mContainer: BaseContainer.VMode
+) : IComponent<VBox> by mContainer, ILayout<VBox> {
+
+    constructor() : this(BaseContainer.VMode())
+
+    override var view: IRouterView<*>? = null
         set(value) {
-            children.reversed().forEach { remove(it) }
+            mContainer.clear()
             field = value
+            value?.let { mContainer.add(it) }
         }
 }

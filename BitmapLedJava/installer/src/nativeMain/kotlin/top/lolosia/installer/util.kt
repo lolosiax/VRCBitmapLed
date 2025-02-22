@@ -19,13 +19,12 @@ package top.lolosia.installer
 
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
-import kotlinx.cinterop.StableRef
-import kotlinx.cinterop.asStableRef
-import kotlinx.cinterop.staticCFunction
+import kotlinx.cinterop.*
 import kotlinx.io.files.FileSystem
 import kotlinx.io.files.Path
-import kotlinx.io.files.SystemFileSystem
 import libui.uiQueueMain
+import platform.windows.GetLastError
+import platform.windows.GetModuleFileNameW
 
 /**
  * util
@@ -54,15 +53,23 @@ fun runOnUiThread(block: () -> Unit) {
     }
 }
 
-val baseDir by lazy {
-    val dir = Path("")
-    return@lazy SystemFileSystem.resolve(dir)
-}
-
-val workDir by lazy {
-    val dir = Path("work")
-    if (!SystemFileSystem.exists(dir)) SystemFileSystem.createDirectories(dir)
-    return@lazy SystemFileSystem.resolve(dir)
+/**
+ * 返回当前进程的完整文件名称，包含文件路径。
+ */
+fun getCurrentProcessFileName(): String {
+    val bufferLength = 32767 // Windows 最大路径长度
+    return memScoped {
+        val buffer = allocArray<UShortVar>(bufferLength)
+        val result = GetModuleFileNameW(
+            hModule = null,
+            lpFilename = buffer,
+            nSize = bufferLength.toUInt()
+        )
+        if (result == 0u) {
+            throw RuntimeException("获取模块文件名失败，错误代码: ${GetLastError()}")
+        }
+        buffer.toKString()
+    }
 }
 
 fun FileSystem.deleteRecursively(path: Path) {

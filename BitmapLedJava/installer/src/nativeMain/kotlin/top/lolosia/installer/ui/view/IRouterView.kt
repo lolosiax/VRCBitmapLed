@@ -19,14 +19,22 @@
 package top.lolosia.installer.ui.view
 
 import libui.ktx.Control
+import libui.ktx.VBox
+import top.lolosia.installer.ui.component.BaseContainer
 import top.lolosia.installer.ui.component.IComponent
+import top.lolosia.installer.ui.layout.BaseLayout
 import top.lolosia.installer.ui.layout.ILayout
+import kotlin.reflect.KClass
 
 /**
  * IRouterView
  * @author 洛洛希雅Lolosia
  * @since 2025-02-22 20:22
  */
-interface IRouterView : IComponent<Control<*>> {
-    val layout: ILayout
+interface IRouterView<T : Control<*>> : IComponent<T> {
+    val layout: KClass<out ILayout<*>>
+
+    object Empty : BaseContainer.VMode(), IRouterView<VBox> {
+        override val layout = BaseLayout::class
+    }
 }

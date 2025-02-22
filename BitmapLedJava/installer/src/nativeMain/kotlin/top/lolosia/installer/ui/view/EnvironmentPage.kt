@@ -18,11 +18,37 @@
 
 package top.lolosia.installer.ui.view
 
+import libui.ktx.*
+import top.lolosia.installer.service.EnvironmentService
+import top.lolosia.installer.ui.component.BaseContainer
+import top.lolosia.installer.ui.layout.BaseLayout
+
 /**
  * DownloadPage
  * @author 洛洛希雅Lolosia
  * @since 2025-02-22 20:21
  */
-// class DownloadPage : IContainer<VBox>, IRouterView {
-//
-// }
+class EnvironmentPage(
+    val service: EnvironmentService
+) : BaseContainer.VMode(), IRouterView<VBox> {
+    override val layout = BaseLayout::class
+    val components = mutableListOf<Pair<Label, ProgressBar>>()
+
+    override val container = VBox().apply {
+        val mainStatus = label("正在准备运行环境……")
+        val mainProgress = progressbar()
+        hbox {
+            vbox {
+                components += List(5) { i ->
+                    label("任务${i + 1}") to progressbar()
+                }
+            }
+            vbox {
+                components += List(5) { i ->
+                    label("任务${i + 6}") to progressbar()
+                }
+            }
+            components += mainStatus to mainProgress
+        }
+    }
+}

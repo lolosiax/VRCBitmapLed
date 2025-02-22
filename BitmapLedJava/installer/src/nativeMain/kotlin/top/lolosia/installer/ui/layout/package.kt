@@ -31,3 +31,7 @@ inline fun <reified T : IComponent<*>> IContainer<*>.create(constructor: () -> T
     add(item)
     return item
 }
+
+fun createLayouts(): List<ILayout<*>> = listOf(
+    BaseLayout()
+)

@@ -16,20 +16,19 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.installer.ui.component
-
-import libui.ktx.Control
-import top.lolosia.installer.runOnUiThread
+package top.lolosia.installer.service
 
 /**
- * IComponent
+ * IService
  * @author 洛洛希雅Lolosia
- * @since 2025-02-22 19:23
+ * @since 2025-02-23 00:20
  */
-interface IComponent<T : Control<*>> {
-    val name: String get() = this::class.simpleName ?: ""
-    val container: T
-    var parent: IComponent<*>?
-        get() = null
-        set(_) {}
+interface IService {
+    suspend fun start() {
+
+    }
+
+    suspend fun stop() {
+
+    }
 }

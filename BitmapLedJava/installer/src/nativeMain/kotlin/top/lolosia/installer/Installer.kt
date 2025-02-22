@@ -16,20 +16,43 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.installer.ui.component
+package top.lolosia.installer
 
-import libui.ktx.Control
-import top.lolosia.installer.runOnUiThread
+import kotlinx.coroutines.delay
+import kotlinx.io.files.Path
+import kotlinx.io.files.SystemFileSystem
+import top.lolosia.installer.service.EnvironmentService
+import top.lolosia.installer.ui.component.dispatch
+import top.lolosia.installer.ui.window.MainWindow
 
 /**
- * IComponent
+ * Installer
  * @author 洛洛希雅Lolosia
- * @since 2025-02-22 19:23
+ * @since 2025-02-23 00:14
  */
-interface IComponent<T : Control<*>> {
-    val name: String get() = this::class.simpleName ?: ""
-    val container: T
-    var parent: IComponent<*>?
-        get() = null
-        set(_) {}
+object Installer {
+    lateinit var mainWindow: MainWindow
+    lateinit var environmentService: EnvironmentService
+
+    val baseDir by lazy {
+        val dir = Path(".")
+        return@lazy SystemFileSystem.resolve(dir)
+    }
+
+    val workDir by lazy {
+        val dir = Path("work")
+        if (!SystemFileSystem.exists(dir)) SystemFileSystem.createDirectories(dir)
+        return@lazy SystemFileSystem.resolve(dir)
+    }
+
+    suspend fun main() {
+        mainWindow = MainWindow.create()
+        environmentService = EnvironmentService()
+        mainWindow.dispatch {
+            mainWindow.activePage = environmentService.view
+        }
+        delay(50)
+        environmentService.checkEnvironment()
+        runJvm()
+    }
 }

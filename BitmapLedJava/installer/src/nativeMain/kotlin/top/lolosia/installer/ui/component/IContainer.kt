@@ -31,4 +31,5 @@ interface IContainer<T> : IComponent<T> where T : Control<*>, T : Container {
 
     fun add(component: IComponent<*>)
     fun remove(component: IComponent<*>)
+    fun clear()
 }

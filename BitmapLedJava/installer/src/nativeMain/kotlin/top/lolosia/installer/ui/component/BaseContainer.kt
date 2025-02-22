@@ -18,6 +18,8 @@
 
 package top.lolosia.installer.ui.component
 
+import libui.ktx.Box
+import libui.ktx.HBox
 import libui.ktx.VBox
 
 /**
@@ -25,12 +27,12 @@ import libui.ktx.VBox
  * @author 洛洛希雅Lolosia
  * @since 2025-02-22 20:14
  */
-open class BaseContainer : IContainer<VBox> {
+abstract class BaseContainer<T> : IContainer<T> where T : Box {
     private val mChildren = mutableListOf<IComponent<*>>()
-    override val children : List<IComponent<*>> = mChildren
-    override val container = VBox()
+    override val children: List<IComponent<*>> = mChildren
 
     override fun add(component: IComponent<*>) {
+        component.parent = this
         container.add(component.container)
         mChildren.add(component)
     }
@@ -39,5 +41,21 @@ open class BaseContainer : IContainer<VBox> {
         val i = mChildren.indexOf(component)
         container.delete(i)
         mChildren.remove(component)
+        component.parent = null
+    }
+
+    override fun clear() {
+        for (i in mChildren.size - 1 downTo 0) {
+            container.delete(i)
+            mChildren.removeAt(i).parent = null
+        }
+    }
+
+    open class HMode : BaseContainer<HBox>() {
+        override val container = HBox()
+    }
+
+    open class VMode : BaseContainer<VBox>() {
+        override val container = VBox()
     }
 }
