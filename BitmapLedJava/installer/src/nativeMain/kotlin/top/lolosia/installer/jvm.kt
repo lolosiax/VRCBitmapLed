@@ -33,17 +33,14 @@ import kotlin.system.exitProcess
  * @since 2025-02-21 18:41
  */
 
-@OptIn(ExperimentalForeignApi::class)
 typealias JNI_CreateJavaVM_t = CFunction<(
     pvm: CValuesRef<CPointerVar<JavaVMVar>>?, // JavaVM**
     penv: CValuesRef<COpaquePointerVar>?, // JNIEnv**
     args: CValuesRef<*>? // void*
 ) -> Int> // jint
 
-@OptIn(ExperimentalForeignApi::class)
 typealias NewObject_t = CFunction<(CPointer<JNIEnvVar>?, jclass?, jmethodID?) -> jobject?>
 
-@OptIn(ExperimentalForeignApi::class)
 fun runJvm() {
 
     val dllPath = "D:\\Java\\jdk-21.0.4.7-hotspot\\bin\\server\\jvm.dll"
@@ -140,7 +137,6 @@ fun runJvm() {
 
 }
 
-@OptIn(ExperimentalForeignApi::class)
 private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePath: jstring): jbyteArray? {
     memScoped {
         val util = env.getUtil()
@@ -166,7 +162,6 @@ private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePa
     }
 }
 
-@OptIn(ExperimentalForeignApi::class)
 private fun getResourcesNames(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectArray? {
     memScoped {
         // 返回资源名称
@@ -183,7 +178,6 @@ private fun getResourcesNames(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectA
 }
 
 
-@OptIn(ExperimentalForeignApi::class)
 private fun getLibraries(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectArray? {
     var baseDir = Path("library")
     if (!SystemFileSystem.exists(baseDir)) SystemFileSystem.createDirectories(baseDir)
@@ -207,10 +201,8 @@ private fun getLibraries(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectArray?
     }
 }
 
-@OptIn(ExperimentalForeignApi::class)
 fun CPointerVar<JNIEnvVar>.checkException(clear: Boolean = true) = value!!.checkException(clear)
 
-@OptIn(ExperimentalForeignApi::class)
 fun CPointer<JNIEnvVar>.checkException(clear: Boolean = true) {
     val env = getUtil()
     val exception = env.ExceptionOccurred!!(this)
@@ -222,8 +214,6 @@ fun CPointer<JNIEnvVar>.checkException(clear: Boolean = true) {
 }
 
 
-@OptIn(ExperimentalForeignApi::class)
 fun CPointer<JNIEnvVar>.getUtil() = pointed.value!!.pointed
 
-@OptIn(ExperimentalForeignApi::class)
 fun CPointerVar<JNIEnvVar>.getUtil() = pointed!!.value!!.pointed

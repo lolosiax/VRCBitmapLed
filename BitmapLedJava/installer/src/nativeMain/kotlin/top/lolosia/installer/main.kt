@@ -1,16 +1,13 @@
-@file:OptIn(ExperimentalForeignApi::class)
-
 package top.lolosia.installer
 
-import kotlinx.cinterop.ExperimentalForeignApi
-import top.lolosia.installer.form.libuiKtxMain
+import kotlinx.coroutines.runBlocking
+import top.lolosia.installer.ui.window.MainWindow
 
 
 fun main() {
-    libuiKtxMain()
-    // runJvm()
-
-    if (1 == 1) return
+    val mainWindow = runBlocking {
+        MainWindow.create()
+    }
 
     return
 }

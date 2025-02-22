@@ -28,8 +28,10 @@ import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
 import kotlinx.datetime.Clock
 import kotlinx.io.buffered
+import kotlinx.io.files.FileNotFoundException
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
+import kotlinx.io.readByteArray
 import top.lolosia.installer.util.ConcurrentTaskQueue
 
 /**
@@ -118,16 +120,78 @@ private suspend fun downloadDependency(
     return success
 }
 
+private val javaZipDir by lazy { Path(workDir, "download", "jre") }
+private val jreDir by lazy { Path(baseDir, "jre") }
+private val jreDownloadUrl = "https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jre/x64/windows/"
+
 private suspend fun downloadJava(client: HttpClient, status: StatusCallback0) {
-    val url =
-        "https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jre/x64/windows/OpenJDK21U-jre_x64_windows_hotspot_21.0.6_7.zip"
-    val resp = client.get(url)
-    if (!resp.status.isSuccess()) {
-        println("下载失败")
+    val jvmPath = Path(jreDir, "jre/bin/server/jvm.dll")
+    if (SystemFileSystem.exists(jvmPath)){
+        status(1.0 to "Jvm运行时环境安装完成")
         return
     }
-    val target = Path(".\\work\\OpenJDK21U-jre_x64_windows_hotspot_21.0.6_7.zip")
-    resp.transferTo(target, status)
+
+    val javaVersion = findJavaVersion(client)
+    val url = "$jreDownloadUrl$javaVersion"
+    val resp = client.get(url)
+    if (!resp.status.isSuccess()) {
+        throw RuntimeException("java下载失败")
+    }
+
+    if (!SystemFileSystem.exists(javaZipDir)) SystemFileSystem.createDirectories(javaZipDir)
+
+    val javaZipPath = Path(javaZipDir, javaVersion)
+
+    try {
+        resp.transferTo(javaZipPath, status)
+        releaseJava()
+        SystemFileSystem.delete(javaZipPath)
+        status(1.0 to "Jvm运行时环境安装完成")
+    } catch (e: Throwable) {
+        if (SystemFileSystem.exists(javaZipPath)) {
+            SystemFileSystem.delete(javaZipPath)
+        }
+    }
+}
+
+private suspend fun findJavaVersion(client: HttpClient): String {
+    val resp = client.get(jreDownloadUrl)
+    if (!resp.status.isSuccess()) {
+        throw RuntimeException("java下载失败，无法获取版本信息。")
+    }
+    try {
+        var str = resp.bodyAsText()
+        str = str.split("<tbody>")[1].split("</tbody>")[0]
+        var findResult = "href=\"[^\"]+\\.zip\"".toRegex().findAll(str).firstOrNull()?.value
+        findResult ?: throw RuntimeException("java下载失败，版本信息获取失败。")
+        findResult = findResult.removePrefix("href=\"").removeSuffix("\"")
+        return findResult
+    } catch (e: RuntimeException) {
+        throw e
+    } catch (e: Throwable) {
+        throw RuntimeException("下载java失败，版本信息获取失败", e)
+    }
+}
+
+fun releaseJava() {
+    val file = SystemFileSystem.list(javaZipDir).find { it.name.endsWith(".zip") }
+    file ?: throw FileNotFoundException("找不到可用的Java运行时安装包")
+    val data = SystemFileSystem.source(file).buffered().use { it.readByteArray() }
+    if (SystemFileSystem.exists(jreDir)) {
+        SystemFileSystem.deleteRecursively(jreDir)
+    }
+    ZipCollection.open(data).use {
+        it.forEach { (name, data) ->
+            val itemFile = Path(javaZipDir, name)
+            val parent = itemFile.parent!!
+            if (!SystemFileSystem.exists(parent)) {
+                SystemFileSystem.createDirectories(parent)
+            }
+            SystemFileSystem.sink(itemFile).buffered().use { fos ->
+                fos.write(data)
+            }
+        }
+    }
 }
 
 private suspend fun HttpResponse.transferTo(target: Path, status: StatusCallback0 = {}) {
@@ -152,7 +216,7 @@ private suspend fun HttpResponse.transferTo(target: Path, status: StatusCallback
                 if (count > 0) {
                     // println("$transformed/$count")
                     val now0 = now()
-                    if (now0 - lastUpdate > 200){
+                    if (now0 - lastUpdate > 200) {
                         lastUpdate = now0
                         status((1.0 * transformed / count) to url)
                     }

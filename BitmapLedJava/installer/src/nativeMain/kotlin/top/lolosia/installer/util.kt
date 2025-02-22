@@ -15,17 +15,16 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-@file:OptIn(ExperimentalForeignApi::class)
-
 package top.lolosia.installer
 
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
-import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.StableRef
 import kotlinx.cinterop.asStableRef
 import kotlinx.cinterop.staticCFunction
+import kotlinx.io.files.FileSystem
+import kotlinx.io.files.Path
+import kotlinx.io.files.SystemFileSystem
 import libui.uiQueueMain
 
 /**
@@ -37,21 +36,40 @@ import libui.uiQueueMain
 private val actions: MutableList<StableRef<Any>> = mutableListOf()
 private val actionsSync = SynchronizedObject()
 
-@OptIn(ExperimentalForeignApi::class)
 fun runOnUiThread(block: () -> Unit) {
     val ref = StableRef.create(block)
     synchronized(actionsSync) {
         actions.add(ref)
-    }
-    uiQueueMain(staticCFunction { it ->
-        val ref0 = it!!.asStableRef<() -> Unit>()
-        try {
-            ref0.get().invoke()
-        } finally {
-            synchronized(actionsSync) {
-                actions.remove(ref0)
+        uiQueueMain(staticCFunction { it ->
+            val ref0 = it!!.asStableRef<() -> Unit>()
+            try {
+                ref0.get().invoke()
+            } finally {
+                synchronized(actionsSync) {
+                    actions.remove(ref0)
+                }
+                ref0.dispose()
             }
-            ref0.dispose()
-        }
-    }, ref.asCPointer())
+        }, ref.asCPointer())
+    }
+}
+
+val baseDir by lazy {
+    val dir = Path("")
+    return@lazy SystemFileSystem.resolve(dir)
+}
+
+val workDir by lazy {
+    val dir = Path("work")
+    if (!SystemFileSystem.exists(dir)) SystemFileSystem.createDirectories(dir)
+    return@lazy SystemFileSystem.resolve(dir)
+}
+
+fun FileSystem.deleteRecursively(path: Path) {
+    list(path).forEach { child ->
+        val meta = metadataOrNull(child)!!
+        if (meta.isDirectory) deleteRecursively(child)
+        else delete(child)
+    }
+    delete(path)
 }

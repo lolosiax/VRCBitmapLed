@@ -28,20 +28,20 @@
         {
           "name": "libui.klib",
           "url": "libui-windows64-0.1.9.klib",
-          "size": 5569760,
-          "sha512": "24e8d08f4eed5ef709f1960deff280f5fe6be3755773b16e7f17112f0b2e05c58ae8043c8b5b0ea5b08344a2d07c99aff2e98da3cb586afc36677f357a773ec8",
-          "sha256": "db111565cc68255d8bce3d745014929cde9ba61d720511b8f50ccb16fd3f5928",
-          "sha1": "405f184a251ca1d108f9496127f9f40a19a1bf3f",
-          "md5": "d6f25894e0107bf9b6122f926038c0a8"
+          "size": 5569881,
+          "sha512": "ad4f4ab10c3b8719df25ae104c5a1cda8568c7129e236f9f885e1b63cc1707273733c59736eb121b599bf5e5d990c992dc80404a672b5978e177cc52c91b6d28",
+          "sha256": "7b062883b52a1ccf2b70561cd4e491b861765c3ad66a5ad39275906ca36de43c",
+          "sha1": "a9d51141f0a833ce422bf1d81fc5b500e16d18fb",
+          "md5": "430543851662ff42ccf9831d3ce7c5c3"
         },
         {
           "name": "libui-cinterop-libui.klib",
           "url": "libui-windows64-0.1.9-cinterop-libui.klib",
-          "size": 43463,
-          "sha512": "343b4af7557fa5b16a9ca1ff5a9b64c0405c0d940bdd6950f72a09a30e59e8adcc0dbd3ed0ccc5e473d37bb6b12921d41abcdd733ce20498bc5607ca17acf65a",
-          "sha256": "2aba9a37b8cf13a4c45a0c13caffc67dd9830ea3967f10b10385ce43e5dc9033",
-          "sha1": "6587253dfa35121f67a1393fab8b4a7481cb18ab",
-          "md5": "50a657bf81cc3654c4383e3885e5deda"
+          "size": 55799,
+          "sha512": "b7ca6873becec51334ff1c3bd8d4bd50fbc08f8e1c84fe487a5e80f9c6124de3117b960a5f29090069d02d79f920c7425965110897060d5965e5e7f651c927e0",
+          "sha256": "8b41f5e970784d689cc8f76b81b1e4e844d23d53f2cf76e1af74fa57abff3e97",
+          "sha1": "a1bda9884e3cde4cb3b765ae6d72a15d8ae58a20",
+          "md5": "c186d8d89c79dd3ab74ba2f8508b0271"
         }
       ]
     }
