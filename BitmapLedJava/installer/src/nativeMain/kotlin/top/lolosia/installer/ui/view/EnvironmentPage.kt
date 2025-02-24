@@ -19,9 +19,16 @@
 package top.lolosia.installer.ui.view
 
 import libui.ktx.*
+import libui.uiAlignEnd
+import libui.uiAlignStart
 import top.lolosia.installer.service.EnvironmentService
+import top.lolosia.installer.ui.component.AnyComponent
 import top.lolosia.installer.ui.component.BaseContainer
+import top.lolosia.installer.ui.component.component
 import top.lolosia.installer.ui.layout.BaseLayout
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 /**
  * DownloadPage
@@ -32,23 +39,38 @@ class EnvironmentPage(
     val service: EnvironmentService
 ) : BaseContainer.VMode(), IRouterView<VBox> {
     override val layout = BaseLayout::class
-    val components = mutableListOf<Pair<Label, ProgressBar>>()
+    val mainStatus = Label("正在准备运行环境……").component()
+    val mainSpeed = Label("0.0 kb/s").component()
+    val mainProgress = ProgressBar().component()
+    val textArea = TextArea().component()
+    val grid = GridPane().apply {
+        hexpand = true
+        halign = uiAlignStart
+        add(mainStatus.container)
+        halign = uiAlignEnd
+        add(mainSpeed.container)
+        row()
+        xspan = 2
+        add(mainProgress.container)
+    }.component()
 
-    override val container = VBox().apply {
-        val mainStatus = label("正在准备运行环境……")
-        val mainProgress = progressbar()
-        hbox {
-            vbox {
-                components += List(5) { i ->
-                    label("任务${i + 1}") to progressbar()
-                }
-            }
-            vbox {
-                components += List(5) { i ->
-                    label("任务${i + 6}") to progressbar()
-                }
-            }
-            components += mainStatus to mainProgress
-        }
+    init {
+        setupLayout()
+    }
+
+    private fun setupLayout(){
+        add(grid)
+    }
+
+    fun updateStatus(status: String) {
+        mainStatus.container.text = status
+    }
+
+    fun updateProgress(progress: Double) {
+        mainProgress.container.value = max(min(progress * 100, 100.0), 0.0).roundToInt()
+    }
+
+    fun appendText(text: String) {
+        textArea.container.append(text + "\n")
     }
 }

@@ -18,6 +18,7 @@
 
 package top.lolosia.installer
 
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
@@ -59,6 +60,7 @@ object Installer {
             activePage = environmentService.view
         }
         delay(50)
+        // awaitCancellation()
         environmentService.checkEnvironment()
         runJvm()
     }

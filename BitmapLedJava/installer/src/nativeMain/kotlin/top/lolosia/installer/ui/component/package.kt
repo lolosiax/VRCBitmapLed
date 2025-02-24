@@ -18,6 +18,7 @@
 
 package top.lolosia.installer.ui.component
 
+import libui.ktx.Control
 import top.lolosia.installer.runOnUiThread
 
 /**
@@ -31,3 +32,5 @@ fun <T : IComponent<*>> T.dispatch(block: T.() -> Unit) {
         block(this)
     }
 }
+
+fun <T : Control<*>> T.component() = AnyComponent(this)

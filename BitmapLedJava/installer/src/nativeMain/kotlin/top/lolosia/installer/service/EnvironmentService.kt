@@ -24,9 +24,11 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.utils.io.*
+import kotlinx.atomicfu.atomic
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
 import kotlinx.cinterop.pointed
+import kotlinx.coroutines.*
 import kotlinx.datetime.Clock
 import kotlinx.io.buffered
 import kotlinx.io.files.FileNotFoundException
@@ -75,25 +77,18 @@ class EnvironmentService : IService {
         }
     }
 
-    private fun updateChildStatus(index: Int, process: Double, message: String) {
+    private fun updateChildStatus(index: Int, message: String) {
         view.dispatch {
-            val (label, proc) = components[index]
-            if (process >= 0) {
-                val value = (process * 100).roundToInt()
-                label.text = "任务${index + 1}：[$value%]${message}"
-                proc.value = value
-            } else {
-                label.text = "任务${index + 1}：[失败]$message"
-                proc.value = 0
-            }
+            val text = "Thread-$index: $message"
+            println(text)
+            appendText(text)
         }
     }
 
     private fun updateMainStatus(count: Int, sum: Int, message: String? = null) {
         view.dispatch {
-            val (label, proc) = components[10]
-            label.text = message ?: "正在初始化运行环境……($count/$sum)"
-            proc.value = (100.0 * count / sum).roundToInt()
+            updateStatus(message ?: "正在初始化运行环境……($count/$sum)")
+            updateProgress(1.0 * count / sum)
         }
     }
 
@@ -103,6 +98,16 @@ class EnvironmentService : IService {
     private suspend fun downloadDependencies(): List<JarDependency> {
         val baseDir = Path("library")
         if (!SystemFileSystem.exists(baseDir)) SystemFileSystem.createDirectories(baseDir)
+
+        val countJob = CoroutineScope(Dispatchers.Default).launch {
+            while (isActive){
+                delay(1000)
+                val length = lastBytes.getAndSet(0) * 0.001f
+                view.dispatch {
+                    mainSpeed.container.text = "$length kb/s"
+                }
+            }
+        }
 
         val client = HttpClient(WinHttp)
         var (repos, deps) = getDependencies()
@@ -115,7 +120,7 @@ class EnvironmentService : IService {
 
         queue.send { i ->
             try {
-                downloadJava(client) { a, b -> updateChildStatus(i, a, b) }
+                downloadJava(client) { _, b -> updateChildStatus(i, b) }
             } finally {
                 synchronized(lock) {
                     finished++
@@ -129,7 +134,7 @@ class EnvironmentService : IService {
         for (dep in deps) {
             queue.send { i ->
                 try {
-                    val rs = downloadDependency(client, repos, dep) { a, b -> updateChildStatus(i, a, b) }
+                    val rs = downloadDependency(client, repos, dep) { _, b -> updateChildStatus(i, b) }
                     if (!rs) failure += dep
                 } finally {
                     finished++
@@ -138,6 +143,7 @@ class EnvironmentService : IService {
             }
         }
         queue.awaitFinish()
+        countJob.cancel()
         return failure
     }
 
@@ -181,6 +187,7 @@ class EnvironmentService : IService {
     private val javaZipDir by lazy { Path(workDir, "download", "jre") }
     private val jreDir by lazy { Path(baseDir, "jre") }
     private val jreDownloadUrl = "https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jre/x64/windows/"
+    private var lastBytes = atomic(0)
 
     private suspend fun downloadJava(client: HttpClient, status: (Double, String) -> Unit) {
         val jvmPath = Path(jreDir, "jre/bin/server/jvm.dll")
@@ -273,17 +280,18 @@ class EnvironmentService : IService {
 
                     transformed += len
                     if (count > 0) {
+                        lastBytes.addAndGet(len)
                         // println("$transformed/$count")
                         val now0 = now()
-                        if (now0 - lastUpdate > 200) {
+                        if (now0 - lastUpdate > 2000) {
                             lastUpdate = now0
-                            status((1.0 * transformed / count), url)
+                            status((1.0 * transformed / count), url.split("/").last())
                         }
                     }
                     it.write(array, 0, len)
                 }
             }
-            status(1.0, "完成")
+            status(1.0, url.split("/").last() + " 下载完成")
         } catch (e: Throwable) {
             status(-1.0, "下载失败：${url}")
         }
