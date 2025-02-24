@@ -28,13 +28,12 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 fun main() = runBlocking {
-    // localWindowTest()
-    val name = getCurrentProcessFileName()
-    println(name)
     Installer.main()
 }
 
 private suspend fun localWindowTest(){
+    val name = getCurrentProcessFileName()
+    println(name)
     // 协程回调等待中断，创建UI线程并等待UI线程完成主窗口创建
     val window = suspendCoroutine { continuation ->
         staThread("main") { // 启动一个STA线程

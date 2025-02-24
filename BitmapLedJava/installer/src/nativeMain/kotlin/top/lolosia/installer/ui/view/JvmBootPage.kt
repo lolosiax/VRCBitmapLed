@@ -16,20 +16,49 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.vrc.led
+package top.lolosia.installer.ui.view
 
-import top.lolosia.vrc.led.boot.Boot
+import kotlinx.atomicfu.locks.SynchronizedObject
+import kotlinx.atomicfu.locks.synchronized
+import libui.ktx.VBox
+import libui.ktx.button
+import top.lolosia.installer.ui.component.BaseContainer
+import top.lolosia.installer.ui.layout.BaseLayout
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 /**
- * Launcher
+ * JvmBootPage
  * @author 洛洛希雅Lolosia
- * @since 2024-09-01 21:38
+ * @since 2025-02-24 21:07
  */
-object Launcher {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        // println("[Program launched! waiting for 15000ms]")
-        // Thread.sleep(15000)
-        Boot().boot("top.lolosia.vrc.led.BitmapLed", args)
+class JvmBootPage : BaseContainer.VMode(), IRouterView<VBox> {
+    override val layout = BaseLayout::class
+    private val lock = SynchronizedObject();
+    private val listeners = mutableListOf<() -> Unit>()
+
+    init {
+        initLayout()
+    }
+
+    private fun initLayout() {
+        container.button("启动JVM") {
+            action {
+                synchronized(lock) {
+                    listeners.forEach { it() }
+                    listeners.clear()
+                }
+            }
+        }
+    }
+
+    suspend fun await() {
+        suspendCoroutine { continuation ->
+            synchronized(lock) {
+                listeners.add {
+                    continuation.resume(Unit)
+                }
+            }
+        }
     }
 }

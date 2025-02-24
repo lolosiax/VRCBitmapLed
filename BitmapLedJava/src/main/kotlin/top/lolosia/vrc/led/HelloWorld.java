@@ -16,20 +16,15 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.vrc.led
-
-import top.lolosia.vrc.led.boot.Boot
-
+package top.lolosia.vrc.led;
 /**
- * Launcher
+ * HelloWorld
+ *
  * @author 洛洛希雅Lolosia
- * @since 2024-09-01 21:38
+ * @since 2025-02-24 18:37
  */
-object Launcher {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        // println("[Program launched! waiting for 15000ms]")
-        // Thread.sleep(15000)
-        Boot().boot("top.lolosia.vrc.led.BitmapLed", args)
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
     }
 }

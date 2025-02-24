@@ -22,16 +22,10 @@ import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
-import libui.ktx.Label
-import libui.ktx.VBox
 import top.lolosia.installer.service.EnvironmentService
-import top.lolosia.installer.ui.component.BaseContainer
 import top.lolosia.installer.ui.component.dispatch
-import top.lolosia.installer.ui.layout.BaseLayout
-import top.lolosia.installer.ui.layout.ILayout
-import top.lolosia.installer.ui.view.IRouterView
+import top.lolosia.installer.ui.view.JvmBootPage
 import top.lolosia.installer.ui.window.MainWindow
-import kotlin.reflect.KClass
 
 /**
  * Installer
@@ -62,6 +56,15 @@ object Installer {
         delay(50)
         // awaitCancellation()
         environmentService.checkEnvironment()
+
+        val bootPage = withUI { JvmBootPage() }
+        mainWindow.dispatch {
+            activePage = bootPage
+        }
+        bootPage.await()
+
         runJvm()
+
+        awaitCancellation()
     }
 }

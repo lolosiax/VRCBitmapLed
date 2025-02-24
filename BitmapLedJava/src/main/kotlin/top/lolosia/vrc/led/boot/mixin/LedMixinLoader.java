@@ -77,7 +77,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     // Blackboard keys
     public static final Keys BLACKBOARD_KEY_TWEAKCLASSES = Keys.of("TweakClasses");
     public static final Keys BLACKBOARD_KEY_TWEAKS = Keys.of("Tweaks");
-    
+
     //private static final String MIXIN_TWEAKER_CLASS = MixinServiceAbstract.LAUNCH_PACKAGE + "MixinTweaker";
     private static final String MIXIN_TWEAKER_CLASS = "top.lolosia.vrc.led.boot.mixin.MixinTweaker";
 
@@ -85,13 +85,13 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     // private static final String STATE_TWEAKER = MixinServiceAbstract.MIXIN_PACKAGE + "EnvironmentStateTweaker";
     private static final String STATE_TWEAKER = "top.lolosia.vrc.led.boot.mixin.EnvironmentStateTweaker";
     private static final String TRANSFORMER_PROXY_CLASS = "top.lolosia.vrc.led.boot.mixin.Proxy";
-    
+
     /**
      * Known re-entrant transformers, other re-entrant transformers will
-     * detected automatically 
+     * detected automatically
      */
     private static final Set<String> excludeTransformers = Sets.newHashSet();
-    
+
     /**
      * Log4j2 logger
      */
@@ -101,7 +101,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
      * Utility for reflecting into Launch ClassLoader
      */
     private final LaunchClassLoaderUtil classLoaderUtil;
-    
+
     /**
      * Local transformer chain, this consists of all transformers present at the
      * init phase with the exclusion of the mixin transformer itself and known
@@ -114,16 +114,16 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
      * Class name transformer (if present)
      */
     private IClassNameTransformer nameTransformer;
-    
+
     public LedMixinLoader() {
         this.classLoaderUtil = new LaunchClassLoaderUtil(Launch.classLoader);
     }
-    
+
     @Override
     public String getName() {
         return "LedMixinLoader";
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#isValid()
      */
@@ -147,7 +147,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
         // Only needed in dev, in production this would be handled by the tweaker
         Launch.classLoader.addClassLoaderExclusion(MixinServiceAbstract.LAUNCH_PACKAGE);
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getInitialPhase()
      */
@@ -163,7 +163,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
         }
         return Phase.PREINIT;
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService
      *      #getMaxCompatibilityLevel()
@@ -172,7 +172,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public CompatibilityLevel getMaxCompatibilityLevel() {
         return CompatibilityLevel.JAVA_21;
     }
-    
+
     @Override
     protected ILogger createLogger(String name) {
         return new LoggerAdapterLog4j2(name);
@@ -191,10 +191,10 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
         if (tweakClasses != null) {
             tweakClasses.add(LedMixinLoader.STATE_TWEAKER);
         }
-        
+
         super.init();
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getPlatformAgents()
      */
@@ -206,7 +206,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
         //     "org.spongepowered.asm.launch.platform.MixinPlatformAgentLiteLoaderLegacy"
         // );
     }
-    
+
     @Override
     public IContainerHandle getPrimaryContainer() {
         URI uri = null;
@@ -215,12 +215,13 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
             if (uri != null) {
                 return new ContainerHandleURI(uri);
             }
+        } catch (NullPointerException ignore){
         } catch (URISyntaxException ex) {
             ex.printStackTrace();
         }
         return new ContainerHandleVirtual(this.getName());
     }
-    
+
     @Override
     public Collection<IContainerHandle> getMixinContainers() {
         Builder<IContainerHandle> list = ImmutableList.<IContainerHandle>builder();
@@ -247,11 +248,11 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                } 
+                }
             }
         }
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getClassProvider()
      */
@@ -259,7 +260,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public IClassProvider getClassProvider() {
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getBytecodeProvider()
      */
@@ -267,7 +268,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public IClassBytecodeProvider getBytecodeProvider() {
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getTransformerProvider()
      */
@@ -275,7 +276,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public ITransformerProvider getTransformerProvider() {
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getClassTracker()
      */
@@ -283,7 +284,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public IClassTracker getClassTracker() {
         return this.classLoaderUtil;
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getAuditTrail()
      */
@@ -291,7 +292,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public IMixinAuditTrail getAuditTrail() {
         return null;
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IClassProvider#findClass(
      *      java.lang.String)
@@ -309,7 +310,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public Class<?> findClass(String name, boolean initialize) throws ClassNotFoundException {
         return Class.forName(name, initialize, Launch.classLoader);
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IClassProvider#findAgentClass(
      *      java.lang.String, boolean)
@@ -318,7 +319,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public Class<?> findAgentClass(String name, boolean initialize) throws ClassNotFoundException {
         return Class.forName(name, initialize, Launch.class.getClassLoader());
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#beginPhase()
      */
@@ -327,7 +328,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
         Launch.classLoader.registerTransformer(LedMixinLoader.TRANSFORMER_PROXY_CLASS);
         this.delegatedTransformers = null;
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#checkEnv(
      *      java.lang.Object)
@@ -338,7 +339,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
             throw new MixinException("Attempted to init the mixin environment in the wrong classloader");
         }
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getResourceAsStream(
      *      java.lang.String)
@@ -347,7 +348,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public InputStream getResourceAsStream(String name) {
         return Launch.classLoader.getResourceAsStream(name);
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IClassProvider#getClassPath()
      */
@@ -356,7 +357,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public URL[] getClassPath() {
         return Launch.classLoader.getSources().toArray(new URL[0]);
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IMixinService#getTransformers()
      */
@@ -370,7 +371,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
             } else {
                 wrapped.add(new LegacyTransformerHandle(transformer));
             }
-            
+
             if (transformer instanceof IClassNameTransformer) {
                 LedMixinLoader.logger.debug("Found name transformer: {}", transformer.getClass().getName());
                 this.nameTransformer = (IClassNameTransformer)transformer;
@@ -383,19 +384,19 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     /**
      * Returns (and generates if necessary) the transformer delegation list for
      * this environment.
-     * 
+     *
      * @return current transformer delegation list (read-only)
      */
     @Override
     public List<ITransformer> getDelegatedTransformers() {
         return Collections.<ITransformer>unmodifiableList(this.getDelegatedLegacyTransformers());
     }
-    
+
     private List<ILegacyClassTransformer> getDelegatedLegacyTransformers() {
         if (this.delegatedTransformers == null) {
             this.buildTransformerDelegationList();
         }
-        
+
         return this.delegatedTransformers;
     }
 
@@ -412,7 +413,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
             if (!(transformer instanceof ILegacyClassTransformer)) {
                 continue;
             }
-            
+
             ILegacyClassTransformer legacyTransformer = (ILegacyClassTransformer)transformer;
             String transformerName = legacyTransformer.getName();
             boolean include = true;
@@ -435,13 +436,13 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
 
     /**
      * Adds a transformer to the transformer exclusions list
-     * 
+     *
      * @param name Class transformer exclusion to add
      */
     @Override
     public void addTransformerExclusion(String name) {
         LedMixinLoader.excludeTransformers.add(name);
-        
+
         // Force rebuild of the list
         this.delegatedTransformers = null;
     }
@@ -449,7 +450,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     /**
      * Retrieve class bytes using available classloaders, does not transform the
      * class
-     * 
+     *
      * @param name class name
      * @param transformedName transformed class name
      * @return class bytes or null if not found
@@ -481,10 +482,10 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
             Closeables.closeQuietly(classStream);
         }
     }
-    
+
     /**
      * Loads class bytecode from the classpath
-     * 
+     *
      * @param className Name of the class to load
      * @param runTransformers True to run the loaded bytecode through the
      *      delegate transformer chain
@@ -496,7 +497,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public byte[] getClassBytes(String className, boolean runTransformers) throws ClassNotFoundException, IOException {
         String transformedName = className.replace('/', '.');
         String name = this.unmapClassName(transformedName);
-        
+
         Profiler profiler = Profiler.getProfiler("mixin");
         Section loadTime = profiler.begin(Profiler.ROOT, "class.load");
         byte[] classBytes = this.getClassBytes(name, transformedName);
@@ -518,7 +519,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     /**
      * Since we obtain the class bytes with getClassBytes(), we need to apply
      * the transformers ourself
-     * 
+     *
      * @param name class name
      * @param transformedName transformed class name
      * @param basicClass input class bytes
@@ -533,18 +534,18 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
         for (ILegacyClassTransformer transformer : this.getDelegatedLegacyTransformers()) {
             // Clear the re-entrance semaphore
             this.lock.clear();
-            
+
             int pos = transformer.getName().lastIndexOf('.');
             String simpleName = transformer.getName().substring(pos + 1);
             Section transformTime = profiler.begin(Profiler.FINE, simpleName.toLowerCase(Locale.ROOT));
             transformTime.setInfo(transformer.getName());
             basicClass = transformer.transformClassBytes(name, transformedName, basicClass);
             transformTime.end();
-            
+
             if (this.lock.isSet()) {
                 // Also add it to the exclusion list so we can exclude it if the environment triggers a rebuild
                 this.addTransformerExclusion(transformer.getName());
-                
+
                 this.lock.clear();
                 LedMixinLoader.logger.info("A re-entrant transformer '{}' was detected and will no longer process meta class data",
                         transformer.getName());
@@ -558,11 +559,11 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
         if (this.nameTransformer == null) {
             this.findNameTransformer();
         }
-        
+
         if (this.nameTransformer != null) {
             return this.nameTransformer.unmapClassName(className);
         }
-        
+
         return className;
     }
 
@@ -584,7 +585,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public ClassNode getClassNode(String className) throws ClassNotFoundException, IOException {
         return this.getClassNode(className, this.getClassBytes(className, true), ClassReader.EXPAND_FRAMES);
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IClassBytecodeProvider#getClassNode(
      *      java.lang.String, boolean)
@@ -593,7 +594,7 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
     public ClassNode getClassNode(String className, boolean runTransformers) throws ClassNotFoundException, IOException {
         return this.getClassNode(className, this.getClassBytes(className, runTransformers), ClassReader.EXPAND_FRAMES);
     }
-    
+
     /* (non-Javadoc)
      * @see org.spongepowered.asm.service.IClassBytecodeProvider#getClassNode(
      *      java.lang.String, boolean, int)
@@ -605,10 +606,10 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
 
     /**
      * Gets an ASM Tree for the supplied class bytecode
-     * 
+     *
      * @param classBytes Class bytecode
      * @param flags ClassReader flags
-     * @return ASM Tree view of the specified class 
+     * @return ASM Tree view of the specified class
      */
     private ClassNode getClassNode(String className, byte[] classBytes, int flags) {
         ClassNode classNode = new ClassNode();
@@ -619,19 +620,19 @@ public class LedMixinLoader extends MixinServiceAbstract implements IClassProvid
 
     private static int findInStackTrace(String className, String methodName) {
         Thread currentThread = Thread.currentThread();
-        
+
         if (!"main".equals(currentThread.getName())) {
             return 0;
         }
-        
+
         StackTraceElement[] stackTrace = currentThread.getStackTrace();
         for (StackTraceElement s : stackTrace) {
             if (className.equals(s.getClassName()) && methodName.equals(s.getMethodName())) {
                 return s.getLineNumber();
             }
         }
-        
+
         return 0;
     }
-    
+
 }

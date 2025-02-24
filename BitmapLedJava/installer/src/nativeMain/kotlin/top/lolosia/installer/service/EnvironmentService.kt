@@ -41,7 +41,6 @@ import top.lolosia.installer.ui.component.dispatch
 import top.lolosia.installer.ui.view.EnvironmentPage
 import top.lolosia.installer.util.ConcurrentTaskQueue
 import top.lolosia.installer.util.threading.withStaThread
-import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
 /**
@@ -80,7 +79,7 @@ class EnvironmentService : IService {
     private fun updateChildStatus(index: Int, message: String) {
         view.dispatch {
             val text = "Thread-$index: $message"
-            println(text)
+            // println(text)
             appendText(text)
         }
     }
@@ -158,7 +157,7 @@ class EnvironmentService : IService {
         val fileName = dependency.url.split('/').last()
         val path = Path(baseDir, dependency.group, dependency.name, dependency.version, fileName)
         if (SystemFileSystem.exists(path)) {
-            println("Dependency \"${dependency.group}:${dependency.name}:${dependency.version}\" exists!")
+            status(1.0, "Dependency \"${dependency.group}:${dependency.name}:${dependency.version}\" exists!")
             return true
         }
 
@@ -190,7 +189,7 @@ class EnvironmentService : IService {
     private var lastBytes = atomic(0)
 
     private suspend fun downloadJava(client: HttpClient, status: (Double, String) -> Unit) {
-        val jvmPath = Path(jreDir, "jre/bin/server/jvm.dll")
+        val jvmPath = Path(jreDir, "bin/server/jvm.dll")
         if (SystemFileSystem.exists(jvmPath)) {
             status(1.0, "Jvm运行时环境安装完成")
             return

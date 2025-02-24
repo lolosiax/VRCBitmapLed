@@ -55,7 +55,7 @@ fun runJvm() {
         println("Failed to load $dllPath, error: $errorCode")
         exitProcess(-1)
     } else {
-        println("Successfully loaded jvm.dll at $dllPath")
+        // println("Successfully loaded jvm.dll at $dllPath")
     }
 
     val proc = GetProcAddress(hModule, "JNI_CreateJavaVM")!!
@@ -68,12 +68,23 @@ fun runJvm() {
         val jvm = alloc<CPointerVar<JavaVMVar>>()
         val jEnv = alloc<CPointerVar<JNIEnvVar>>()
         val vmArgs = alloc<JavaVMInitArgs>()
-        val vmOptions = allocArrayOfPointersTo<JavaVMOption>()
-        // val vmOptions = cValuesOf<JavaVMOption>()
-
         vmArgs.version = JNI_VERSION_21
-        vmArgs.options = vmOptions.pointed.value
-        vmArgs.nOptions = 0
+        val dev = false
+
+        if (dev){
+            val vmOption = alloc<JavaVMOption>()
+            vmOption.optionString = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005".cstr.ptr
+            val vmOptions = allocArrayOfPointersTo(vmOption)
+
+            vmArgs.options = vmOptions.pointed.value
+            vmArgs.nOptions = 1
+        }
+        else {
+            val vmOptions = allocArrayOfPointersTo<JavaVMOption>()
+
+            vmArgs.options = vmOptions.pointed.value
+            vmArgs.nOptions = 0
+        }
 
         val result = createJavaVM(
             jvm.ptr,
@@ -83,7 +94,7 @@ fun runJvm() {
         if (result != 0) {
             throw RuntimeException("Failed to create JVM. Error code: $result")
         }
-        println("JVM created successfully")
+        // println("JVM created successfully")
 
         val util = jEnv.getUtil()
 
@@ -138,27 +149,32 @@ fun runJvm() {
         val classLoader = NewObject(jEnv.value, classLoaderClazz, constructorMethodId)
         classLoader ?: jEnv.checkException()
 
-        println("Create ClassLoader successfully!")
+        // println("Create ClassLoader successfully!")
 
         //
         // 启动应用程序
+        // println("Get ClassLoader.loadClass()")
         val methodId = util.GetMethodID!!(
             jEnv.value, classLoaderClazz,
             "loadClass".cstr.ptr,
             "(Ljava/lang/String;)Ljava/lang/Class;".cstr.ptr
         )
+        // val jStr = util.NewStringUTF!!(jEnv.value, "top.lolosia.vrc.led.HelloWorld".cstr.ptr)
         val jStr = util.NewStringUTF!!(jEnv.value, "top.lolosia.vrc.led.Launcher".cstr.ptr)
         if (methodId == null) jEnv.checkException()
         val LoadClass = util.CallObjectMethod!!.reinterpret<CallObjectMethod_t>()
 
+        // println("Load MainClass")
         val mainClass = LoadClass(jEnv.value, classLoader, methodId, jStr)
         if (mainClass == null) jEnv.checkException()
 
+        // println("Get MainClass.main(String[] args) method ID")
         var zeroArg = false
         var mainMethodId = util.GetStaticMethodID!!(
             jEnv.value, mainClass, "main".cstr.ptr, "([Ljava/lang/String;)V".cstr.ptr
         )
         if (mainMethodId == null) {
+            // println("Get MainClass.main() method ID")
             zeroArg = true
             mainMethodId = util.GetStaticMethodID!!(
                 jEnv.value, mainClass, "main".cstr.ptr, "()V".cstr.ptr
@@ -166,16 +182,25 @@ fun runJvm() {
         }
         mainMethodId ?: jEnv.checkException()
         if (!zeroArg) {
+            // println("Call MainClass.main(String[] args) method")
             val CallStaticVoidMethod = util.CallStaticVoidMethod!!.reinterpret<CallStaticVoidMethod_t>()
             val clazz0 = util.FindClass!!(jEnv.value, "java/lang/String".cstr.ptr)
             val objArray = util.NewObjectArray!!(jEnv.value, 0, clazz0, null)
             CallStaticVoidMethod(jEnv.value, mainClass, mainMethodId, objArray)
-            return
+        } else {
+            // println("Call MainClass.main() method")
+            val CallStaticVoidMethod = util.CallStaticVoidMethod!!.reinterpret<CallStaticVoidMethod_t0>()
+            CallStaticVoidMethod(jEnv.value, mainClass, mainMethodId)
         }
+        jEnv.checkException()
 
-        val CallStaticVoidMethod = util.CallStaticVoidMethod!!.reinterpret<CallStaticVoidMethod_t0>()
-        CallStaticVoidMethod(jEnv.value, mainClass, mainMethodId)
+
+        // println("Main method exited")
     }
+}
+
+private val resources by lazy {
+    getInstallerJarCollection().use { c -> c.map { (f, d) -> f to d } }.toMap()
 }
 
 private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePath: jstring): jbyteArray? {
@@ -185,10 +210,13 @@ private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePa
         val chars = util.GetStringUTFChars!!(env, resourcePath, null)
         val bytes = chars?.readBytes(len) ?: byteArrayOf()
         val resourcePathStr = bytes.decodeToString()
+        // println("Loading resources: $resourcePathStr")
 
         val data = getInstallerJarCollection().use { iter ->
             iter.find { it.fileName == resourcePathStr }?.data
         }
+
+        // val data = resources[resourcePathStr] ?: resources["META-INF/${resourcePathStr}"]
         if (data == null) {
             val cls = util.FindClass!!(env, "java/io/FileNotFoundException".cstr.ptr)
             cls ?: env.checkException()

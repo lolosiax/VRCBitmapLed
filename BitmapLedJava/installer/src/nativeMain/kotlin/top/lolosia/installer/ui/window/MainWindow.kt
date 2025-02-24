@@ -81,7 +81,7 @@ private suspend fun createMainWindow(): MainWindow {
     var mainThread: Thread? = null
     val window = suspendCoroutine { continuation ->
         mainThread = staThread("main") {
-            appWindow(title = "VRC Bitmap Led", width = 460, height = 240) {
+            appWindow(title = "VRC Bitmap Led", width = 460, height = 60) {
                 continuation.resume(this)
             }
             println("UI Thread exited!")

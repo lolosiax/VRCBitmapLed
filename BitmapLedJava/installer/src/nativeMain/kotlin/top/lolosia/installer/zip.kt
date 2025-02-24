@@ -133,7 +133,7 @@ private fun getZipCollection0(data: COpaquePointer, size: Int): ZipCollection {
                         throw IllegalStateException("Can not get entry file data, because iterator indices are not equal.")
                     }
                     try {
-                        arena.run {
+                        memScoped {
                             val depSize = meta.uncompressed_size.toInt()
                             val depData = ByteArray(depSize)
                             val depPtr = depData.refTo(0).getPointer(this)

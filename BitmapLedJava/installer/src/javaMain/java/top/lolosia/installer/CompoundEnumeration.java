@@ -16,20 +16,45 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.vrc.led
+package top.lolosia.installer;
 
-import top.lolosia.vrc.led.boot.Boot
+import java.util.Enumeration;
+import java.util.NoSuchElementException;
 
 /**
- * Launcher
+ * CompoundEnumeration
+ * <p>
+ * A utility class that will enumerate over an array of enumerations.
+ *
  * @author 洛洛希雅Lolosia
- * @since 2024-09-01 21:38
+ * @since 2025-02-24 23:47
  */
-object Launcher {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        // println("[Program launched! waiting for 15000ms]")
-        // Thread.sleep(15000)
-        Boot().boot("top.lolosia.vrc.led.BitmapLed", args)
+public final class CompoundEnumeration<E> implements Enumeration<E> {
+    private final Enumeration<E>[] enums;
+    private int index;
+
+    public CompoundEnumeration(Enumeration<E>[] enums) {
+        this.enums = enums;
+    }
+
+    private boolean next() {
+        while (index < enums.length) {
+            if (enums[index] != null && enums[index].hasMoreElements()) {
+                return true;
+            }
+            index++;
+        }
+        return false;
+    }
+
+    public boolean hasMoreElements() {
+        return next();
+    }
+
+    public E nextElement() {
+        if (!next()) {
+            throw new NoSuchElementException();
+        }
+        return enums[index].nextElement();
     }
 }

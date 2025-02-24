@@ -29,6 +29,7 @@ kotlin {
                 linkerOpts("-Wl,--subsystem,windows")
 
                 windowsResources("$projectDir/resources/installer.rc")
+                // freeCompilerArgs += listOf("-g")
             }
         }
         compilations.getByName("main") {
@@ -47,7 +48,7 @@ kotlin {
                 }
             }
 
-            kotlinOptions.freeCompilerArgs = listOf(
+            kotlinOptions.freeCompilerArgs += listOf(
                 "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libminizip.a",
                 "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/libbzip2.a",
                 "-include-binary", "$projectDir/src/nativeInterop/cinterop/minizip/liblzma.a",
@@ -111,7 +112,7 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Executable.windowsResources(rcFileNam
 
 tasks.register<Copy>("copyInstallerJar") {
     val jar = project(":").tasks["installerJar"] as Jar
-    // dependsOn(jar)
+    dependsOn(jar)
     val file = jar.outputs.files.singleFile
     from(file)
     into("$projectDir/resources")

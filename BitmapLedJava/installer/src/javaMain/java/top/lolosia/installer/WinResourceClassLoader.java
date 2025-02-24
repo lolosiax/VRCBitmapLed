@@ -1,5 +1,7 @@
 package top.lolosia.installer;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,8 +24,11 @@ class WinResourceClassLoader extends URLClassLoader {
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] classBytes = loadFromResource(name.replace('.', '/') + ".class");
-        if (classBytes == null) return super.findClass(name);
+        var fileName = name.replace('.', '/') + ".class";
+        if (!resources.containsKey(fileName)) {
+            return super.findClass(name);
+        }
+        byte[] classBytes = loadFromResource(fileName);
 
         return defineClass(name, classBytes, 0, classBytes.length);
     }
@@ -31,33 +36,51 @@ class WinResourceClassLoader extends URLClassLoader {
 
     @Override
     public InputStream getResourceAsStream(String name) {
-        byte[] data = loadFromResource(name);
-        if (data == null) return super.getResourceAsStream(name);
-
+        var name1 = name.startsWith("/") ? name.substring(1) : name;
+        if (!resources.containsKey(name1)) {
+            return super.getResourceAsStream(name);
+        }
+        var data = loadFromResource(name1);
         return new ByteArrayInputStream(data);
+    }
+
+    @Nullable
+    @Override
+    public URL getResource(String name) {
+        // System.out.println("getResource: " + name);
+        var name1 = name.startsWith("/") ? name.substring(1) : name;
+        if (!resources.containsKey(name1)) {
+            return super.getResource(name);
+        }
+        return resources.get(name1);
+    }
+
+    @Override
+    public Enumeration<URL> getResources(String name) throws IOException {
+        var l = findResources0(name);
+        var s = super.getResources(name);
+        //noinspection unchecked
+        return new CompoundEnumeration<URL>(new Enumeration[]{l, s});
     }
 
     @Override
     public Enumeration<URL> findResources(String name) throws IOException {
+        var l = findResources0(name);
         var s = super.findResources(name);
-        var l = Collections.enumeration(resources.values());
-        final boolean[] isLocal = {true};
-        return new Enumeration<>() {
-            @Override
-            public boolean hasMoreElements() {
-                if (isLocal[0]) {
-                    if (l.hasMoreElements()) return true;
-                    isLocal[0] = false;
-                }
-                return s.hasMoreElements();
-            }
+        //noinspection unchecked
+        return new CompoundEnumeration<URL>(new Enumeration[]{l, s});
+    }
 
-            @Override
-            public URL nextElement() {
-                if (isLocal[0]) return l.nextElement();
-                return s.nextElement();
+    private Enumeration<URL> findResources0(String name) {
+        if (name.startsWith("/")) name = name.substring(1);
+        List<URL> result = new ArrayList<>();
+
+        for (Map.Entry<String, URL> entry : resources.entrySet()) {
+            if (entry.getKey().equals(name)) {
+                result.add(entry.getValue());
             }
-        };
+        }
+        return Collections.enumeration(result);
     }
 
     @Override
@@ -92,8 +115,8 @@ class WinResourceClassLoader extends URLClassLoader {
 
                         @Override
                         public void connect() throws FileNotFoundException {
-                            var url = getURL();
-                            var path = url.getPath();
+                            var path = getURL().getPath();
+                            if (path.startsWith("/")) path = path.substring(1);
                             var data = loadFromResource(path);
                             if (data == null) {
                                 throw new FileNotFoundException("\"" + path + "\" can not found in windows rc resource!");
@@ -112,7 +135,8 @@ class WinResourceClassLoader extends URLClassLoader {
                         }
 
                         @Override
-                        public InputStream getInputStream() {
+                        public InputStream getInputStream() throws FileNotFoundException {
+                            if (data == null) connect();
                             return new ByteArrayInputStream(data);
                         }
                     };
@@ -125,7 +149,8 @@ class WinResourceClassLoader extends URLClassLoader {
         var names = getResourcesNames();
         for (String name : names) {
             try {
-                var url = new URI("winres://" + name).toURL();
+                // System.out.println(name);
+                var url = new URI("winres://IDR_JAR1/" + name).toURL();
                 map.put(name, url);
             } catch (URISyntaxException | MalformedURLException e) {
                 System.err.println(e);
@@ -139,7 +164,7 @@ class WinResourceClassLoader extends URLClassLoader {
         for (int i = 0; i < libs.length; i++) {
             try {
                 var lib = libs[i];
-                System.out.println(lib);
+                // System.out.println(lib);
                 var url = new URI("file:/" + lib).toURL();
                 urls[i] = url;
             } catch (MalformedURLException | URISyntaxException e) {
@@ -149,6 +174,6 @@ class WinResourceClassLoader extends URLClassLoader {
 
         libraries = urls;
         // libraries = new URL[0];
-        System.out.println("WinResourceClassLoader initialized!");
+        // System.out.println("WinResourceClassLoader initialized!");
     }
 }
