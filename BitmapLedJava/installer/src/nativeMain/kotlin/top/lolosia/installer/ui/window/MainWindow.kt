@@ -1,6 +1,6 @@
 package top.lolosia.installer.ui.window
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
 import libui.ktx.VBox
 import libui.ktx.Window
 import libui.ktx.appWindow
@@ -9,18 +9,22 @@ import top.lolosia.installer.ui.component.IComponent
 import top.lolosia.installer.ui.layout.BaseLayout
 import top.lolosia.installer.ui.layout.createLayouts
 import top.lolosia.installer.ui.view.IRouterView
+import top.lolosia.installer.util.threading.Thread
+import top.lolosia.installer.util.threading.staThread
+import top.lolosia.installer.ui
+import top.lolosia.installer.withUI
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class MainWindow private constructor(
     val window: Window,
-    val thread: CloseableCoroutineDispatcher,
+    val thread: Thread,
     private val mContainer: BaseContainer.VMode
 ) : IComponent<VBox> by mContainer {
 
     constructor(
         window: Window,
-        thread: CloseableCoroutineDispatcher
+        thread: Thread
     ) : this(window, thread, BaseContainer.VMode())
 
     companion object {
@@ -28,10 +32,6 @@ class MainWindow private constructor(
     }
 
     val components = mutableMapOf<String, Any>()
-
-    init {
-        window.add(mContainer.container)
-    }
 
     var activePage: IRouterView<*> = IRouterView.Empty
         set(value) {
@@ -46,6 +46,10 @@ class MainWindow private constructor(
 
     private val layouts = createLayouts().associateBy { it::class }
 
+    init {
+        window.add(mContainer.container)
+    }
+
     @Suppress("UNCHECKED_CAST")
     fun <T> getComponent(id: String): T = components[id] as T
 
@@ -56,15 +60,18 @@ class MainWindow private constructor(
     operator fun set(id: String, component: Any) = components.set(id, component)
 }
 
-@OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
 private suspend fun createMainWindow(): MainWindow {
-    val mainThread = newSingleThreadContext("main")
+    var mainThread: Thread? = null
     val window = suspendCoroutine { continuation ->
-        CoroutineScope(mainThread).launch {
+        mainThread = staThread("main") {
             appWindow(title = "VRC Bitmap Led", width = 460, height = 240) {
                 continuation.resume(this)
             }
+            println("UI Thread exited!")
         }
     }
-    return MainWindow(window, mainThread)
+
+    delay(200)
+    val mainWindow = withUI { MainWindow(window, mainThread!!) }
+    return mainWindow
 }

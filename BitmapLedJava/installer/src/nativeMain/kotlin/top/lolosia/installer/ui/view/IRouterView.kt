@@ -20,6 +20,7 @@ package top.lolosia.installer.ui.view
 
 import libui.ktx.Control
 import libui.ktx.VBox
+import top.lolosia.installer.ui
 import top.lolosia.installer.ui.component.BaseContainer
 import top.lolosia.installer.ui.component.IComponent
 import top.lolosia.installer.ui.layout.BaseLayout
@@ -36,5 +37,8 @@ interface IRouterView<T : Control<*>> : IComponent<T> {
 
     object Empty : BaseContainer.VMode(), IRouterView<VBox> {
         override val layout = BaseLayout::class
+        override val container: VBox by lazy {
+            ui { VBox() }
+        }
     }
 }

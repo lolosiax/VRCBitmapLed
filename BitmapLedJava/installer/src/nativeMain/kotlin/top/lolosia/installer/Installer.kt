@@ -21,9 +21,16 @@ package top.lolosia.installer
 import kotlinx.coroutines.delay
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
+import libui.ktx.Label
+import libui.ktx.VBox
 import top.lolosia.installer.service.EnvironmentService
+import top.lolosia.installer.ui.component.BaseContainer
 import top.lolosia.installer.ui.component.dispatch
+import top.lolosia.installer.ui.layout.BaseLayout
+import top.lolosia.installer.ui.layout.ILayout
+import top.lolosia.installer.ui.view.IRouterView
 import top.lolosia.installer.ui.window.MainWindow
+import kotlin.reflect.KClass
 
 /**
  * Installer
@@ -49,7 +56,7 @@ object Installer {
         mainWindow = MainWindow.create()
         environmentService = EnvironmentService()
         mainWindow.dispatch {
-            mainWindow.activePage = environmentService.view
+            activePage = environmentService.view
         }
         delay(50)
         environmentService.checkEnvironment()

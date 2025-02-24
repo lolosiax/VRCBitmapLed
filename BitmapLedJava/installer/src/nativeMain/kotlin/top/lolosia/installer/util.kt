@@ -20,13 +20,14 @@ package top.lolosia.installer
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
 import kotlinx.cinterop.*
+import kotlinx.coroutines.runBlocking
 import kotlinx.io.files.FileSystem
 import kotlinx.io.files.Path
 import libui.uiQueueMain
-import platform.windows.CreateThread
-import platform.windows.DWORDVar
-import platform.windows.GetLastError
-import platform.windows.GetModuleFileNameW
+import platform.windows.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 /**
  * util
@@ -55,6 +56,26 @@ fun runOnUiThread(block: () -> Unit) {
     }
 }
 
+suspend fun <T> withUI(block: () -> T): T {
+    return suspendCoroutine { continuation ->
+        runOnUiThread {
+            try {
+                continuation.resume(block())
+            } catch (e: Throwable) {
+                continuation.resumeWithException(e)
+            }
+        }
+    }
+}
+
+/**
+ * 指示一段代码需要在UI线程执行
+ * @param block 需要执行的代码块
+ */
+fun <T> ui(block: () -> T) = runBlocking {
+    withUI { block() }
+}
+
 /**
  * 返回当前进程的完整文件名称，包含文件路径。
  */
@@ -81,29 +102,4 @@ fun FileSystem.deleteRecursively(path: Path) {
         else delete(child)
     }
     delete(path)
-}
-
-fun thread(block: () -> Unit) {
-    val ref = StableRef.create(block)
-    synchronized(actionsSync) {
-        actions.add(ref)
-    }
-    memScoped {
-        val lpThreadID = alloc<DWORDVar>()
-        CreateThread(null, 0u, staticCFunction { it ->
-            val ref0 = it!!.asStableRef<() -> Unit>()
-            try {
-                ref0.get().invoke()
-                return@staticCFunction 0U
-            } catch (e: Throwable) {
-                e.printStackTrace()
-                return@staticCFunction 0xFFFFU
-            } finally {
-                synchronized(actionsSync) {
-                    actions.remove(ref0)
-                }
-                ref0.dispose()
-            }
-        }, ref.asCPointer(), 0u, lpThreadID.ptr)
-    }
 }

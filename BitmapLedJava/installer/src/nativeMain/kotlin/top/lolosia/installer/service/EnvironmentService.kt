@@ -38,9 +38,7 @@ import top.lolosia.installer.*
 import top.lolosia.installer.ui.component.dispatch
 import top.lolosia.installer.ui.view.EnvironmentPage
 import top.lolosia.installer.util.ConcurrentTaskQueue
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
+import top.lolosia.installer.util.threading.withStaThread
 import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
@@ -51,7 +49,7 @@ import kotlin.system.exitProcess
  */
 
 class EnvironmentService : IService {
-    val view = EnvironmentPage(this)
+    val view = ui { EnvironmentPage(this) }
     private val baseDir get() = Installer.baseDir
     private val workDir get() = Installer.workDir
 
@@ -59,20 +57,16 @@ class EnvironmentService : IService {
         while (true) {
             val failure = downloadDependencies()
             if (failure.isEmpty()) break
-            val rs = suspendCoroutine { cor ->
-                thread {
-                    CoInitializeEx(null, COINIT_APARTMENTTHREADED)
-                    val hwnd = Installer.mainWindow.window.ptr.pointed.hwnd
-                    var msg = "以下依赖下载失败，要重试吗？\n"
-                    msg += failure.joinToString("\n") { "${it.group}:${it.name}:${it.version}" }
-                    val type = MB_ABORTRETRYIGNORE or MB_ICONWARNING or MB_DEFBUTTON2
-                    val rs = MessageBoxW(hwnd, msg, "下载失败", type.toUInt())
-                    if (rs == 0) {
-                        cor.resumeWithException(RuntimeException("Win32 Error: ${GetLastError()}"))
-                    }
-                    cor.resume(rs)
-                    CoUninitialize()
+            val rs = withStaThread {
+                val hwnd = Installer.mainWindow.window.ptr.pointed.hwnd
+                var msg = "以下依赖下载失败，要重试吗？\n"
+                msg += failure.joinToString("\n") { "${it.group}:${it.name}:${it.version}" }
+                val type = MB_ABORTRETRYIGNORE or MB_ICONWARNING or MB_DEFBUTTON2
+                val rs = MessageBoxW(hwnd, msg, "下载失败", type.toUInt())
+                if (rs == 0) {
+                    throw RuntimeException("Win32 Error: ${GetLastError()}")
                 }
+                rs
             }
             if (rs == IDABORT) exitProcess(-1)
             else if (rs == IDTRYAGAIN) continue
