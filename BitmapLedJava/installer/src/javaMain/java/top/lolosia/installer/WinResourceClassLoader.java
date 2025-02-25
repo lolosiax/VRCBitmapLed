@@ -22,6 +22,10 @@ class WinResourceClassLoader extends URLClassLoader {
         for (URL library : libraries) addURL(library);
     }
 
+    public static Set<String> getDirs() {
+        return dirs;
+    }
+
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         var fileName = name.replace('.', '/') + ".class";
@@ -57,7 +61,22 @@ class WinResourceClassLoader extends URLClassLoader {
 
     @Override
     public Enumeration<URL> getResources(String name) throws IOException {
-        var l = findResources0(name);
+        System.out.println("getResources: " + name);
+
+        if (name.startsWith("/")) name = name.substring(1);
+        if (name.endsWith("/")) name = name.substring(0, name.length() - 1);
+        List<URL> result = new ArrayList<>();
+
+        for (Map.Entry<String, URL> entry : resources.entrySet()) {
+            if (entry.getKey().equals(name)) {
+                result.add(entry.getValue());
+            }
+            if (entry.getKey().startsWith(name + "/")) {
+                result.add(entry.getValue());
+            }
+        }
+
+        var l = Collections.enumeration(result);
         var s = super.getResources(name);
         //noinspection unchecked
         return new CompoundEnumeration<URL>(new Enumeration[]{l, s});
@@ -65,13 +84,6 @@ class WinResourceClassLoader extends URLClassLoader {
 
     @Override
     public Enumeration<URL> findResources(String name) throws IOException {
-        var l = findResources0(name);
-        var s = super.findResources(name);
-        //noinspection unchecked
-        return new CompoundEnumeration<URL>(new Enumeration[]{l, s});
-    }
-
-    private Enumeration<URL> findResources0(String name) {
         if (name.startsWith("/")) name = name.substring(1);
         List<URL> result = new ArrayList<>();
 
@@ -80,7 +92,11 @@ class WinResourceClassLoader extends URLClassLoader {
                 result.add(entry.getValue());
             }
         }
-        return Collections.enumeration(result);
+
+        var l = Collections.enumeration(result);
+        var s = super.findResources(name);
+        //noinspection unchecked
+        return new CompoundEnumeration<URL>(new Enumeration[]{l, s});
     }
 
     @Override
@@ -102,6 +118,7 @@ class WinResourceClassLoader extends URLClassLoader {
     private static native String[] getLibraries();
 
     private static Map<String, URL> resources;
+    private static Set<String> dirs;
     private static URL[] libraries;
 
     private static void init() {
@@ -147,8 +164,15 @@ class WinResourceClassLoader extends URLClassLoader {
         // 初始化Jar资源列表
         var map = new LinkedHashMap<String, URL>();
         var names = getResourcesNames();
+        var dirs1 = new ArrayList<String>();
         for (String name : names) {
             try {
+                var dir = name.substring(0, name.lastIndexOf('/') + 1);
+                if (!map.containsKey(dir)) {
+                    dirs1.add(dir);
+                    var dirUrl = new URI("winres://IDR_JAR1/" + dir).toURL();
+                    map.put(name, dirUrl);
+                }
                 // System.out.println(name);
                 var url = new URI("winres://IDR_JAR1/" + name).toURL();
                 map.put(name, url);
@@ -158,6 +182,7 @@ class WinResourceClassLoader extends URLClassLoader {
         }
 
         resources = Collections.unmodifiableMap(map);
+        dirs = Collections.unmodifiableSet(new LinkedHashSet<>(dirs1));
 
         var libs = getLibraries();
         var urls = new URL[libs.length];

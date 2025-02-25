@@ -67,24 +67,22 @@ fun runJvm() {
         // 创建JVM
         val jvm = alloc<CPointerVar<JavaVMVar>>()
         val jEnv = alloc<CPointerVar<JNIEnvVar>>()
+        val vmArgsArray = mutableListOf(
+            "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+            "--add-opens=java.base/java.nio.file.spi=ALL-UNNAMED",
+            // "--add-opens java.base/java.lang=ALL-UNNAMED",
+        )
+
+        val vmOptions = allocArray<JavaVMOption>(vmArgsArray.size)
+        vmArgsArray.forEachIndexed{ i, it ->
+            vmOptions[i].optionString = it.cstr.ptr
+        }
+
         val vmArgs = alloc<JavaVMInitArgs>()
         vmArgs.version = JNI_VERSION_21
-        val dev = false
-
-        if (dev){
-            val vmOption = alloc<JavaVMOption>()
-            vmOption.optionString = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005".cstr.ptr
-            val vmOptions = allocArrayOfPointersTo(vmOption)
-
-            vmArgs.options = vmOptions.pointed.value
-            vmArgs.nOptions = 1
-        }
-        else {
-            val vmOptions = allocArrayOfPointersTo<JavaVMOption>()
-
-            vmArgs.options = vmOptions.pointed.value
-            vmArgs.nOptions = 0
-        }
+        vmArgs.options = vmOptions
+        vmArgs.nOptions = vmArgsArray.size
+        // vmArgs.ignoreUnrecognized = 1U
 
         val result = createJavaVM(
             jvm.ptr,
@@ -198,8 +196,8 @@ fun runJvm() {
     }
 }
 
-private val resources by lazy {
-    getInstallerJarCollection().use { c -> c.map { (f, d) -> f to d } }.toMap()
+private val installerResources by lazy {
+    getClassloaderJarCollection().use { c -> c.map { (f, d) -> f to d } }.toMap()
 }
 
 private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePath: jstring): jbyteArray? {
@@ -212,11 +210,11 @@ private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePa
         util.ReleaseStringUTFChars!!(env, resourcePath, chars)
         // println("Loading resources: $resourcePathStr")
 
-        val data = getInstallerJarCollection().use { iter ->
-            iter.find { it.fileName == resourcePathStr }?.data
-        }
+        val data = installerResources[resourcePathStr]
+            ?: getInstallerJarCollection().use { iter ->
+                iter.find { it.fileName == resourcePathStr }?.data
+            }
 
-        // val data = resources[resourcePathStr] ?: resources["META-INF/${resourcePathStr}"]
         if (data == null) {
             val cls = util.FindClass!!(env, "java/io/FileNotFoundException".cstr.ptr)
             cls ?: env.checkException()
@@ -234,7 +232,9 @@ private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePa
 private fun getResourcesNames(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectArray? {
     memScoped {
         // 返回资源名称
-        val files = getInstallerJarCollection().use { iter -> iter.map { it.fileName } }
+        val files = installerResources.keys.toMutableList()
+        files += getInstallerJarCollection().use { iter -> iter.map { it.fileName } }
+
         val util = env.getUtil()
         val clazz0 = util.FindClass!!(env, "java/lang/String".cstr.ptr)
         val objArray = util.NewObjectArray!!(env, files.size, clazz0, null)
