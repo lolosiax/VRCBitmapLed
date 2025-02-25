@@ -21,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.resume
@@ -28,6 +29,7 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 import kotlin.io.path.Path
 import kotlin.io.path.absolute
+import kotlin.io.path.exists
 
 buildscript {
     dependencies {
@@ -67,6 +69,9 @@ task("buildResources") {
 suspend fun buildPlatform(name: String, dirPath: String) {
     val path = Path(dirPath).absolute()
     val vite = path.resolve("node_modules/.bin/vite.CMD")
+    if (!vite.exists()){
+        throw FileNotFoundException("Vite does not exist, Did you run \"npm install\" in the \"${dirPath}\" directory?")
+    }
     suspendCoroutine {
         val process = ProcessBuilder(vite.toString(), "build", "--mode", "build").apply {
             directory(path.toFile())
