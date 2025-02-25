@@ -1,7 +1,9 @@
-work
-libs
+work/
+libs/
 resources/installer.jar
 resources/classloader.jar
 *.log
-library
-jre
+library/
+jre/
+plugins/
+logs/

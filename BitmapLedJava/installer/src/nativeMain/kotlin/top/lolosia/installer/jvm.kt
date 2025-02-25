@@ -18,6 +18,7 @@
 
 package top.lolosia.installer
 
+import kotlin.system.exitProcess
 import kotlinx.cinterop.*
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
@@ -25,7 +26,6 @@ import platform.windows.GetLastError
 import platform.windows.GetProcAddress
 import platform.windows.LoadLibraryW
 import top.lolosia.jni.*
-import kotlin.system.exitProcess
 
 /**
  * jvm
@@ -121,7 +121,7 @@ fun runJvm() {
             throw IllegalStateException("Class \"top.lolosia.installer.WinResourceClassLoader\" doesn't exist!")
         }
 
-        val methods = allocArray<JNINativeMethod>(2)
+        val methods = allocArray<JNINativeMethod>(3)
         // 方法 1: loadFromResource
         methods[0].fnPtr = staticCFunction(::loadFromResource)
         methods[0].name = "loadFromResource".cstr.ptr
@@ -194,7 +194,6 @@ fun runJvm() {
         }
         jEnv.checkException()
 
-
         // println("Main method exited")
     }
 }
@@ -210,6 +209,7 @@ private fun loadFromResource(env: CPointer<JNIEnvVar>, clazz: jclass, resourcePa
         val chars = util.GetStringUTFChars!!(env, resourcePath, null)
         val bytes = chars?.readBytes(len) ?: byteArrayOf()
         val resourcePathStr = bytes.decodeToString()
+        util.ReleaseStringUTFChars!!(env, resourcePath, chars)
         // println("Loading resources: $resourcePathStr")
 
         val data = getInstallerJarCollection().use { iter ->
@@ -236,7 +236,7 @@ private fun getResourcesNames(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectA
         // 返回资源名称
         val files = getInstallerJarCollection().use { iter -> iter.map { it.fileName } }
         val util = env.getUtil()
-        val clazz0 = util.FindClass!!(env, "java/lang/String".cstr.ptr);
+        val clazz0 = util.FindClass!!(env, "java/lang/String".cstr.ptr)
         val objArray = util.NewObjectArray!!(env, files.size, clazz0, null)
         files.forEachIndexed { i, it ->
             val jStr = util.NewStringUTF!!(env, it.cstr.ptr)
@@ -245,7 +245,6 @@ private fun getResourcesNames(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectA
         return objArray
     }
 }
-
 
 private fun getLibraries(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectArray? {
     var baseDir = Path("library")
@@ -260,7 +259,7 @@ private fun getLibraries(env: CPointer<JNIEnvVar>, clazz: jclass): jobjectArray?
             Path(baseDir, it.group, it.name, it.version, fileName).toString().replace("\\", "/")
         }
         val util = env.getUtil()
-        val clazz0 = util.FindClass!!(env, "java/lang/String".cstr.ptr);
+        val clazz0 = util.FindClass!!(env, "java/lang/String".cstr.ptr)
         val objArray = util.NewObjectArray!!(env, files.size, clazz0, null)
         files.forEachIndexed { i, it ->
             val jStr = util.NewStringUTF!!(env, it.cstr.ptr)
@@ -281,7 +280,6 @@ fun CPointer<JNIEnvVar>.checkException(clear: Boolean = true) {
         throw RuntimeException("Jvm thrown an exception, see log for more details.")
     }
 }
-
 
 fun CPointer<JNIEnvVar>.getUtil() = pointed.value!!.pointed
 
