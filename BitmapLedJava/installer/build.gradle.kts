@@ -58,10 +58,6 @@ kotlin {
         }
     }
 
-    jvm("java") {
-        withJava()
-    }
-
     sourceSets {
         nativeMain {
             dependencies {
@@ -101,8 +97,7 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Executable.windowsResources(rcFileNam
 
         dependsOn(
             compilation.compileTaskProvider.get(),
-            ":installer:copyInstallerJar",
-            ":installer:copyClassloaderJar"
+            ":installer:copyInstallerJar"
         )
     }
 
@@ -112,18 +107,9 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Executable.windowsResources(rcFileNam
 
 tasks.register<Copy>("copyInstallerJar") {
     val jar = project(":").tasks["installerJar"] as Jar
-    dependsOn(jar)
+    // dependsOn(jar)
     val file = jar.outputs.files.singleFile
     from(file)
     into("$projectDir/resources")
     rename("(.*).jar", "installer.jar")
-}
-
-tasks.register<Copy>("copyClassloaderJar") {
-    val jar = tasks["javaJar"] as Jar
-    dependsOn(jar)
-    val file = jar.outputs.files.singleFile
-    from(file)
-    into("$projectDir/resources")
-    rename("(.*).jar", "classloader.jar")
 }

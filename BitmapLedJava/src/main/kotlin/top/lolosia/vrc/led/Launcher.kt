@@ -28,8 +28,8 @@ import top.lolosia.vrc.led.boot.Boot
 object Launcher {
     @JvmStatic
     fun main(args: Array<String>) {
-        // println("[Program launched! waiting for 15000ms]")
-        // Thread.sleep(15000)
+        println("[Program launched! waiting for 15000ms]")
+        Thread.sleep(15000)
         Boot().boot("top.lolosia.vrc.led.BitmapLed", args)
     }
 }

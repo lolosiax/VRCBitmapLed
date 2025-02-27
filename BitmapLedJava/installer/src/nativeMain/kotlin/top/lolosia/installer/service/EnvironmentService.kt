@@ -24,10 +24,12 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.utils.io.*
+import io.ktor.utils.io.core.*
 import kotlinx.atomicfu.atomic
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
 import kotlinx.cinterop.pointed
+import kotlinx.cinterop.reinterpret
 import kotlinx.coroutines.*
 import kotlinx.datetime.Clock
 import kotlinx.io.buffered
@@ -53,6 +55,21 @@ class EnvironmentService : IService {
     val view = ui { EnvironmentPage(this) }
     private val baseDir get() = Installer.baseDir
     private val workDir get() = Installer.workDir
+    private val coreJarPath
+        get() = Path(
+            baseDir, "library", "top.lolosia", "vrc-led", "latest", "vrc_led-latest.jar"
+        )
+
+    val dependencies by lazy { getDependencies() }
+
+    val dependencyFiles by lazy {
+        val baseDir = Path(Installer.baseDir, "library")
+        val otherDeps = dependencies.dependencies.map {
+            val fileName = it.url.split('/').last()
+            Path(baseDir, it.group, it.name, it.version, fileName)
+        }
+        return@lazy listOf(coreJarPath, *otherDeps.toTypedArray())
+    }
 
     suspend fun checkEnvironment() {
         while (true) {
@@ -99,7 +116,7 @@ class EnvironmentService : IService {
         if (!SystemFileSystem.exists(baseDir)) SystemFileSystem.createDirectories(baseDir)
 
         val countJob = CoroutineScope(Dispatchers.Default).launch {
-            while (isActive){
+            while (isActive) {
                 delay(1000)
                 val length = lastBytes.getAndSet(0) * 0.001f
                 view.dispatch {
@@ -109,7 +126,7 @@ class EnvironmentService : IService {
         }
 
         val client = HttpClient(WinHttp)
-        var (repos, deps) = getDependencies()
+        var (repos, deps) = dependencies
         repos = repos.map { it.removeSuffix("/") }
         val queue = ConcurrentTaskQueue(10)
         queue.start()
@@ -126,6 +143,9 @@ class EnvironmentService : IService {
                     updateMainStatus(finished, count)
                 }
             }
+        }
+        queue.send {
+            releaseCoreJar()
         }
 
         val failure = mutableListOf<JarDependency>()
@@ -144,6 +164,19 @@ class EnvironmentService : IService {
         queue.awaitFinish()
         countJob.cancel()
         return failure
+    }
+
+    private fun releaseCoreJar() {
+        val (ptr, size) = getJarResource("IDR_JAR1")
+        val jarPath = coreJarPath
+        val dir = jarPath.parent!!
+        if (!SystemFileSystem.exists(dir)){
+            SystemFileSystem.createDirectories(dir)
+        }
+        SystemFileSystem.delete(jarPath)
+        SystemFileSystem.sink(jarPath).buffered().use {
+            it.writeFully(ptr.reinterpret(), 0, size.toLong())
+        }
     }
 
     private suspend fun downloadDependency(

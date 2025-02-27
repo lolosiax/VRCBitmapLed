@@ -23,6 +23,7 @@ import kotlinx.coroutines.delay
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
 import top.lolosia.installer.service.EnvironmentService
+import top.lolosia.installer.service.JvmService
 import top.lolosia.installer.ui.component.dispatch
 import top.lolosia.installer.ui.view.JvmBootPage
 import top.lolosia.installer.ui.window.MainWindow
@@ -35,6 +36,7 @@ import top.lolosia.installer.ui.window.MainWindow
 object Installer {
     lateinit var mainWindow: MainWindow
     lateinit var environmentService: EnvironmentService
+    lateinit var jvmService: JvmService
 
     val baseDir by lazy {
         val dir = Path(".")
@@ -50,6 +52,7 @@ object Installer {
     suspend fun main() {
         mainWindow = MainWindow.create()
         environmentService = EnvironmentService()
+        jvmService = JvmService()
         mainWindow.dispatch {
             activePage = environmentService.view
         }
@@ -63,7 +66,7 @@ object Installer {
         }
         bootPage.await()
 
-        runJvm()
+        jvmService.launch()
 
         awaitCancellation()
     }

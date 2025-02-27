@@ -6,7 +6,6 @@
 1           24      "installer.manifest"
 IDI_ICON1	ICON    DISCARDABLE	 "logo.ico"  //设置程序图标
 IDR_JAR1    JARFILE "installer.jar"
-IDR_JAR2    JARFILE "classloader.jar"
 
 // https://blog.csdn.net/xiaotoly/article/details/53841013
 #define VFT_APP 1

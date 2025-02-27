@@ -34,7 +34,7 @@ import platform.windows.SizeofResource
 fun getInstallerJarCollection() = getJarCollection0("IDR_JAR1")
 fun getClassloaderJarCollection() = getJarCollection0("IDR_JAR2")
 
-private fun getJar0(name: String): Pair<COpaquePointer, Int> {
+fun getJarResource(name: String): Pair<COpaquePointer, Int> {
     memScoped {
         val hRes = FindResourceW(null, name, "JARFILE")
         hRes ?: throw RuntimeException("Internal jar '$name' not found!")
@@ -46,6 +46,6 @@ private fun getJar0(name: String): Pair<COpaquePointer, Int> {
 }
 
 private fun getJarCollection0(name: String): ZipCollection {
-    val (data, size) = getJar0(name)
+    val (data, size) = getJarResource(name)
     return ZipCollection.open(data, size)
 }
