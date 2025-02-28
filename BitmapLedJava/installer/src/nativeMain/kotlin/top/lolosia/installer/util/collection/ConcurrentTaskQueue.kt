@@ -16,7 +16,7 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.installer.util
+package top.lolosia.installer.util.collection
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel

@@ -41,8 +41,14 @@ import platform.windows.*
 import top.lolosia.installer.*
 import top.lolosia.installer.ui.component.dispatch
 import top.lolosia.installer.ui.view.EnvironmentPage
-import top.lolosia.installer.util.ConcurrentTaskQueue
+import top.lolosia.installer.util.collection.ConcurrentTaskQueue
+import top.lolosia.installer.util.deleteRecursively
+import top.lolosia.installer.util.dependency.JarDependency
+import top.lolosia.installer.util.dependency.getDependencies
+import top.lolosia.installer.util.jar.getJarResource
 import top.lolosia.installer.util.threading.withStaThread
+import top.lolosia.installer.util.ui
+import top.lolosia.installer.util.zip.ZipCollection
 import kotlin.system.exitProcess
 
 /**
@@ -277,7 +283,7 @@ class EnvironmentService : IService {
         if (SystemFileSystem.exists(jreDir)) {
             SystemFileSystem.deleteRecursively(jreDir)
         }
-        ZipCollection.open(data).use {
+        ZipCollection(data).use {
             it.forEach { (name, data) ->
                 val name1 = name.split("/", limit = 2)[1]
                 val itemFile = Path(jreDir, name1)

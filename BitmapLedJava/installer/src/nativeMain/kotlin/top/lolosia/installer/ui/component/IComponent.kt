@@ -19,7 +19,6 @@
 package top.lolosia.installer.ui.component
 
 import libui.ktx.Control
-import top.lolosia.installer.runOnUiThread
 
 /**
  * IComponent

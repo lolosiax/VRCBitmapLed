@@ -29,7 +29,7 @@ import top.lolosia.installer.ui.layout.createLayouts
 import top.lolosia.installer.ui.view.IRouterView
 import top.lolosia.installer.util.threading.Thread
 import top.lolosia.installer.util.threading.staThread
-import top.lolosia.installer.withUI
+import top.lolosia.installer.util.withUI
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 

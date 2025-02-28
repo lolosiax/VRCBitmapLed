@@ -23,7 +23,7 @@ kotlin {
     mingwX64("native") {
         binaries {
             executable {
-                entryPoint = "top.lolosia.installer.main"
+                entryPoint = "top.lolosia.installer.boot.main"
 
                 runTask?.args("")
                 linkerOpts("-Wl,--subsystem,windows")
@@ -107,7 +107,7 @@ fun org.jetbrains.kotlin.gradle.plugin.mpp.Executable.windowsResources(rcFileNam
 
 tasks.register<Copy>("copyInstallerJar") {
     val jar = project(":").tasks["installerJar"] as Jar
-    // dependsOn(jar)
+    dependsOn(jar)
     val file = jar.outputs.files.singleFile
     from(file)
     into("$projectDir/resources")

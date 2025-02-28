@@ -27,6 +27,7 @@ import top.lolosia.installer.service.JvmService
 import top.lolosia.installer.ui.component.dispatch
 import top.lolosia.installer.ui.view.JvmBootPage
 import top.lolosia.installer.ui.window.MainWindow
+import top.lolosia.installer.util.withUI
 
 /**
  * Installer

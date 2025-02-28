@@ -16,43 +16,23 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.installer
+package top.lolosia.installer.util.zip
 
 import kotlinx.cinterop.*
 import top.lolosia.minizip.*
 
 /**
- * jar
- * @author 洛洛希雅Lolosia
- * @since 2025-02-21 19:11
+ * 使用字节数组打开一个 ZipCollection 实例
+ * @param bytes 字节数组
  */
+fun ZipCollection(bytes: ByteArray): ZipCollection = ByteArrayZipCollection(bytes)
 
-interface ZipCollection : Iterable<ZipItem>, AutoCloseable {
-    companion object {
-        fun open(data: COpaquePointer, size: Int): ZipCollection = getZipCollection0(data, size)
-        fun open(data: ByteArray): ZipCollection = ByteArrayZipCollection(data)
-    }
-}
-
-class ZipItem(val fileName: String, data: () -> ByteArray) {
-    val data by lazy(data)
-    operator fun component1() = fileName
-    operator fun component2() = data
-}
-
-private class ByteArrayZipCollection(data: ByteArray) : ZipCollection {
-    val dataPtr = data.pin()
-    val zipCollection = getZipCollection0(dataPtr.addressOf(0), data.size)
-
-    override fun iterator() = zipCollection.iterator()
-
-    override fun close() {
-        dataPtr.unpin()
-        zipCollection.close()
-    }
-}
-
-private fun getZipCollection0(data: COpaquePointer, size: Int): ZipCollection {
+/**
+ * 使用字节指针打开一个 ZipCollection 实例
+ * @param data 字节指针
+ * @param size 数据长度
+ */
+fun ZipCollection(data: COpaquePointer, size: Int): ZipCollection {
     val arena = Arena()
     var reader: COpaquePointerVar? = null
     var memStream: COpaquePointerVar? = null

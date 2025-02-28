@@ -16,37 +16,11 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.installer
+package top.lolosia.installer.boot
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
+import kotlinx.coroutines.runBlocking
+import top.lolosia.installer.Installer
 
-/**
- * deps
- * @author 洛洛希雅Lolosia
- * @since 2025-02-16 17:09
- */
-@Serializable
-data class JarDependency(
-    val group: String,
-    val name: String,
-    val version: String,
-    val extension: String,
-    val classifier: String,
-    val sha256: String,
-    val url: String
-)
-
-@Serializable
-data class DependencyFile(
-    val repositories: List<String>,
-    val dependencies: List<JarDependency>
-)
-
-fun getDependencies(): DependencyFile {
-    val json = getInstallerJarCollection().use { iter ->
-        iter.find { it.fileName == "dependencies-urls.json" }?.data?.decodeToString()
-    }
-    json ?: throw RuntimeException("dependencies-urls.json not found!")
-    return Json.decodeFromString<DependencyFile>(json)
+fun main() = runBlocking {
+    Installer.main()
 }

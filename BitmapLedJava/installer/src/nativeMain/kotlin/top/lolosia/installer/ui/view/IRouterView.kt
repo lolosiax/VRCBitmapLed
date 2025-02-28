@@ -20,11 +20,11 @@ package top.lolosia.installer.ui.view
 
 import libui.ktx.Control
 import libui.ktx.VBox
-import top.lolosia.installer.ui
 import top.lolosia.installer.ui.component.BaseContainer
 import top.lolosia.installer.ui.component.IComponent
 import top.lolosia.installer.ui.layout.BaseLayout
 import top.lolosia.installer.ui.layout.ILayout
+import top.lolosia.installer.util.ui
 import kotlin.reflect.KClass
 
 /**

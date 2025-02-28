@@ -16,21 +16,24 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package top.lolosia.installer.ui.component
+package top.lolosia.installer.util.dependency
 
-import libui.ktx.Control
-import top.lolosia.installer.util.runOnUiThread
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 
 /**
- * `package`
+ * deps
  * @author 洛洛希雅Lolosia
- * @since 2025-02-23 00:31
+ * @since 2025-02-16 17:09
  */
+@Serializable
+data class JarDependency(
+    val group: String,
+    val name: String,
+    val version: String,
+    val extension: String,
+    val classifier: String,
+    val sha256: String,
+    val url: String
+)
 
-fun <T : IComponent<*>> T.dispatch(block: T.() -> Unit) {
-    runOnUiThread {
-        block(this)
-    }
-}
-
-fun <T : Control<*>> T.component() = AnyComponent(this)
