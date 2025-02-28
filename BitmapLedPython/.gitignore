@@ -7,8 +7,8 @@
 /anim
 /sundry/anim
 /sundry/*.png
-/merged
-/raw
+/merged*
+/raw*
 /*.otf
 /*.ttf
 /*.ttc
