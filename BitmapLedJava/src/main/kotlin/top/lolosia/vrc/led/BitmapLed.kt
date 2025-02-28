@@ -26,6 +26,8 @@ import org.springframework.context.ApplicationContext
 import top.lolosia.vrc.led.boot.LedClassLoader
 import top.lolosia.vrc.led.manager.PluginManager
 import top.lolosia.vrc.led.plugin.BitmapLedPlugin
+import kotlin.io.path.Path
+import kotlin.io.path.exists
 
 /**
  * VRC Bitmap Led 应用程序核心服务主入口点。
@@ -41,6 +43,7 @@ object BitmapLed {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        loadDatabase()
         val classLoader = BitmapLed::class.java.classLoader as? LedClassLoader
 
         val builder = SpringApplicationBuilder(Application::class.java)
@@ -68,5 +71,29 @@ object BitmapLed {
     fun <T : BitmapLedPlugin> getPlugin(plugin: String): T? {
         @Suppress("UNCHECKED_CAST")
         return applicationContext.getBean(PluginManager::class.java)[plugin] as T?
+    }
+
+    /**
+     * 释放数据库文件
+     */
+    private fun loadDatabase() {
+        val database = listOf("db.sqlite")
+        val dir = Path("./work/database/")
+        val classLoader = BitmapLed::class.java.classLoader
+        val packageName = BitmapLed::class.java.packageName.replace(".", "/")
+        for (it in database) {
+            val path = dir.resolve(it)
+            if (!path.exists()) {
+                if (!dir.exists()) dir.toFile().mkdirs()
+                val stream = classLoader.getResourceAsStream("$packageName/$it") ?: continue
+                val out = path.toFile().outputStream()
+                try {
+                    stream.copyTo(out)
+                } finally {
+                    stream.close()
+                    out.close()
+                }
+            }
+        }
     }
 }
