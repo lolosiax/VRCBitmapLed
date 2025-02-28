@@ -37,8 +37,18 @@ class JavaVMBuilder(val javaHome: String = "") {
         proc.reinterpret<JNI_CreateJavaVM_t>()
     }
 
+    fun vmArgs(args: Collection<String>): JavaVMBuilder {
+        vmArgs.addAll(args)
+        return this
+    }
+
     fun vmArgs(vararg args: String): JavaVMBuilder {
         vmArgs.addAll(args)
+        return this
+    }
+
+    fun classpath(cp : Collection<Path>) : JavaVMBuilder {
+        classpath.addAll(cp)
         return this
     }
 
@@ -53,22 +63,25 @@ class JavaVMBuilder(val javaHome: String = "") {
     }
 
     fun build(): JavaVMBuilderResult = memScoped {
-        val arena = Arena()
         //
         // 创建JVM
-        val jvm = arena.alloc<CPointerVar<JavaVMVar>>()
-        val jEnv = arena.alloc<CPointerVar<JNIEnvVar>>()
+        val jvm = alloc<CPointerVar<JavaVMVar>>()
+        val jEnv = alloc<CPointerVar<JNIEnvVar>>()
 
-        val vmOptions = allocArray<JavaVMOption>(vmArgs.size)
-        vmArgs.forEachIndexed { i, it ->
+        val options = listOf(
+            "-Djava.class.path=" + classpath.joinToString(";") { SystemFileSystem.resolve(it).toString() }
+        ) + vmArgs
+
+        val vmOptions = allocArray<JavaVMOption>(options.size)
+        options.forEachIndexed { i, it ->
             vmOptions[i].optionString = it.cstr.ptr
         }
 
         val pVmArgs = alloc<JavaVMInitArgs>()
         pVmArgs.version = JNI_VERSION_21
         pVmArgs.options = vmOptions
-        pVmArgs.nOptions = vmArgs.size
-        pVmArgs.ignoreUnrecognized = 1U
+        pVmArgs.nOptions = options.size
+        // pVmArgs.ignoreUnrecognized = 1U
 
         val result = mCreateJavaVM(
             jvm.ptr,

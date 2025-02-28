@@ -173,7 +173,7 @@ class EnvironmentService : IService {
         if (!SystemFileSystem.exists(dir)){
             SystemFileSystem.createDirectories(dir)
         }
-        SystemFileSystem.delete(jarPath)
+        SystemFileSystem.delete(jarPath, false)
         SystemFileSystem.sink(jarPath).buffered().use {
             it.writeFully(ptr.reinterpret(), 0, size.toLong())
         }

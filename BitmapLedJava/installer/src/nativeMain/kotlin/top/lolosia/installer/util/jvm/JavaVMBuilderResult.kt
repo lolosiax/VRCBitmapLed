@@ -21,7 +21,9 @@ data class JavaVMBuilderResult(
         var objArray: jobjectArray?
 
         memScoped {
-            classMain = util.FindClass!!(jEnv, mainClass.cstr.ptr)
+            val mainClass1 = mainClass.replace('.', '/')
+
+            classMain = util.FindClass!!(jEnv, mainClass1.cstr.ptr)
             classMain ?: jEnv.checkException()
 
             mainMethodId = util.GetStaticMethodID!!(

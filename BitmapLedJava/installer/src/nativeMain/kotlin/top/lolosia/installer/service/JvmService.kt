@@ -45,13 +45,13 @@ class JvmService {
 
     private fun createJavaVM() {
         val classPath = Installer.environmentService.dependencyFiles.map {
-            SystemFileSystem.resolve(it).toString()
-        }.joinToString(";")
+            SystemFileSystem.resolve(it)
+        }
         result = JavaVMBuilder(jvmPath).apply {
             vmArgs(
                 "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
-                "-cp=$classPath",
             )
+            classpath(classPath)
             mainClass("top.lolosia.vrc.led.Launcher")
         }.build()
     }
