@@ -61,11 +61,21 @@ object Installer {
         // awaitCancellation()
         environmentService.checkEnvironment()
 
-        val bootPage = withUI { JvmBootPage() }
-        mainWindow.dispatch {
-            activePage = bootPage
+        val useBoot = false
+
+        if (useBoot){
+            val bootPage = withUI { JvmBootPage() }
+            mainWindow.dispatch {
+                activePage = bootPage
+            }
+            bootPage.await()
         }
-        bootPage.await()
+        else {
+            delay(50)
+            withUI {
+                mainWindow.window.hide()
+            }
+        }
 
         jvmService.launch()
 
