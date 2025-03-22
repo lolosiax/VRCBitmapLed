@@ -59,3 +59,28 @@ for k in range(num_output_images):
     # 保存图像
     output_image = Image.fromarray(rgba_array, mode='RGBA')
     output_image.save(f"merged/{k}.png")
+
+
+# 预加载所有图像
+images = []
+for num in range(num_output_images):
+    with Image.open(f"merged/{num}.png") as img:
+        # 确保颜色格式为 RGBA
+        if img.mode != 'RGBA':
+            raise ValueError(f"图像 {num}.png 的格式为 {img.mode}，非 RGBA 格式")
+        images.append(img.copy())
+
+# 获取基准参数
+base_width = images[0].width
+single_height = images[0].height
+total_height = single_height * num_output_images
+
+# 创建画布
+canvas = Image.new('RGBA', (base_width, total_height))
+
+# 纵向拼接
+for idx, img in enumerate(images):
+    canvas.paste(img, (0, idx * single_height))
+
+# 无损保存
+canvas.save("merged/unifont.png", format="PNG", compress_level=0)
