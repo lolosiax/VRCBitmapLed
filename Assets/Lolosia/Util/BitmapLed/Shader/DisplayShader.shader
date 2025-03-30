@@ -1,6 +1,6 @@
 /**
  * 这是绘制点阵屏幕所需的Shader
- * 文件遵循 MIT 协议，©2025 洛洛希雅 版权所有
+ * 文件遵循 GNU GPLv3 协议，©2025 洛洛希雅 版权所有
  */
 Shader "Unlit/DisplayShader"
 {

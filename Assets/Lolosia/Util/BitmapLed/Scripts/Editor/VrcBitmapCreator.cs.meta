@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0fd1c07a39e144e5b9136a40052f2e8a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mesh: {fileID: 6564718643534134775, guid: adfac4cf307d32c479bfbad4f7b930d2, type: 3}
+  - fontAtlas: {fileID: 18700000, guid: eb34bc74205da714c859a237b79da001, type: 3}
+  - fontAtlasGb2312: {fileID: 18700000, guid: c514e6de2368af54c9483b0ae34f5e7d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

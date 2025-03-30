@@ -46,17 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &1665630643802051050
 GameObject:
@@ -104,17 +104,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &2010509084115967389
 GameObject:
@@ -162,17 +162,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &2325688605440497646
 GameObject:
@@ -220,17 +220,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &2793015731619404411
 GameObject:
@@ -246,7 +246,6 @@ GameObject:
   - component: {fileID: 9061985502317582023}
   - component: {fileID: 1215934589837661726}
   - component: {fileID: 4466920071943879715}
-  - component: {fileID: 2199193144480587958}
   m_Layer: 0
   m_Name: BitmapLedDisplayX24-768byte
   m_TagString: Untagged
@@ -287,7 +286,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2793015731619404411}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8175,21 +8174,6 @@ MonoBehaviour:
     saved: 0
     hasExplicitDefaultValue: 1
     m_overrideAnimatorDefaults: 1
---- !u!114 &2199193144480587958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2793015731619404411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42581d8044b64899834d3d515ab3a144, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boneReference: 55
-  subPath: Armature/Floor_C
-  attachmentMode: 2
 --- !u!1 &2806246294945078445
 GameObject:
   m_ObjectHideFlags: 0
@@ -8236,17 +8220,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &2821359814857072246
 GameObject:
@@ -8294,17 +8278,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &3124394153407626434
 GameObject:
@@ -8352,17 +8336,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &3139600063009808222
 GameObject:
@@ -8410,17 +8394,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &3148121471348027025
 GameObject:
@@ -8468,17 +8452,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &4102825090042936557
 GameObject:
@@ -8526,17 +8510,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &4281780308633629156
 GameObject:
@@ -8584,17 +8568,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &4389938940592121095
 GameObject:
@@ -8642,17 +8626,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &4606267548152038252
 GameObject:
@@ -8774,17 +8758,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &4864704202908039226
 GameObject:
@@ -8832,17 +8816,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &5096277797709382213
 GameObject:
@@ -8890,17 +8874,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &5223925937272697779
 GameObject:
@@ -8958,7 +8942,7 @@ MonoBehaviour:
   allowOthers: 0
   localOnly: 1
   receiverType: 2
-  parameter: BitmapLed/LocalLeftBottom
+  parameter: BitmapDisplay/LocalLeftBottom
   minVelocity: 0.05
 --- !u!1 &5474675667679814137
 GameObject:
@@ -9006,17 +8990,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &5763616976768661533
 GameObject:
@@ -9064,17 +9048,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 0
   allowOthers: 1
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/RemotePressed
+  parameter: BitmapDisplay/RemotePressed
   minVelocity: 0.05
 --- !u!1 &5841581481895036060
 GameObject:
@@ -9175,7 +9159,7 @@ MonoBehaviour:
   allowOthers: 1
   localOnly: 1
   receiverType: 2
-  parameter: BitmapLed/RemoteLeftBottom
+  parameter: BitmapDisplay/RemoteLeftBottom
   minVelocity: 0.05
 --- !u!1 &6982455831751059161
 GameObject:
@@ -9223,17 +9207,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &8125593014836464814
 GameObject:
@@ -9324,17 +9308,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &8386745421040519896
 GameObject:
@@ -9382,17 +9366,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 0}
   shapeType: 1
-  radius: 0.08
+  radius: 0.05
   height: 1.05
   position: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 1}
   collisionTags:
-  - FingerIndexR
+  - Finger
   allowSelf: 1
   allowOthers: 0
   localOnly: 1
   receiverType: 0
-  parameter: BitmapLed/LocalPressed
+  parameter: BitmapDisplay/LocalPressed
   minVelocity: 0.05
 --- !u!1 &8560827844748650523
 GameObject:
@@ -9450,7 +9434,7 @@ MonoBehaviour:
   allowOthers: 0
   localOnly: 1
   receiverType: 2
-  parameter: BitmapLed/LocalLeftTop
+  parameter: BitmapDisplay/LocalLeftTop
   minVelocity: 0.05
 --- !u!1 &9004329672882727554
 GameObject:
@@ -9508,5 +9492,5 @@ MonoBehaviour:
   allowOthers: 1
   localOnly: 1
   receiverType: 2
-  parameter: BitmapLed/RemoteLeftTop
+  parameter: BitmapDisplay/RemoteLeftTop
   minVelocity: 0.05
