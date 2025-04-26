@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Threading.Tasks;
 using AnimatorAsCode.V1;
 using AnimatorAsCode.V1.ModularAvatar;
 using UnityEditor;
@@ -19,7 +21,7 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor
         private AacFlController mController;
         private AacFlBase mAac;
 
-        internal void Create(string path, string prefix, int chars)
+        internal async Task Create(string path, string prefix, int chars)
         {
             // 1. 生成 着色器
             // 2. 生成 GameObject
@@ -33,49 +35,59 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor
             try
             {
                 var shaderFile = $"{path}/{prefix}_Shader.shader";
-                CreateInstance<ShaderCreator>().Create(shaderFile, chars);
+                await CreateInstance<ShaderCreator>().Create(shaderFile, chars);
+                await Task.Yield();
 
                 var animatorFile = $"{path}/{prefix}_Animator.asset";
                 var animatorCreator = new AnimationCreator(gameObject);
-                animatorCreator.Create(animatorFile, chars);
+                await animatorCreator.Create(animatorFile, chars);
+                await Task.Yield();
+                
                 mController = animatorCreator.Controller;
                 mAac = animatorCreator.Aac;
 
                 var meshFilter = gameObject.AddComponent<MeshFilter>();
                 meshFilter.mesh = mesh;
                 var meshRenderer = gameObject.AddComponent<MeshRenderer>();
+                
+                await Task.Yield();
 
-                Shader newShader = AssetDatabase.LoadAssetAtPath<Shader>(shaderFile);
-                Material newMat = new Material(newShader);
+                var newShader = AssetDatabase.LoadAssetAtPath<Shader>(shaderFile);
+                var newMat = new Material(newShader);
                 newMat.SetTexture(FontAtlas, fontAtlas);
                 newMat.SetTexture(FontAtlasGb2312, fontAtlasGb2312);
                 newMat.SetVector(Size, new Vector4(16, 16, 0, 0));
 
                 AssetDatabase.CreateAsset(newMat, $"{path}/{prefix}_Mat.mat");
                 AssetDatabase.SaveAssets();
-
+                
+                await Task.Yield();
+                
                 meshRenderer.sharedMaterial = newMat;
 
                 Selection.activeObject = gameObject;
                 SceneView.FrameLastActiveSceneView();
 
-                CreateMaParams(gameObject, chars);
+                await CreateMaParams(gameObject, chars);
             }
             catch
             {
-                Destroy(gameObject);
+                DestroyImmediate(gameObject);
                 throw;
             }
         }
 
-        private void CreateMaParams(GameObject gameObject, int chars)
+        private async Task CreateMaParams(GameObject gameObject, int chars)
         {
             var nop = mAac.NoAnimator();
             {
+                Debug.Log("开始创建MA合并动画器组件");
                 var aacMa = MaAc.Create(gameObject);
                 aacMa.NewMergeAnimator(mController, VRCAvatarDescriptor.AnimLayerType.FX).Relative();
+                await Task.Yield();
             }
             {
+                Debug.Log("开始创建MA同步参数组件");
                 var obj = new GameObject("SyncParams");
                 obj.transform.parent = gameObject.transform;
                 var aacMa = MaAc.Create(obj);
@@ -85,8 +97,11 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor
                 {
                     aacMa.NewParameter(nop.BoolParameter($"BitmapLed/Sync/Bit{i}")).NotSaved().WithDefaultValue(true);
                 }
+                
+                await Task.Yield();
             }
             {
+                Debug.Log("开始创建MA非同步显示参数组件");
                 var obj = new GameObject("DisplayParams");
                 obj.transform.parent = gameObject.transform;
                 var aacMa = MaAc.Create(obj);
@@ -97,6 +112,8 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor
                     aacMa.NewParameter(param0).NotSaved().NotSynced().WithDefaultValue(0x7F);
                     aacMa.NewParameter(param1).NotSaved().NotSynced().WithDefaultValue(0xFF);
                 }
+                
+                await Task.Yield();
             }
         }
     }

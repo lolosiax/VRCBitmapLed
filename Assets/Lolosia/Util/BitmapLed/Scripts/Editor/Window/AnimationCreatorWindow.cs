@@ -25,7 +25,7 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor.Window
             {
                 var path = EditorUtility.SaveFilePanelInProject("资产保存路径", "AAC Demo", "asset", "AAC Demo");
                 int.TryParse(mCharsInput, out var size);
-                new AnimationCreator(mRoot, mToggleItem).Create(path, size);
+                _ = new AnimationCreator(mRoot, mToggleItem).Create(path, size);
             }
         }
     }

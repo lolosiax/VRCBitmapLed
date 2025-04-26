@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,10 +11,13 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor
         [Tooltip("拖拽你的Shader模板文件到这里")] [SerializeField]
         public Shader shaderTemplate;
 
-        public void Create(string path, int chars)
+        public async Task Create(string path, int chars)
         {
+            Debug.Log($"开始创建着色器，字符数{chars}，位于{path}");
             var templatePath = AssetDatabase.GetAssetPath(shaderTemplate);
             var template = File.ReadAllText(templatePath);
+            
+            await Task.Yield();
 
             var bytes = chars * 5;
 
@@ -40,11 +44,16 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor
             template = string.Join("\n", lines);
 
             template = template.Replace("/*%_Data_Prop_Def_%*/", GeneratePropDef(bytes));
+            await Task.Yield();
             template = template.Replace("/*%_Data_Field_Def_%*/", GenerateFieldDef(bytes));
+            await Task.Yield();
             template = template.Replace("\r", "").Replace("\n", "\r\n");
 
             File.WriteAllText(path, template);
+            
+            await Task.Yield();
             AssetDatabase.Refresh();
+            Debug.Log("创建着色器完成");
         }
 
         private string GeneratePropDef(int bytes)

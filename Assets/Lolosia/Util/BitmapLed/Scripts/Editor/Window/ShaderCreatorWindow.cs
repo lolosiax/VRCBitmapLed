@@ -26,7 +26,7 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor.Window
                     "shader",
                     "DisplayShader"
                 );
-                CreateInstance<ShaderCreator>().Create(path, chars);
+                _ = CreateInstance<ShaderCreator>().Create(path, chars);
             }
         }
     }
