@@ -10,7 +10,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Lolosia.Util.BitmapLed.Scripts.Editor
+namespace Lolosia.Util.BitmapLed.Scripts.Editor.B5
 {
   internal class AnimationCreator
   {

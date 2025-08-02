@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
 
-namespace Lolosia.Util.BitmapLed.Scripts.Editor
+namespace Lolosia.Util.BitmapLed.Scripts.Editor.B5
 {
     internal class VrcBitmapCreator : ScriptableObject
     {

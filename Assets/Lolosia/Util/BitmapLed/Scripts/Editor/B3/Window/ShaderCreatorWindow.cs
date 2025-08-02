@@ -1,11 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Lolosia.Util.BitmapLed.Scripts.Editor.Window
+namespace Lolosia.Util.BitmapLed.Scripts.Editor.B3.Window
 {
     public class ShaderCreatorWindow : EditorWindow
     {
-        [MenuItem("Lolosia/生成着色器")]
+        [MenuItem("Lolosia/生成着色器（B3）")]
         public static void ShowWindow()
         {
             GetWindow<ShaderCreatorWindow>("生成着色器");
@@ -22,7 +22,7 @@ namespace Lolosia.Util.BitmapLed.Scripts.Editor.Window
                 int.TryParse(mCharsInput, out var chars);
                 var path = EditorUtility.SaveFilePanelInProject(
                     "资产保存路径",
-                    "DisplayShaderRGB" + chars * 5,
+                    "DisplayShaderRGB(B3)" + chars * 3,
                     "shader",
                     "DisplayShader"
                 );

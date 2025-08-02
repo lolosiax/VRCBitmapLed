@@ -1,11 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Lolosia.Util.BitmapLed.Scripts.Editor.Window
+namespace Lolosia.Util.BitmapLed.Scripts.Editor.B3.Window
 {
     public class AnimationCreatorWindow : EditorWindow
     {
-        [MenuItem("Lolosia/生成动画器")]
+        [MenuItem("Lolosia/生成动画器（B3）")]
         public static void ShowWindow()
         { 
             GetWindow<AnimationCreatorWindow>("生成动画器");

@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
-namespace Lolosia.Util.BitmapLed.Scripts.Editor.Window
+namespace Lolosia.Util.BitmapLed.Scripts.Editor.B3.Window
 {
   public class VrcBitmapCreatorWindow : EditorWindow
   {
-    [MenuItem("Lolosia/生成点阵屏")]
+    [MenuItem("Lolosia/生成点阵屏（B3）")]
     public static void ShowWindow()
     {
-      GetWindow<VrcBitmapCreatorWindow>("生成点阵屏");
+      GetWindow<VrcBitmapCreatorWindow>("生成点阵屏（B3）");
     }
 
     private string mCharsInput = "256";

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
-namespace Lolosia.Util.BitmapLed.Scripts.Editor
+namespace Lolosia.Util.BitmapLed.Scripts.Editor.B5
 {
     internal class ShaderCreator : ScriptableObject
     {
